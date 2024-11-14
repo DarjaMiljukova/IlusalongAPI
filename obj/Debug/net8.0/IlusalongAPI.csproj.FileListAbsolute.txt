@@ -169,3 +169,4 @@ C:\Users\opilane\source\repos\miljukovaTARpv22\hajus+proga\IlusalongAPI\bin\Debu
 C:\Users\opilane\source\repos\miljukovaTARpv22\hajus+proga\IlusalongAPI\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\opilane\source\repos\miljukovaTARpv22\hajus+proga\IlusalongAPI\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 C:\Users\opilane\source\repos\miljukovaTARpv22\hajus+proga\IlusalongAPI\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\opilane\source\repos\miljukovaTARpv22\hajus+proga\IlusalongAPI\obj\Debug\net8.0\IlusalongAPI.sourcelink.json

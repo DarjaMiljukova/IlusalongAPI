@@ -1,10 +1,9 @@
 ﻿namespace IlusalongAPI.Models
 {
-    public class Master
+    public class Category
     {
         public int Id { get; set; }
         public required string Name { get; set; }
-        public int ServiceId { get; set; }
-        public required Service Service { get; set; }
+        public required ICollection<Service> Services { get; set; }  
     }
 }

@@ -1,6 +1,5 @@
 ﻿using IlusalongAPI.Data;
 using IlusalongAPI.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +14,20 @@ namespace IlusalongAPI.Controllers
         public BookingController(SalonContext context)
         {
             _context = context;
+        }
+
+        [HttpGet("services")]
+        public IActionResult GetServices()
+        {
+            var services = _context.Services.ToList();
+            return Ok(services);
+        }
+
+        [HttpGet("masters/{serviceId}")]
+        public IActionResult GetMastersByService(int serviceId)
+        {
+            var masters = _context.Masters.Where(m => m.ServiceId == serviceId).ToList();
+            return Ok(masters);
         }
 
         [HttpPost]

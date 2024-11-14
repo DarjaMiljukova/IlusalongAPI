@@ -1,6 +1,5 @@
 ﻿using IlusalongAPI.Data;
 using IlusalongAPI.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IlusalongAPI.Controllers
@@ -16,10 +15,47 @@ namespace IlusalongAPI.Controllers
             _context = context;
         }
 
-        [HttpGet("byservice/{serviceId}")]
-        public IActionResult GetMastersByService(int serviceId)
+        [HttpGet]
+        public IActionResult GetAllMasters()
         {
-            return Ok(_context.Masters.Where(m => m.ServiceId == serviceId).ToList());
+            var masters = _context.Masters.ToList();
+            return Ok(masters);
+        }
+
+        [HttpPost]
+        public IActionResult AddMaster([FromBody] Master master)
+        {
+            var user = Request.Headers["UserEmail"].ToString();
+            var password = Request.Headers["UserPassword"].ToString();
+
+            if (user == "admin@gmail.com" && password == "admin")
+            {
+                _context.Masters.Add(master);
+                _context.SaveChanges();
+                return Ok("Мастер добавлен.");
+            }
+
+            return Unauthorized("Только админ может добавлять мастеров.");
+        }
+
+        [HttpDelete("deleteMaster/{id}")]
+        public IActionResult DeleteMaster(int id)
+        {
+            var user = Request.Headers["UserEmail"].ToString();
+            var password = Request.Headers["UserPassword"].ToString();
+
+            if (user == "admin@gmail.com" && password == "admin")
+            {
+                var master = _context.Masters.Find(id);
+                if (master == null)
+                    return NotFound("Мастер не найден.");
+
+                _context.Masters.Remove(master);
+                _context.SaveChanges();
+                return Ok("Мастер удален.");
+            }
+
+            return Unauthorized("Только админ может удалять мастеров.");
         }
     }
 }
