@@ -36,7 +36,7 @@ namespace IlusalongAPI.Data
 
             modelBuilder.Entity<Service>()
                 .HasOne(s => s.Category)
-                .WithMany(c => c.Services)
+                .WithMany()
                 .HasForeignKey(s => s.CategoryId)
                 .OnDelete(DeleteBehavior.Restrict);  
         }

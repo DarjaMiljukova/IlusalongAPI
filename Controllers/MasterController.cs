@@ -25,26 +25,19 @@ namespace IlusalongAPI.Controllers
         [HttpPost]
         public IActionResult AddMaster([FromBody] Master master)
         {
-            var user = Request.Headers["UserEmail"].ToString();
-            var password = Request.Headers["UserPassword"].ToString();
 
-            if (user == "admin@gmail.com" && password == "admin")
-            {
+
                 _context.Masters.Add(master);
                 _context.SaveChanges();
-                return Ok("Мастер добавлен.");
-            }
+                return Ok("Мастер добавлен.");     
 
-            return Unauthorized("Только админ может добавлять мастеров.");
         }
 
         [HttpDelete("deleteMaster/{id}")]
         public IActionResult DeleteMaster(int id)
         {
-            var user = Request.Headers["UserEmail"].ToString();
-            var password = Request.Headers["UserPassword"].ToString();
 
-            if (user == "admin@gmail.com" && password == "admin")
+
             {
                 var master = _context.Masters.Find(id);
                 if (master == null)
@@ -55,7 +48,6 @@ namespace IlusalongAPI.Controllers
                 return Ok("Мастер удален.");
             }
 
-            return Unauthorized("Только админ может удалять мастеров.");
         }
     }
 }
