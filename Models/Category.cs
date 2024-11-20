@@ -3,7 +3,8 @@
     public class Category
     {
         public int Id { get; set; }
-        public required string Name { get; set; }
-        public required ICollection<Service> Services { get; set; }  
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
+
 }
