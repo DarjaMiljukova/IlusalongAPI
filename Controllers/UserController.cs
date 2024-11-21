@@ -1,10 +1,6 @@
-﻿using IlusalongAPI.Data;
-using IlusalongAPI.Models;
-<<<<<<< Updated upstream
+﻿using IlusalongAPI.Models;
 using Microsoft.AspNetCore.Mvc;
-=======
 using Microsoft.EntityFrameworkCore;
->>>>>>> Stashed changes
 
 namespace IlusalongAPI.Controllers
 {

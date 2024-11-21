@@ -339,3 +339,6 @@ C:\Users\MSI\source\repos\IlusalongAPI\obj\Debug\net8.0\refint\IlusalongAPI.dll
 C:\Users\MSI\source\repos\IlusalongAPI\obj\Debug\net8.0\IlusalongAPI.pdb
 C:\Users\MSI\source\repos\IlusalongAPI\obj\Debug\net8.0\IlusalongAPI.genruntimeconfig.cache
 C:\Users\MSI\source\repos\IlusalongAPI\obj\Debug\net8.0\ref\IlusalongAPI.dll
+C:\Users\MSI\source\repos\IlusalongAPI\bin\Debug\net8.0\ilusalong-frontend\package-lock.json
+C:\Users\MSI\source\repos\IlusalongAPI\bin\Debug\net8.0\ilusalong-frontend\package.json
+C:\Users\MSI\source\repos\IlusalongAPI\bin\Debug\net8.0\ilusalong-frontend\public\manifest.json

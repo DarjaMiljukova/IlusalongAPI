@@ -1,5 +1,4 @@
-﻿using IlusalongAPI.Data;
-using IlusalongAPI.Models;
+﻿using IlusalongAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,33 +15,38 @@ namespace IlusalongAPI.Controllers
             _context = context;
         }
 
+        // Метод для получения всех услуг
         [HttpGet]
-        public async Task<IActionResult> GetAllServices()
+        public IActionResult GetAllServices()
         {
-            var services = await _context.Services.Include(s => s.Category).ToListAsync();  
+            var services = _context.Services.ToList();
+            if (!services.Any())
+                return NotFound("Услуги не найдены.");
             return Ok(services);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddService([FromBody] Service service)
+        // Метод для получения всех услуг по категории
+        [HttpGet("{categoryId}")]
+        public IActionResult GetServicesByCategory(int categoryId)
         {
-            var user = Request.Headers["UserEmail"].ToString();
-            var password = Request.Headers["UserPassword"].ToString();
+            var services = _context.Services
+                .Where(s => s.CategoryId == categoryId)  // Ищем все услуги по категории
+                .ToList();
 
-<<<<<<< Updated upstream
-            if (user == "admin@gmail.com" && password == "admin") 
-            {
-                var category = await _context.Categories.FindAsync(service.CategoryId);
-                if (category == null)
-                {
-                    return BadRequest("Категория не найдена.");
-                }
+            if (!services.Any())
+                return NotFound("Услуги для этой категории не найдены.");
 
-                _context.Services.Add(service);
-                await _context.SaveChangesAsync();
-                return Ok("Услуга добавлена.");
-            }
-=======
+            return Ok(services);
+        }
+
+        // Метод для добавления новой услуги
+        [HttpPost]
+        public IActionResult AddService([FromBody] Service service)
+        {
+            // Проверяем, что данные корректны
+            if (service == null || string.IsNullOrEmpty(service.Name) || service.CategoryId <= 0 || service.Price <= 0)
+                return BadRequest("Некорректные данные для услуги.");
+
             // Проверяем, существует ли категория с таким ID
             var category = _context.Categories.FirstOrDefault(c => c.Id == service.CategoryId);
             if (category == null)
@@ -54,39 +58,23 @@ namespace IlusalongAPI.Controllers
             // Добавляем услугу в базу данных
             _context.Services.Add(service);
             _context.SaveChanges();
->>>>>>> Stashed changes
 
-            return Unauthorized("Только админ может добавлять услуги.");
+            return Ok("Услуга успешно добавлена.");
         }
-
-<<<<<<< Updated upstream
-        [HttpDelete("deleteService/{id}")]
-        public async Task<IActionResult> DeleteService(int id)
-=======
 
 
         // Метод для получения услуги по ID
         [HttpGet("{id}")]
         public IActionResult GetServiceById(int id)
->>>>>>> Stashed changes
         {
-            var user = Request.Headers["UserEmail"].ToString();
-            var password = Request.Headers["UserPassword"].ToString();
+            var service = _context.Services
+                .Include(s => s.Category)  // Загружаем информацию о категории услуги
+                .FirstOrDefault(s => s.Id == id);
 
-            if (user == "admin@gmail.com" && password == "admin") 
-            {
-                var service = await _context.Services.FindAsync(id);
-                if (service == null)
-                {
-                    return NotFound("Услуга не найдена.");
-                }
+            if (service == null)
+                return NotFound("Услуга не найдена.");
 
-                _context.Services.Remove(service);
-                await _context.SaveChangesAsync();
-                return Ok("Услуга удалена.");
-            }
-
-            return Unauthorized("Только админ может удалять услуги.");
+            return Ok(service);
         }
     }
 }

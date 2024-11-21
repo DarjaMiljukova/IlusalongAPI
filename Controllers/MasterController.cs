@@ -1,4 +1,4 @@
-﻿using IlusalongAPI.Data;
+﻿
 using IlusalongAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 

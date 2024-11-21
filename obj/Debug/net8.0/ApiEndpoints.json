@@ -1,46 +1,8 @@
 [
   {
-<<<<<<< Updated upstream
-    "ContainingType": "IlusalongAPI.Controllers.BookingController",
-    "Method": "CreateBooking",
-    "RelativePath": "api/Booking",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "booking",
-        "Type": "IlusalongAPI.Models.Booking",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "IlusalongAPI.Controllers.BookingController",
-    "Method": "GetMastersByService",
-    "RelativePath": "api/Booking/masters/{serviceId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "serviceId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "IlusalongAPI.Controllers.BookingController",
-    "Method": "GetServices",
-    "RelativePath": "api/Booking/services",
-=======
     "ContainingType": "IlusalongAPI.Controllers.AppointmentController",
     "Method": "GetAllAppointments",
     "RelativePath": "api/Appointment",
->>>>>>> Stashed changes
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -48,8 +10,6 @@
     "ReturnTypes": []
   },
   {
-<<<<<<< Updated upstream
-=======
     "ContainingType": "IlusalongAPI.Controllers.AppointmentController",
     "Method": "CreateAppointment",
     "RelativePath": "api/Appointment",
@@ -98,7 +58,6 @@
     "ReturnTypes": []
   },
   {
->>>>>>> Stashed changes
     "ContainingType": "IlusalongAPI.Controllers.CategoryController",
     "Method": "GetCategories",
     "RelativePath": "api/Category",
@@ -194,9 +153,25 @@
   },
   {
     "ContainingType": "IlusalongAPI.Controllers.ServiceController",
-    "Method": "DeleteService",
-    "RelativePath": "api/Service/deleteService/{id}",
-    "HttpMethod": "DELETE",
+    "Method": "GetServicesByCategory",
+    "RelativePath": "api/Service/{categoryId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "IlusalongAPI.Controllers.ServiceController",
+    "Method": "GetServiceById",
+    "RelativePath": "api/Service/{id}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
