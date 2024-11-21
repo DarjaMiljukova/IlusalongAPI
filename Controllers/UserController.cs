@@ -37,36 +37,45 @@ namespace IlusalongAPI.Controllers
             return Ok(user);
         }
 
+        // Регистрация нового пользователя
         [HttpPost("register")]
         public IActionResult Register([FromBody] User user)
         {
+            // Проверка, существует ли пользователь с таким email
             if (_context.Users.Any(u => u.Email == user.Email))
                 return BadRequest("Пользователь с таким email уже существует.");
 
+            // Проверка, указан ли номер телефона
             if (string.IsNullOrEmpty(user.PhoneNumber))
                 return BadRequest("Номер телефона обязателен.");
 
+            // Автоматически назначаем роль клиента, если это не админ
+            user.Role = "client";
+
             _context.Users.Add(user);
             _context.SaveChanges();
-            return Ok("Пользователь зарегистрирован.");
+            return Ok("Пользователь зарегистрирован с ролью клиента.");
         }
 
- 
+        // Логин пользователя
         [HttpPost("login")]
         public IActionResult Login([FromBody] User user)
         {
+            // Проверка на администратора
             if (user.Email == "admin@gmail.com" && user.Password == "admin")
             {
-                return Ok(new { userId = 0, userEmail = user.Email}); 
+                return Ok(new { userId = 0, userEmail = user.Email, role = "admin" });
             }
 
+            // Проверяем в базе данных
             var existingUser = _context.Users.SingleOrDefault(u => u.Email == user.Email && u.Password == user.Password);
             if (existingUser == null)
                 return Unauthorized("Неверные данные для входа.");
 
-            return Ok(new { userId = existingUser.Id, userEmail = existingUser.Email});
+            return Ok(new { userId = existingUser.Id, userEmail = existingUser.Email, role = existingUser.Role });
         }
 
+        // Получение всех пользователей
         [HttpGet("users")]
         public IActionResult GetUsers()
         {
@@ -76,7 +85,7 @@ namespace IlusalongAPI.Controllers
                 return NotFound("Пользователи не найдены.");
             }
 
-            return Ok(users);  
+            return Ok(users);
         }
     }
 }
