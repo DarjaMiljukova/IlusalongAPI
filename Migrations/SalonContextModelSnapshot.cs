@@ -133,6 +133,17 @@ namespace IlusalongAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+<<<<<<< Updated upstream
+=======
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+>>>>>>> Stashed changes
                     b.HasKey("Id");
 
                     b.ToTable("Users");

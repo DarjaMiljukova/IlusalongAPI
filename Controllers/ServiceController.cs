@@ -29,6 +29,7 @@ namespace IlusalongAPI.Controllers
             var user = Request.Headers["UserEmail"].ToString();
             var password = Request.Headers["UserPassword"].ToString();
 
+<<<<<<< Updated upstream
             if (user == "admin@gmail.com" && password == "admin") 
             {
                 var category = await _context.Categories.FindAsync(service.CategoryId);
@@ -41,12 +42,33 @@ namespace IlusalongAPI.Controllers
                 await _context.SaveChangesAsync();
                 return Ok("Услуга добавлена.");
             }
+=======
+            // Проверяем, существует ли категория с таким ID
+            var category = _context.Categories.FirstOrDefault(c => c.Id == service.CategoryId);
+            if (category == null)
+                return BadRequest("Категория с указанным ID не найдена.");
+
+            // Связываем услугу с существующей категорией
+            service.Category = category;
+
+            // Добавляем услугу в базу данных
+            _context.Services.Add(service);
+            _context.SaveChanges();
+>>>>>>> Stashed changes
 
             return Unauthorized("Только админ может добавлять услуги.");
         }
 
+<<<<<<< Updated upstream
         [HttpDelete("deleteService/{id}")]
         public async Task<IActionResult> DeleteService(int id)
+=======
+
+
+        // Метод для получения услуги по ID
+        [HttpGet("{id}")]
+        public IActionResult GetServiceById(int id)
+>>>>>>> Stashed changes
         {
             var user = Request.Headers["UserEmail"].ToString();
             var password = Request.Headers["UserPassword"].ToString();
