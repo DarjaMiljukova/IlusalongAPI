@@ -54,7 +54,7 @@ namespace IlusalongAPI.Controllers
 
             _context.Users.Add(user);
             _context.SaveChanges();
-            return Ok("Пользователь зарегистрирован с ролью клиента.");
+            return Ok("Register success with user role.");
         }
 
         // Логин пользователя

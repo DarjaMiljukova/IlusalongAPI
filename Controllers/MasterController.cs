@@ -32,6 +32,8 @@ namespace IlusalongAPI.Controllers
         [HttpPost]
         public IActionResult AddMaster([FromBody] Master master)
         {
+            Console.WriteLine($"Received Master: Name={master?.Name}, ServiceId={master?.ServiceId}");
+
             if (master == null || string.IsNullOrEmpty(master.Name) || master.ServiceId <= 0)
                 return BadRequest("Некорректные данные для мастера.");
 
@@ -44,8 +46,10 @@ namespace IlusalongAPI.Controllers
             _context.Masters.Add(master);
             _context.SaveChanges();
 
-            return Ok("Мастер успешно добавлен.");
+            return Ok(new { message = "Мастер успешно добавлен.", master });
         }
+
+
 
         [HttpDelete("deleteMaster/{id}")]
         public IActionResult DeleteMaster(int id)

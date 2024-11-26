@@ -11,6 +11,8 @@ function AdminPage() {
     const [selectedClientId, setSelectedClientId] = useState(null);
     const [newCategoryName, setNewCategoryName] = useState('');
     const [newCategoryDescription, setNewCategoryDescription] = useState('');
+    const [newMasterName, setNewMasterName] = useState('');
+    const [newMasterServiceId, setNewMasterServiceId] = useState('');
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -59,6 +61,41 @@ function AdminPage() {
             alert('Failed to update client');
         }
     };
+    const handleAddMaster = async (e) => {
+        e.preventDefault();
+
+        if (!newMasterName || isNaN(newMasterServiceId) || newMasterServiceId <= 0) {
+            alert('Please provide a valid master name and service ID.');
+            return;
+        }
+
+        const newMaster = {
+            name: newMasterName.trim(),
+            serviceId: parseInt(newMasterServiceId),
+        };
+
+        try {
+            const response = await fetch('http://localhost:5259/api/Master', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newMaster),
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(errorText || 'Failed to add master');
+            }
+
+            const result = await response.json();
+            setMasters((prevMasters) => [...prevMasters, result.master]);
+            alert(result.message);
+            setNewMasterName('');
+            setNewMasterServiceId('');
+        } catch (error) {
+            console.error('Error adding master:', error);
+            alert(`Failed to add master: ${error.message}`);
+        }
+    };
 
     // Выписывание штрафов
     const handleIssuePenalty = async (e) => {
@@ -97,31 +134,34 @@ function AdminPage() {
     // Добавление новой категории
     const handleAddCategory = async (e) => {
         e.preventDefault();
+
+        if (!newCategoryName || !newCategoryDescription) {
+            alert('Both name and description are required!');
+            return;
+        }
+
         const newCategory = {
             name: newCategoryName,
             description: newCategoryDescription,
         };
 
-        try {
-            const response = await fetch('http://localhost:5259/api/Category', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newCategory),
-            });
+        const response = await fetch('http://localhost:5259/api/Category/addCategory', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newCategory),
+        });
 
-            if (!response.ok) {
-                throw new Error('Failed to add category');
-            }
-
-            const createdCategory = await response.json();
-            setCategories((prevCategories) => [...prevCategories, createdCategory]);
-            alert('Category added successfully!');
-            setNewCategoryName('');
-            setNewCategoryDescription('');
-        } catch (error) {
-            console.error('Error adding category:', error);
-            alert('Failed to add category');
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText);
         }
+
+        const createdCategory = await response.json();
+        console.log('Server Response:', createdCategory);
+        setCategories((prevCategories) => [...prevCategories, createdCategory.category]);
+        alert(createdCategory.message);
+        setNewCategoryName('');
+        setNewCategoryDescription('');
     };
 
     const renderInformationContent = () => {
@@ -313,6 +353,29 @@ function AdminPage() {
                         </form>
                     </div>
                 );
+            case 'addMaster':
+                return (
+                    <div>
+                        <h2>Add Master</h2>
+                        <form onSubmit={handleAddMaster}>
+                            <label>Master Name:</label>
+                            <input
+                                type="text"
+                                value={newMasterName}
+                                onChange={(e) => setNewMasterName(e.target.value)}
+                                required
+                            />
+                            <label>Service ID:</label>
+                            <input
+                                type="number"
+                                value={newMasterServiceId}
+                                onChange={(e) => setNewMasterServiceId(e.target.value)}
+                                required
+                            />
+                            <button type="submit">Add Master</button>
+                        </form>
+                    </div>
+                );
             default:
                 return null;
         }
@@ -343,6 +406,13 @@ function AdminPage() {
                 >
                     Add Category
                 </button>
+                <button
+                    className={activeMenu === 'addMaster' ? 'active' : ''}
+                    onClick={() => setActiveMenu('addMaster')}
+                >
+                    Add Master
+                </button>
+
             </nav>
 
             <div className="content">{renderContent()}</div>

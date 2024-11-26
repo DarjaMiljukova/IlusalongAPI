@@ -27,6 +27,7 @@ namespace IlusalongAPI.Controllers
         [HttpPost("addCategory")]
         public async Task<IActionResult> AddCategory([FromBody] Category category)
         {
+            Console.WriteLine($"Received Category: Name={category?.Name}, Description={category?.Description}");
             // Проверяем, что категория не пустая
             if (category == null || string.IsNullOrEmpty(category.Name))
             {
@@ -37,7 +38,7 @@ namespace IlusalongAPI.Controllers
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
 
-            return Ok($"Категория '{category.Name}' успешно добавлена.");
+            return Ok(new { message = $"Категория '{category.Name}' успешно добавлена.", category });
         }
     }
 }

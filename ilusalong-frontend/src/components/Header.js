@@ -15,7 +15,7 @@ function Header() {
                         <Link to="/client/booking">Book</Link>
                     </>
                 )}
-                <Link to="/login" onClick={() => localStorage.clear()}>Logout</Link>
+                <Link to="/login" className="LogoutField" onClick={() => localStorage.clear()}>Logout</Link>
             </nav>
         </header>
     );

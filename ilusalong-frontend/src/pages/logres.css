@@ -97,3 +97,9 @@ p span {
 p span:hover {
     text-decoration: underline;
 }
+.LogoutField {
+    background-color: white;
+    text-decoration: none;
+    border-radius: 10px 10px 0px 0px;
+    padding: 14px;
+}
