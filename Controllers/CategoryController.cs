@@ -23,22 +23,42 @@ namespace IlusalongAPI.Controllers
             return Ok(categories);
         }
 
-        // Метод для добавления новой категории (без услуг)
+        // Добавление новой категории
         [HttpPost("addCategory")]
         public async Task<IActionResult> AddCategory([FromBody] Category category)
         {
             Console.WriteLine($"Received Category: Name={category?.Name}, Description={category?.Description}");
-            // Проверяем, что категория не пустая
+
             if (category == null || string.IsNullOrEmpty(category.Name))
             {
                 return BadRequest("Название категории не может быть пустым.");
             }
 
-            // Добавляем категорию в базу данных
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
 
             return Ok(new { message = $"Категория '{category.Name}' успешно добавлена.", category });
+        }
+
+        // Изменение категории
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateCategory(int id, [FromBody] Category updatedCategory)
+        {
+            var category = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
+
+            if (category == null)
+            {
+                return NotFound("Категория не найдена.");
+            }
+
+            // Обновляем поля категории, если они переданы
+            category.Name = updatedCategory.Name ?? category.Name;
+            category.Description = updatedCategory.Description ?? category.Description;
+
+            _context.Categories.Update(category);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = $"Категория '{category.Name}' успешно обновлена.", category });
         }
     }
 }

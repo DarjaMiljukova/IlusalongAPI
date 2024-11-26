@@ -19,7 +19,7 @@
     "Parameters": [
       {
         "Name": "appointment",
-        "Type": "IlusalongAPI.Models.Appointment",
+        "Type": "Appointment",
         "IsRequired": true
       }
     ],
@@ -69,6 +69,27 @@
   },
   {
     "ContainingType": "IlusalongAPI.Controllers.CategoryController",
+    "Method": "UpdateCategory",
+    "RelativePath": "api/Category/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedCategory",
+        "Type": "IlusalongAPI.Models.Category",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "IlusalongAPI.Controllers.CategoryController",
     "Method": "AddCategory",
     "RelativePath": "api/Category/addCategory",
     "HttpMethod": "POST",
@@ -103,7 +124,7 @@
     "Parameters": [
       {
         "Name": "master",
-        "Type": "IlusalongAPI.Models.Master",
+        "Type": "IlusalongAPI.Models.User",
         "IsRequired": true
       }
     ],
@@ -111,15 +132,36 @@
   },
   {
     "ContainingType": "IlusalongAPI.Controllers.MasterController",
-    "Method": "DeleteMaster",
-    "RelativePath": "api/Master/deleteMaster/{id}",
-    "HttpMethod": "DELETE",
+    "Method": "GetMasterById",
+    "RelativePath": "api/Master/{id}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "IlusalongAPI.Controllers.MasterController",
+    "Method": "UpdateMaster",
+    "RelativePath": "api/Master/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedMaster",
+        "Type": "IlusalongAPI.Models.User",
         "IsRequired": true
       }
     ],
@@ -137,22 +179,6 @@
   },
   {
     "ContainingType": "IlusalongAPI.Controllers.ServiceController",
-    "Method": "AddService",
-    "RelativePath": "api/Service",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "service",
-        "Type": "IlusalongAPI.Models.Service",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "IlusalongAPI.Controllers.ServiceController",
     "Method": "GetServiceById",
     "RelativePath": "api/Service/{id}",
     "HttpMethod": "GET",
@@ -162,6 +188,43 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "IlusalongAPI.Controllers.ServiceController",
+    "Method": "UpdateService",
+    "RelativePath": "api/Service/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedService",
+        "Type": "Service",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "IlusalongAPI.Controllers.ServiceController",
+    "Method": "CreateService",
+    "RelativePath": "api/Service/createService",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "service",
+        "Type": "Service",
         "IsRequired": true
       }
     ],

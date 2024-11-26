@@ -23,7 +23,6 @@ namespace IlusalongAPI.Controllers
         {
             var appointments = _context.Appointments
                 .Include(a => a.Service)  // Загружаем данные об услугах
-                .Include(a => a.Master)  // Загружаем данные о мастерах
                 .Include(a => a.User)    // Загружаем данные о пользователях
                 .ToList();
 
@@ -39,7 +38,7 @@ namespace IlusalongAPI.Controllers
         {
             var appointment = _context.Appointments
                 .Include(a => a.Service)  
-                .Include(a => a.Master)  
+
                 .Include(a => a.User)   
                 .FirstOrDefault(a => a.Id == id);
 
@@ -64,13 +63,8 @@ namespace IlusalongAPI.Controllers
             if (service == null)
                 return BadRequest("Услуга с указанным ID не найдена.");
 
-            var master = _context.Masters.FirstOrDefault(m => m.Id == appointment.MasterId);
-            if (master == null)
-                return BadRequest("Мастер с указанным ID не найден.");
-
             appointment.User = user;
             appointment.Service = service;
-            appointment.Master = master;
             appointment.Status = "scheduled"; 
 
 

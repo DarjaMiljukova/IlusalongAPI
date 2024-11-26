@@ -15,52 +15,62 @@ namespace IlusalongAPI.Controllers
             _context = context;
         }
 
+        // Получение всех мастеров
         [HttpGet]
         public IActionResult GetAllMasters()
         {
-            var masters = _context.Masters
-                .Include(m => m.Service)  
-                .ThenInclude(s => s.Category)  
-                .ToList();
-
+            var masters = _context.Users.Where(u => u.Role == "master").ToList();
             if (!masters.Any())
                 return NotFound("Мастера не найдены.");
 
             return Ok(masters);
         }
 
-        [HttpPost]
-        public IActionResult AddMaster([FromBody] Master master)
+        // Получение мастера по ID
+        [HttpGet("{id}")]
+        public IActionResult GetMasterById(int id)
         {
-            Console.WriteLine($"Received Master: Name={master?.Name}, ServiceId={master?.ServiceId}");
+            var master = _context.Users.FirstOrDefault(u => u.Id == id && u.Role == "master");
+            if (master == null)
+                return NotFound("Мастер не найден.");
 
-            if (master == null || string.IsNullOrEmpty(master.Name) || master.ServiceId <= 0)
-                return BadRequest("Некорректные данные для мастера.");
+            return Ok(master);
+        }
 
-            var service = _context.Services.FirstOrDefault(s => s.Id == master.ServiceId);
-            if (service == null)
-                return BadRequest("Услуга с указанным ID не найдена.");
+        // Добавление мастера
+        [HttpPost]
+        public IActionResult AddMaster([FromBody] User master)
+        {
+            if (string.IsNullOrEmpty(master.Email) || string.IsNullOrEmpty(master.Password))
+                return BadRequest("Email и пароль обязательны для добавления мастера.");
 
-            master.Service = service;
+            if (_context.Users.Any(u => u.Email == master.Email))
+                return BadRequest("Мастер с таким email уже существует.");
 
-            _context.Masters.Add(master);
+            master.Role = "master"; // Устанавливаем роль "master"
+            _context.Users.Add(master);
             _context.SaveChanges();
 
             return Ok(new { message = "Мастер успешно добавлен.", master });
         }
 
-
-
-        [HttpDelete("deleteMaster/{id}")]
-        public IActionResult DeleteMaster(int id)
+        // Изменение данных мастера
+        [HttpPut("{id}")]
+        public IActionResult UpdateMaster(int id, [FromBody] User updatedMaster)
         {
-            var master = _context.Masters.Find(id);
+            var master = _context.Users.FirstOrDefault(u => u.Id == id && u.Role == "master");
             if (master == null)
                 return NotFound("Мастер не найден.");
 
-            _context.Masters.Remove(master);
+            master.Email = updatedMaster.Email ?? master.Email;
+            master.PhoneNumber = updatedMaster.PhoneNumber ?? master.PhoneNumber;
+            master.Password = updatedMaster.Password ?? master.Password;
+
+            _context.Users.Update(master);
             _context.SaveChanges();
-            return Ok("Мастер удален.");
+
+            return Ok(new { message = "Данные мастера успешно обновлены.", master });
         }
+
     }
 }

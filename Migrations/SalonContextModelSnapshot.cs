@@ -22,7 +22,7 @@ namespace IlusalongAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("IlusalongAPI.Models.Appointment", b =>
+            modelBuilder.Entity("Appointment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,9 +32,6 @@ namespace IlusalongAPI.Migrations
 
                     b.Property<DateTime>("AppointmentDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("MasterId")
-                        .HasColumnType("int");
 
                     b.Property<int>("ServiceId")
                         .HasColumnType("int");
@@ -47,8 +44,6 @@ namespace IlusalongAPI.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MasterId");
 
                     b.HasIndex("ServiceId");
 
@@ -93,40 +88,14 @@ namespace IlusalongAPI.Migrations
                     b.Property<int>("ServiceId")
                         .HasColumnType("int");
 
+                    b.Property<int>("ServiceId1")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ServiceId");
+                    b.HasIndex("ServiceId1");
 
                     b.ToTable("Masters");
-                });
-
-            modelBuilder.Entity("IlusalongAPI.Models.Service", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("Services");
                 });
 
             modelBuilder.Entity("IlusalongAPI.Models.User", b =>
@@ -156,27 +125,53 @@ namespace IlusalongAPI.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("IlusalongAPI.Models.Appointment", b =>
+            modelBuilder.Entity("Service", b =>
                 {
-                    b.HasOne("IlusalongAPI.Models.Master", "Master")
-                        .WithMany()
-                        .HasForeignKey("MasterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.HasOne("IlusalongAPI.Models.Service", "Service")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MasterId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("MasterId");
+
+                    b.ToTable("Services");
+                });
+
+            modelBuilder.Entity("Appointment", b =>
+                {
+                    b.HasOne("Service", "Service")
                         .WithMany()
                         .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("IlusalongAPI.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Appointments")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("Master");
 
                     b.Navigation("Service");
 
@@ -185,16 +180,16 @@ namespace IlusalongAPI.Migrations
 
             modelBuilder.Entity("IlusalongAPI.Models.Master", b =>
                 {
-                    b.HasOne("IlusalongAPI.Models.Service", "Service")
+                    b.HasOne("Service", "Service")
                         .WithMany()
-                        .HasForeignKey("ServiceId")
+                        .HasForeignKey("ServiceId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Service");
                 });
 
-            modelBuilder.Entity("IlusalongAPI.Models.Service", b =>
+            modelBuilder.Entity("Service", b =>
                 {
                     b.HasOne("IlusalongAPI.Models.Category", "Category")
                         .WithMany()
@@ -202,7 +197,20 @@ namespace IlusalongAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("IlusalongAPI.Models.User", "Master")
+                        .WithMany()
+                        .HasForeignKey("MasterId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("Category");
+
+                    b.Navigation("Master");
+                });
+
+            modelBuilder.Entity("IlusalongAPI.Models.User", b =>
+                {
+                    b.Navigation("Appointments");
                 });
 #pragma warning restore 612, 618
         }
