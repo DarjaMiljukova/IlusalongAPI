@@ -1,56 +1,48 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background: #f5f5f5;
-}
-
-header nav {
-  display: flex;
-  justify-content: center;
-  background: #0073e6;
-  padding: 10px;
-}
-
-header nav a {
-  color: white;
-  text-decoration: none;
-  margin: 0 15px;
-}
-
-header nav a:hover {
-  text-decoration: underline;
-}
-
-.wrapper {
-  width: 300px;
-  margin: 50px auto;
-  padding: 20px;
+.content {
+  max-width: 800px;
+  margin: 0 auto;
   background: white;
+  color: black;
+  padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
 }
 
-.field {
-  margin-bottom: 15px;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  color: black;
+  margin-top: 20px;
 }
 
-.field label {
+table th, table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+form {
+  margin-top: 20px;
+}
+
+form label {
   display: block;
-  margin-bottom: 5px;
+  margin: 10px 0 5px;
 }
 
-.field input, .field select {
+form input, form select {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ddd;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
   border-radius: 5px;
 }
 
 button {
-  width: 100%;
-  padding: 10px;
-  background: #0073e6;
+  padding: 10px 20px;
+  background: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
@@ -58,5 +50,5 @@ button {
 }
 
 button:hover {
-  background: #005bb5;
+  background: #0056b3;
 }

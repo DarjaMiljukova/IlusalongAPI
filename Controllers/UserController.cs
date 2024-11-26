@@ -73,6 +73,34 @@ namespace IlusalongAPI.Controllers
                 return Unauthorized("Неверные данные для входа.");
 
             return Ok(new { userId = existingUser.Id, userEmail = existingUser.Email, role = existingUser.Role });
-        }        
+        }
+        // Метод для изменения данных пользователя
+        [HttpPut("{id}")]
+        public IActionResult UpdateUser(int id, [FromBody] User updatedUser)
+        {
+            // Находим пользователя по ID
+            var existingUser = _context.Users.FirstOrDefault(u => u.Id == id);
+            if (existingUser == null)
+                return NotFound("Пользователь не найден.");
+
+            // Обновляем поля, только если они переданы
+            if (!string.IsNullOrEmpty(updatedUser.Email))
+                existingUser.Email = updatedUser.Email;
+
+            if (!string.IsNullOrEmpty(updatedUser.Password))
+                existingUser.Password = updatedUser.Password;
+
+            if (!string.IsNullOrEmpty(updatedUser.Role))
+                existingUser.Role = updatedUser.Role;
+
+            if (!string.IsNullOrEmpty(updatedUser.PhoneNumber))
+                existingUser.PhoneNumber = updatedUser.PhoneNumber;
+
+            // Сохраняем изменения
+            _context.Users.Update(existingUser);
+            _context.SaveChanges();
+
+            return Ok("Данные пользователя обновлены.");
+        }
     }
 }
