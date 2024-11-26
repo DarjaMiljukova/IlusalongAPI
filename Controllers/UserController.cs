@@ -73,19 +73,6 @@ namespace IlusalongAPI.Controllers
                 return Unauthorized("Неверные данные для входа.");
 
             return Ok(new { userId = existingUser.Id, userEmail = existingUser.Email, role = existingUser.Role });
-        }
-
-        // Получение всех пользователей
-        [HttpGet("users")]
-        public IActionResult GetUsers()
-        {
-            var users = _context.Users.ToList();
-            if (!users.Any())
-            {
-                return NotFound("Пользователи не найдены.");
-            }
-
-            return Ok(users);
-        }
+        }        
     }
 }

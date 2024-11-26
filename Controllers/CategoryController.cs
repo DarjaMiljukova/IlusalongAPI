@@ -1,5 +1,4 @@
-﻿
-using IlusalongAPI.Models;
+﻿using IlusalongAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,32 +14,30 @@ namespace IlusalongAPI.Controllers
         {
             _context = context;
         }
-        
+
+        // Получение всех категорий
         [HttpGet]
         public IActionResult GetCategories()
         {
-            var categories = _context.Categories.Include(c => c.Services).ToList();  
+            var categories = _context.Categories.ToList();
             return Ok(categories);
         }
 
-        [HttpPost]
+        // Метод для добавления новой категории (без услуг)
+        [HttpPost("addCategory")]
         public async Task<IActionResult> AddCategory([FromBody] Category category)
         {
-            if (category == null || category.Services == null || !category.Services.Any())
+            // Проверяем, что категория не пустая
+            if (category == null || string.IsNullOrEmpty(category.Name))
             {
-                return BadRequest("Категория должна содержать хотя бы одну услугу.");
+                return BadRequest("Название категории не может быть пустым.");
             }
 
+            // Добавляем категорию в базу данных
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
-            foreach (var service in category.Services)
-            {
-                service.CategoryId = category.Id;  
-                _context.Services.Add(service);
-            }
-            await _context.SaveChangesAsync();
 
-            return Ok("Категория с услугами добавлена.");
+            return Ok($"Категория '{category.Name}' успешно добавлена.");
         }
     }
 }

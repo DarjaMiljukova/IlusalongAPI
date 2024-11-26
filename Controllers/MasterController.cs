@@ -1,6 +1,6 @@
-﻿
-using IlusalongAPI.Models;
+﻿using IlusalongAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace IlusalongAPI.Controllers
 {
@@ -18,44 +18,45 @@ namespace IlusalongAPI.Controllers
         [HttpGet]
         public IActionResult GetAllMasters()
         {
-            var masters = _context.Masters.ToList();
+            var masters = _context.Masters
+                .Include(m => m.Service)  
+                .ThenInclude(s => s.Category)  
+                .ToList();
+
+            if (!masters.Any())
+                return NotFound("Мастера не найдены.");
+
             return Ok(masters);
         }
 
         [HttpPost]
         public IActionResult AddMaster([FromBody] Master master)
         {
-            var user = Request.Headers["UserEmail"].ToString();
-            var password = Request.Headers["UserPassword"].ToString();
+            if (master == null || string.IsNullOrEmpty(master.Name) || master.ServiceId <= 0)
+                return BadRequest("Некорректные данные для мастера.");
 
-            if (user == "admin@gmail.com" && password == "admin")
-            {
-                _context.Masters.Add(master);
-                _context.SaveChanges();
-                return Ok("Мастер добавлен.");
-            }
+            var service = _context.Services.FirstOrDefault(s => s.Id == master.ServiceId);
+            if (service == null)
+                return BadRequest("Услуга с указанным ID не найдена.");
 
-            return Unauthorized("Только админ может добавлять мастеров.");
+            master.Service = service;
+
+            _context.Masters.Add(master);
+            _context.SaveChanges();
+
+            return Ok("Мастер успешно добавлен.");
         }
 
         [HttpDelete("deleteMaster/{id}")]
         public IActionResult DeleteMaster(int id)
         {
-            var user = Request.Headers["UserEmail"].ToString();
-            var password = Request.Headers["UserPassword"].ToString();
+            var master = _context.Masters.Find(id);
+            if (master == null)
+                return NotFound("Мастер не найден.");
 
-            if (user == "admin@gmail.com" && password == "admin")
-            {
-                var master = _context.Masters.Find(id);
-                if (master == null)
-                    return NotFound("Мастер не найден.");
-
-                _context.Masters.Remove(master);
-                _context.SaveChanges();
-                return Ok("Мастер удален.");
-            }
-
-            return Unauthorized("Только админ может удалять мастеров.");
+            _context.Masters.Remove(master);
+            _context.SaveChanges();
+            return Ok("Мастер удален.");
         }
     }
 }
