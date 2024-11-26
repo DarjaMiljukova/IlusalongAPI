@@ -38,9 +38,9 @@ namespace IlusalongAPI.Controllers
         public IActionResult GetAppointmentById(int id)
         {
             var appointment = _context.Appointments
-                .Include(a => a.Service)  // Загружаем данные об услуге
-                .Include(a => a.Master)  // Загружаем данные о мастере
-                .Include(a => a.User)    // Загружаем данные о пользователе
+                .Include(a => a.Service)  
+                .Include(a => a.Master)  
+                .Include(a => a.User)   
                 .FirstOrDefault(a => a.Id == id);
 
             if (appointment == null)
@@ -53,32 +53,27 @@ namespace IlusalongAPI.Controllers
         [HttpPost]
         public IActionResult CreateAppointment([FromBody] Appointment appointment)
         {
-            // Проверка даты записи
             if (appointment.AppointmentDate < DateTime.Now)
                 return BadRequest("Дата записи должна быть в будущем.");
 
-            // Проверка на существование пользователя
             var user = _context.Users.FirstOrDefault(u => u.Id == appointment.UserId);
             if (user == null)
                 return BadRequest("Пользователь с указанным ID не найден.");
 
-            // Проверка на существование услуги
             var service = _context.Services.FirstOrDefault(s => s.Id == appointment.ServiceId);
             if (service == null)
                 return BadRequest("Услуга с указанным ID не найдена.");
 
-            // Проверка на существование мастера
             var master = _context.Masters.FirstOrDefault(m => m.Id == appointment.MasterId);
             if (master == null)
                 return BadRequest("Мастер с указанным ID не найден.");
 
-            // Установка связанных объектов
             appointment.User = user;
             appointment.Service = service;
             appointment.Master = master;
-            appointment.Status = "scheduled"; // Устанавливаем статус по умолчанию
+            appointment.Status = "scheduled"; 
 
-            // Добавление записи
+
             _context.Appointments.Add(appointment);
             _context.SaveChanges();
 

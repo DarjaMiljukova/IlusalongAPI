@@ -15,12 +15,12 @@ namespace IlusalongAPI.Controllers
             _context = context;
         }
 
-        // Метод для получения всех услуг с данными категории
+ 
         [HttpGet]
         public IActionResult GetAllServices()
         {
             var services = _context.Services
-                .Include(s => s.Category)  // Загружаем данные о категории
+                .Include(s => s.Category)  
                 .ToList();
 
             if (!services.Any())
