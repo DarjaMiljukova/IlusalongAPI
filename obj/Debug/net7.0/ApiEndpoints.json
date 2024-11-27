@@ -168,6 +168,74 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "IlusalongAPI.Controllers.PenaltyController",
+    "Method": "GetAllPenalties",
+    "RelativePath": "api/Penalty",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "IlusalongAPI.Controllers.PenaltyController",
+    "Method": "UpdatePenalty",
+    "RelativePath": "api/Penalty/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedPenalty",
+        "Type": "IlusalongAPI.Models.Penalty",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "IlusalongAPI.Controllers.PenaltyController",
+    "Method": "DeletePenalty",
+    "RelativePath": "api/Penalty/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "IlusalongAPI.Controllers.PenaltyController",
+    "Method": "AddFine",
+    "RelativePath": "api/Penalty/{userId}/addFine",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "penalty",
+        "Type": "IlusalongAPI.Models.Penalty",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "IlusalongAPI.Controllers.ServiceController",
     "Method": "GetAllServices",
     "RelativePath": "api/Service",

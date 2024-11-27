@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using IlusalongAPI.Models;
+using IlusalongAPI.Controllers;
 
 namespace IlusalongAPI
 {
@@ -10,6 +11,7 @@ namespace IlusalongAPI
         public DbSet<Service> Services { get; set; }
         public DbSet<Master> Masters { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Penalty> Penalties { get; set; }
 
         public SalonContext(DbContextOptions<SalonContext> options) : base(options) { }
 

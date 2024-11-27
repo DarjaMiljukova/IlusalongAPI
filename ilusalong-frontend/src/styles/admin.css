@@ -1,0 +1,98 @@
+/* Общие стили для панели */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(45deg, #003366, #004080, #0059b3, #0073e6);
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Контейнер для админской панели */
+.admin-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 900px;
+    box-sizing: border-box;
+}
+
+/* Заголовки */
+.admin-container h2 {
+    text-align: center;
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.admin-container h3 {
+    color: #333;
+    font-size: 22px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+/* Стили для списка категорий и мастеров */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Стили для формы добавления штрафа */
+.form-container {
+    margin-top: 30px;
+}
+
+.form-container label {
+    display: block;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.form-container input,
+.form-container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.form-container button {
+    background-color: #0073e6;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+}
+
+.form-container button:hover {
+    background-color: #005bb5;
+}
+
+/* Для отображения сообщений */
+.message {
+    text-align: center;
+    color: red;
+    font-size: 16px;
+    margin-top: 15px;
+}

@@ -1,6 +1,10 @@
 ﻿using IlusalongAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace IlusalongAPI.Controllers
 {
@@ -57,14 +61,15 @@ namespace IlusalongAPI.Controllers
             return Ok("Register success with user role.");
         }
 
-        // Логин пользователя
+        // Логин пользователя с генерацией JWT
         [HttpPost("login")]
         public IActionResult Login([FromBody] User user)
         {
             // Проверка на администратора
             if (user.Email == "admin@gmail.com" && user.Password == "admin")
             {
-                return Ok(new { userId = 0, userEmail = user.Email, role = "admin" });
+                var token = GenerateJwtToken(0, "admin");
+                return Ok(new { token });
             }
 
             // Проверяем в базе данных
@@ -72,8 +77,29 @@ namespace IlusalongAPI.Controllers
             if (existingUser == null)
                 return Unauthorized("Неверные данные для входа.");
 
-            return Ok(new { userId = existingUser.Id, userEmail = existingUser.Email, role = existingUser.Role });
+            var generatedToken = GenerateJwtToken(existingUser.Id, existingUser.Role);
+            return Ok(new { token = generatedToken });
         }
+
+        // Генерация JWT токена
+        private string GenerateJwtToken(int userId, string role)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes("YourSecretKey12345"); // Замените на ваш секретный ключ
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+            new Claim("id", userId.ToString()),
+            new Claim("role", role)
+        }),
+                Expires = DateTime.UtcNow.AddHours(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
+        }
+
         // Метод для изменения данных пользователя
         [HttpPut("{id}")]
         public IActionResult UpdateUser(int id, [FromBody] User updatedUser)
