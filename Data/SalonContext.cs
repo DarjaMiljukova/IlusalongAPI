@@ -19,33 +19,29 @@ namespace IlusalongAPI
         {
             base.OnModelCreating(modelBuilder);
 
-            // Связь Appointment -> User (клиент)
             modelBuilder.Entity<Appointment>()
                 .HasOne(a => a.User)
                 .WithMany(u => u.Appointments)
                 .HasForeignKey(a => a.UserId)
-                .OnDelete(DeleteBehavior.Restrict); // Убираем каскадное удаление
+                .OnDelete(DeleteBehavior.Restrict); 
 
-            // Связь Appointment -> Service
             modelBuilder.Entity<Appointment>()
                 .HasOne(a => a.Service)
                 .WithMany()
                 .HasForeignKey(a => a.ServiceId)
-                .OnDelete(DeleteBehavior.Restrict); // Убираем каскадное удаление
+                .OnDelete(DeleteBehavior.Restrict); 
 
-            // Связь Appointment -> Master
-            modelBuilder.Entity<Service>() // Мастер из таблицы Users через Service
+            modelBuilder.Entity<Service>() 
                 .HasOne(s => s.Master)
                 .WithMany()
                 .HasForeignKey(s => s.MasterId)
-                .OnDelete(DeleteBehavior.Restrict); // Убираем каскадное удаление
+                .OnDelete(DeleteBehavior.Restrict); 
 
-            // Связь Service -> Category
             modelBuilder.Entity<Service>()
                 .HasOne(s => s.Category)
                 .WithMany()
                 .HasForeignKey(s => s.CategoryId)
-                .OnDelete(DeleteBehavior.Cascade); // Каскадное удаление для категории
+                .OnDelete(DeleteBehavior.Cascade); 
         }
 
     }

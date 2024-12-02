@@ -284,6 +284,22 @@
   },
   {
     "ContainingType": "IlusalongAPI.Controllers.ServiceController",
+    "Method": "GetServicesByCategory",
+    "RelativePath": "api/Service/category/{categoryId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "IlusalongAPI.Controllers.ServiceController",
     "Method": "CreateService",
     "RelativePath": "api/Service/createService",
     "HttpMethod": "POST",
@@ -293,6 +309,22 @@
       {
         "Name": "service",
         "Type": "Service",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "IlusalongAPI.Controllers.ServiceController",
+    "Method": "GetServicesByMaster",
+    "RelativePath": "api/Service/master/{masterId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "masterId",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

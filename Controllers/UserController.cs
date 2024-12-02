@@ -19,7 +19,6 @@ namespace IlusalongAPI.Controllers
             _context = context;
         }
 
-        // Метод для получения всех пользователей
         [HttpGet]
         public IActionResult GetAllUsers()
         {
@@ -29,7 +28,6 @@ namespace IlusalongAPI.Controllers
             return Ok(users);
         }
 
-        // Метод для получения пользователя по ID
         [HttpGet("{id}")]
         public IActionResult GetUserById(int id)
         {
@@ -41,19 +39,15 @@ namespace IlusalongAPI.Controllers
             return Ok(user);
         }
 
-        // Регистрация нового пользователя
         [HttpPost("register")]
         public IActionResult Register([FromBody] User user)
         {
-            // Проверка, существует ли пользователь с таким email
             if (_context.Users.Any(u => u.Email == user.Email))
                 return BadRequest("Пользователь с таким email уже существует.");
 
-            // Проверка, указан ли номер телефона
             if (string.IsNullOrEmpty(user.PhoneNumber))
                 return BadRequest("Номер телефона обязателен.");
 
-            // Автоматически назначаем роль клиента, если это не админ
             user.Role = "client";
 
             _context.Users.Add(user);
@@ -61,18 +55,15 @@ namespace IlusalongAPI.Controllers
             return Ok("Register success with user role.");
         }
 
-        // Логин пользователя с генерацией JWT
         [HttpPost("login")]
         public IActionResult Login([FromBody] User user)
         {
-            // Проверка на администратора
             if (user.Email == "admin@gmail.com" && user.Password == "admin")
             {
                 var token = GenerateJwtToken(0, "admin");
                 return Ok(new { token });
             }
 
-            // Проверяем в базе данных
             var existingUser = _context.Users.SingleOrDefault(u => u.Email == user.Email && u.Password == user.Password);
             if (existingUser == null)
                 return Unauthorized("Неверные данные для входа.");
@@ -81,11 +72,10 @@ namespace IlusalongAPI.Controllers
             return Ok(new { token = generatedToken });
         }
 
-        // Генерация JWT токена
         private string GenerateJwtToken(int userId, string role)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("YourSecretKey12345"); // Замените на ваш секретный ключ
+            var key = Encoding.ASCII.GetBytes("YourSecretKey12345"); 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
@@ -100,16 +90,13 @@ namespace IlusalongAPI.Controllers
             return tokenHandler.WriteToken(token);
         }
 
-        // Метод для изменения данных пользователя
         [HttpPut("{id}")]
         public IActionResult UpdateUser(int id, [FromBody] User updatedUser)
         {
-            // Находим пользователя по ID
             var existingUser = _context.Users.FirstOrDefault(u => u.Id == id);
             if (existingUser == null)
                 return NotFound("Пользователь не найден.");
 
-            // Обновляем поля, только если они переданы
             if (!string.IsNullOrEmpty(updatedUser.Email))
                 existingUser.Email = updatedUser.Email;
 
@@ -122,7 +109,6 @@ namespace IlusalongAPI.Controllers
             if (!string.IsNullOrEmpty(updatedUser.PhoneNumber))
                 existingUser.PhoneNumber = updatedUser.PhoneNumber;
 
-            // Сохраняем изменения
             _context.Users.Update(existingUser);
             _context.SaveChanges();
 

@@ -15,7 +15,6 @@ namespace IlusalongAPI.Controllers
             _context = context;
         }
 
-        // Получение всех категорий
         [HttpGet]
         public IActionResult GetCategories()
         {
@@ -23,7 +22,6 @@ namespace IlusalongAPI.Controllers
             return Ok(categories);
         }
 
-        // Добавление новой категории
         [HttpPost("addCategory")]
         public async Task<IActionResult> AddCategory([FromBody] Category category)
         {
@@ -40,7 +38,6 @@ namespace IlusalongAPI.Controllers
             return Ok(new { message = $"Категория '{category.Name}' успешно добавлена.", category });
         }
 
-        // Изменение категории
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateCategory(int id, [FromBody] Category updatedCategory)
         {
@@ -51,7 +48,6 @@ namespace IlusalongAPI.Controllers
                 return NotFound("Категория не найдена.");
             }
 
-            // Обновляем поля категории, если они переданы
             category.Name = updatedCategory.Name ?? category.Name;
             category.Description = updatedCategory.Description ?? category.Description;
 

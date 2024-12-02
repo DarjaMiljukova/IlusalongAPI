@@ -17,13 +17,12 @@ namespace IlusalongAPI.Controllers
             _context = context;
         }
 
-        // Метод для получения всех записей
         [HttpGet]
         public IActionResult GetAllAppointments()
         {
             var appointments = _context.Appointments
-                .Include(a => a.Service)  // Загружаем данные об услугах
-                .Include(a => a.User)    // Загружаем данные о пользователях
+                .Include(a => a.Service)  
+                .Include(a => a.User)    
                 .ToList();
 
             if (!appointments.Any())
@@ -32,7 +31,6 @@ namespace IlusalongAPI.Controllers
             return Ok(appointments);
         }
 
-        // Метод для получения записи по ID
         [HttpGet("{id}")]
         public IActionResult GetAppointmentById(int id)
         {

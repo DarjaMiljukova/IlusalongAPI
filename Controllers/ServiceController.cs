@@ -15,7 +15,6 @@ namespace IlusalongAPI.Controllers
             _context = context;
         }
 
-        // Получение всех услуг
         [HttpGet]
         public IActionResult GetAllServices()
         {
@@ -29,7 +28,6 @@ namespace IlusalongAPI.Controllers
             return Ok(services);
         }
 
-        // Получение услуги по ID
         [HttpGet("{id}")]
         public IActionResult GetServiceById(int id)
         {
@@ -43,27 +41,32 @@ namespace IlusalongAPI.Controllers
             return Ok(service);
         }
 
-        // Создание новой услуги
         [HttpPost("createService")]
         public IActionResult CreateService([FromBody] Service service)
         {
-            // Проверяем, что пользователь с MasterId существует и имеет роль "master"
             var master = _context.Users.FirstOrDefault(u => u.Id == service.MasterId && u.Role == "master");
             if (master == null)
                 return BadRequest("Мастер с указанным ID не найден или не имеет соответствующей роли.");
 
-            // Проверяем, существует ли категория
             var category = _context.Categories.FirstOrDefault(c => c.Id == service.CategoryId);
             if (category == null)
                 return BadRequest("Категория с указанным ID не найдена.");
 
+            service.Category = category;
+            service.Master = master;
+
             _context.Services.Add(service);
             _context.SaveChanges();
 
-            return Ok(new { message = "Услуга успешно создана.", service });
+            var createdService = _context.Services
+                .Include(s => s.Master)
+                .Include(s => s.Category)
+                .FirstOrDefault(s => s.Id == service.Id);
+
+            return Ok(new { message = "Услуга успешно создана.", service = createdService });
         }
 
-        // Изменение данных услуги
+
         [HttpPut("{id}")]
         public IActionResult UpdateService(int id, [FromBody] Service updatedService)
         {
@@ -71,16 +74,6 @@ namespace IlusalongAPI.Controllers
             if (service == null)
                 return NotFound("Услуга не найдена.");
 
-            // Проверка существования мастера
-            if (updatedService.MasterId != 0)
-            {
-                var master = _context.Users.FirstOrDefault(u => u.Id == updatedService.MasterId && u.Role == "master");
-                if (master == null)
-                    return BadRequest("Мастер с указанным ID не найден.");
-                service.MasterId = updatedService.MasterId;
-            }
-
-            // Проверка существования категории
             if (updatedService.CategoryId != 0)
             {
                 var category = _context.Categories.FirstOrDefault(c => c.Id == updatedService.CategoryId);
@@ -98,6 +91,29 @@ namespace IlusalongAPI.Controllers
 
             return Ok(new { message = "Услуга успешно обновлена.", service });
         }
+
+
+        [HttpGet("master/{masterId}")]
+        public IActionResult GetServicesByMaster(int masterId)
+        {
+            var services = _context.Services.Where(s => s.MasterId == masterId).ToList();
+            if (!services.Any())
+            {
+                return NotFound("Услуги для указанного мастера не найдены.");
+            }
+            return Ok(services);
+        }
+        [HttpGet("category/{categoryId}")]
+        public IActionResult GetServicesByCategory(int categoryId)
+        {
+            var services = _context.Services.Where(s => s.CategoryId == categoryId).ToList();
+            if (!services.Any())
+            {
+                return NotFound("Услуги для указанной категории не найдены.");
+            }
+            return Ok(services);
+        }
+
 
     }
 }

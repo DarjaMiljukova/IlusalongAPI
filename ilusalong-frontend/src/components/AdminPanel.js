@@ -2,185 +2,489 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const AdminPanel = () => {
-    const [clients, setClients] = useState([]);
-    const [masters, setMasters] = useState([]);
+    const [users, setUsers] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [masters, setMasters] = useState([]);
     const [penalties, setPenalties] = useState([]);
-    const [message, setMessage] = useState('');
+    const [searchEmail, setSearchEmail] = useState('');
+    const [filteredUsers, setFilteredUsers] = useState([]);
+    const [editingUserId, setEditingUserId] = useState(null);
+    const [editingCategoryId, setEditingCategoryId] = useState(null);
+    const [newCategoryName, setNewCategoryName] = useState('');
+    const [newCategoryDescription, setNewCategoryDescription] = useState('');
+    const [selectedTab, setSelectedTab] = useState('users');
+    const [newPenalty, setNewPenalty] = useState({ userId: '', reason: '', amount: '', dateIssued: '' });
+    const [editingPenaltyId, setEditingPenaltyId] = useState(null);
+    const [editedPenalty, setEditedPenalty] = useState({});
 
-    // Fetch data when the component mounts
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                // Fetch all data from backend using Axios
-                const [clientsRes, mastersRes, categoriesRes, penaltiesRes] = await Promise.all([
-                    axios.get('http://localhost:5259/api/User'),  // Correct API endpoint
-                    axios.get('http://localhost:5259/api/Master'),
-                    axios.get('http://localhost:5259/api/Category'),
-                    axios.get('http://localhost:5259/api/Penalty')
-                ]);
-                // Set the fetched data into the state
-                setClients(clientsRes.data);
-                setMasters(mastersRes.data);
-                setCategories(categoriesRes.data);
-                setPenalties(penaltiesRes.data);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-                setMessage('Failed to load data. Please check the backend.');
-            }
-        };
+        fetchUsers();
+        fetchCategories();
+        fetchMasters();
+        fetchPenalties();
+    }, []);
 
-        fetchData();
-    }, []);  // Empty dependency array to run once on component mount
+    const fetchUsers = async () => {
+        try {
+            const response = await axios.get('http://localhost:5259/api/User');
+            setUsers(response.data);
+            setFilteredUsers(response.data);
+        } catch (error) {
+            console.error('Ошибка при загрузке пользователей:', error);
+        }
+    };
 
-    // Render the admin panel
+    const fetchCategories = async () => {
+        try {
+            const response = await axios.get('http://localhost:5259/api/Category');
+            setCategories(response.data);
+        } catch (error) {
+            console.error('Ошибка при загрузке категорий:', error);
+        }
+    };
+
+    const fetchMasters = async () => {
+        try {
+            const response = await axios.get('http://localhost:5259/api/Master');
+            setMasters(response.data);
+        } catch (error) {
+            console.error('Ошибка при загрузке мастеров:', error);
+        }
+    };
+    const fetchPenalties = async () => {
+        try {
+            const response = await axios.get('http://localhost:5259/api/Penalty');
+            setPenalties(response.data);
+        } catch (error) {
+            console.error('Ошибка при загрузке мастеров:', error);
+        }
+    };
+    const handleCategoryChange = async (categoryId, newName, newDescription) => {
+        const isConfirmed = window.confirm('Вы уверены, что хотите изменить категорию?');
+        if (!isConfirmed) return;
+
+        try {
+            const updatedCategory = { id: categoryId, name: newName, description: newDescription };
+            await axios.put(`http://localhost:5259/api/Category/${categoryId}`, updatedCategory);
+            fetchCategories();
+        } catch (error) {
+            console.error('Ошибка при обновлении категории:', error);
+        }
+        setEditingCategoryId(null);
+    };
+
+    const handleUserRoleChange = async (userId, newRole) => {
+        const isConfirmed = window.confirm('Вы уверены, что хотите изменить роль пользователя?');
+        if (!isConfirmed) return;
+
+        try {
+            const updatedUser = { ...users.find((user) => user.id === userId), role: newRole };
+            await axios.put(`http://localhost:5259/api/User/${userId}`, updatedUser);
+            fetchUsers();
+        } catch (error) {
+            console.error('Ошибка при обновлении роли пользователя:', error);
+        }
+        setEditingUserId(null);
+    };
+
+    const handleSearch = (email) => {
+        setSearchEmail(email);
+        const filtered = users.filter((user) =>
+            user.email.toLowerCase().includes(email.toLowerCase())
+        );
+        setFilteredUsers(filtered);
+    };
+
+    const handleAddCategory = async () => {
+        try {
+            const newCategory = { name: newCategoryName, description: newCategoryDescription };
+            await axios.post('http://localhost:5259/api/Category/addCategory', newCategory);
+            fetchCategories();
+            setNewCategoryName('');
+            setNewCategoryDescription('');
+        } catch (error) {
+            console.error('Ошибка при добавлении категории:', error);
+        }
+    };
+
+    const handleTabChange = (tab) => {
+        setSelectedTab(tab);
+        if (tab === 'masters') fetchMasters();
+    };
+
+    const handleAddPenalty = async () => {
+        try {
+            const userId = parseInt(newPenalty.userId, 10);
+            const penaltyData = {
+                id: 0,
+                userId: userId,
+                reason: newPenalty.reason.trim(),
+                amount: parseFloat(newPenalty.amount),
+                dateIssued: newPenalty.dateIssued,
+                user: {
+                    id: 0,
+                    email: "string",
+                    password: "string",
+                    role: "string",
+                    phoneNumber: "string",
+                },
+            };
+
+            console.log("Отправляемые данные штрафа:", penaltyData);
+
+            await axios.post(`http://localhost:5259/api/Penalty/${userId}/addFine`, penaltyData);
+
+            fetchPenalties();
+
+            setNewPenalty({ userId: '', reason: '', amount: '', dateIssued: '' });
+
+            console.log("Штраф успешно добавлен!");
+        } catch (error) {
+            console.error('Ошибка при добавлении штрафа:', error.response?.data || error.message);
+        }
+    };
+
+    const handleDeletePenalty = async (penaltyId) => {
+        try {
+            await axios.delete(`http://localhost:5259/api/Penalty/${penaltyId}`);
+            fetchPenalties();
+        } catch (error) {
+            console.error('Ошибка при удалении штрафа:', error);
+        }
+    };
+
+    const handleEditPenalty = (penalty) => {
+        setEditingPenaltyId(penalty.id);
+        setEditedPenalty({ ...penalty });
+    };
+
+    const handleUpdatePenalty = async () => {
+        try {
+            await axios.put(`http://localhost:5259/api/Penalty/${editingPenaltyId}`, editedPenalty);
+            setEditingPenaltyId(null);
+            setEditedPenalty({});
+            fetchPenalties();
+        } catch (error) {
+            console.error('Ошибка при обновлении штрафа:', error);
+        }
+    };
+    const logout = () => {
+        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
+        window.location.href = '/login';
+    };
+
     return (
         <div className="admin-panel">
-            <h1>Admin Panel</h1>
+            <div style={{ position: 'absolute', top: '10px', right: '10px' }}>
+                <button
+                    onClick={logout}
+                    style={{
+                        padding: '10px',
+                        backgroundColor: '#f44336',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: '5px',
+                        cursor: 'pointer',
+                    }}
+                >
+                    Выйти
+                </button>
+            </div>
+            <h2>Панель администратора</h2>
+            <ul className="nav nav-tabs">
+                <button
+                    className={`nav-link ${selectedTab === 'users' ? 'active' : ''}`}
+                    onClick={() => handleTabChange('users')}
+                >
+                    Пользователи
+                </button>
+                <button
+                    className={`nav-link ${selectedTab === 'categories' ? 'active' : ''}`}
+                    onClick={() => handleTabChange('categories')}
+                >
+                    Категории
+                </button>
+                <button
+                    className={`nav-link ${selectedTab === 'masters' ? 'active' : ''}`}
+                    onClick={() => handleTabChange('masters')}
+                >
+                    Мастеры
+                </button>
+                <button
+                    className={`nav-link ${selectedTab === 'penalties' ? 'active' : ''}`}
+                    onClick={() => handleTabChange('penalties')}
+                >
+                    Штрафы
+                </button>
+            </ul>
 
-            {/* Categories Button */}
-            <button onClick={() => setMessage('Categories data will be shown here')}>
-                Categories
-            </button>
-
-            {/* Masters Button */}
-            <button onClick={() => setMessage('Masters data will be shown here')}>
-                Masters
-            </button>
-
-            {/* Penalties Button */}
-            <button onClick={() => setMessage('Penalties data will be shown here')}>
-                Penalties
-            </button>
-
-            {/* Clients Button */}
-            <button onClick={() => setMessage('Clients data will be shown here')}>
-                Clients
-            </button>
-
-            {/* Show Clients Table */}
-            {message === 'Clients data will be shown here' && (
+            {selectedTab === 'users' && (
                 <div>
-                    <h2>Clients Data</h2>
-                    <table>
+                    <h3>Список пользователей</h3>
+                    <input
+                        type="text"
+                        placeholder="Поиск по email"
+                        value={searchEmail}
+                        onChange={(e) => handleSearch(e.target.value)}
+                    />
+                    <table className="table">
                         <thead>
                         <tr>
                             <th>ID</th>
                             <th>Email</th>
-                            <th>Phone Number</th>
+                            <th>Телефон</th>
+                            <th>Роль</th>
+                            <th>Действия</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {clients.length > 0 ? (
-                            clients.map(client => (
-                                <tr key={client.id}>
-                                    <td>{client.id}</td>
-                                    <td>{client.email}</td>
-                                    <td>{client.phoneNumber}</td>
-                                </tr>
-                            ))
-                        ) : (
-                            <tr>
-                                <td colSpan="3">No data available</td>
+                        {filteredUsers.map((user) => (
+                            <tr key={user.id}>
+                                <td>{user.id}</td>
+                                <td>{user.email}</td>
+                                <td>{user.phoneNumber}</td>
+                                <td>
+                                    {editingUserId === user.id ? (
+                                        <select
+                                            value={user.role}
+                                            onChange={(e) => handleUserRoleChange(user.id, e.target.value)}
+                                        >
+                                            <option value="client">Пользователь</option>
+                                            <option value="master">Мастер</option>
+                                        </select>
+                                    ) : (
+                                        user.role
+                                    )}
+                                </td>
+                                <td>
+                                    {editingUserId === user.id ? (
+                                        <button onClick={() => setEditingUserId(null)}>Сохранить</button>
+                                    ) : (
+                                        <button onClick={() => setEditingUserId(user.id)}>Редактировать</button>
+                                    )}
+                                </td>
                             </tr>
-                        )}
+                        ))}
                         </tbody>
                     </table>
                 </div>
             )}
 
-            {/* Display Masters Table */}
-            {message === 'Masters data will be shown here' && (
+            {selectedTab === 'categories' && (
                 <div>
-                    <h2>Masters Data</h2>
-                    <table>
+                    <h3>Категории</h3>
+                    <div>
+                        <input
+                            type="text"
+                            placeholder="Название категории"
+                            value={newCategoryName}
+                            onChange={(e) => setNewCategoryName(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            placeholder="Описание категории"
+                            value={newCategoryDescription}
+                            onChange={(e) => setNewCategoryDescription(e.target.value)}
+                        />
+                        <button onClick={handleAddCategory}>Добавить категорию</button>
+                    </div>
+                    <table className="table">
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Name</th>
-                            <th>Specialty</th>
+                            <th>Название</th>
+                            <th>Описание</th>
+                            <th>Действия</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {masters.length > 0 ? (
-                            masters.map(master => (
-                                <tr key={master.id}>
-                                    <td>{master.id}</td>
-                                    <td>{master.name}</td>
-                                    <td>{master.specialty}</td>
-                                </tr>
-                            ))
-                        ) : (
-                            <tr>
-                                <td colSpan="3">No data available</td>
+                        {categories.map((category) => (
+                            <tr key={category.id}>
+                                <td>{category.id}</td>
+                                <td>
+                                    {editingCategoryId === category.id ? (
+                                        <input
+                                            type="text"
+                                            defaultValue={category.name}
+                                            onChange={(e) =>
+                                                setCategories((prev) =>
+                                                    prev.map((cat) =>
+                                                        cat.id === category.id ? { ...cat, name: e.target.value } : cat
+                                                    )
+                                                )
+                                            }
+                                        />
+                                    ) : (
+                                        category.name
+                                    )}
+                                </td>
+                                <td>
+                                    {editingCategoryId === category.id ? (
+                                        <input
+                                            type="text"
+                                            defaultValue={category.description}
+                                            onChange={(e) =>
+                                                setCategories((prev) =>
+                                                    prev.map((cat) =>
+                                                        cat.id === category.id
+                                                            ? { ...cat, description: e.target.value }
+                                                            : cat
+                                                    )
+                                                )
+                                            }
+                                        />
+                                    ) : (
+                                        category.description
+                                    )}
+                                </td>
+                                <td>
+                                    {editingCategoryId === category.id ? (
+                                        <button
+                                            onClick={() =>
+                                                handleCategoryChange(
+                                                    category.id,
+                                                    category.name,
+                                                    category.description
+                                                )
+                                            }
+                                        >
+                                            Сохранить
+                                        </button>
+                                    ) : (
+                                        <button onClick={() => setEditingCategoryId(category.id)}>Редактировать</button>
+                                    )}
+                                </td>
                             </tr>
-                        )}
+                        ))}
                         </tbody>
                     </table>
                 </div>
             )}
 
-            {/* Display Penalties Table */}
-            {message === 'Penalties data will be shown here' && (
+            {selectedTab === 'masters' && (
                 <div>
-                    <h2>Penalties Data</h2>
-                    <table>
+                    <h3>Мастеры</h3>
+                    <table className="table">
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Amount</th>
-                            <th>Reason</th>
+                            <th>Email</th>
+                            <th>Telefoninumber</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {penalties.length > 0 ? (
-                            penalties.map(penalty => (
-                                <tr key={penalty.id}>
-                                    <td>{penalty.id}</td>
-                                    <td>{penalty.amount}</td>
-                                    <td>{penalty.reason}</td>
-                                </tr>
-                            ))
-                        ) : (
-                            <tr>
-                                <td colSpan="3">No data available</td>
+                        {masters.map((master) => (
+                            <tr key={master.id}>
+                                <td>{master.id}</td>
+                                <td>{master.email}</td>
+                                <td>{master.phoneNumber}</td>
                             </tr>
-                        )}
+                        ))}
                         </tbody>
                     </table>
                 </div>
             )}
-
-            {/* Display Categories Table */}
-            {message === 'Categories data will be shown here' && (
+            {selectedTab === 'penalties' && (
                 <div>
-                    <h2>Categories Data</h2>
-                    <table>
+                    <h3>Штрафы</h3>
+                    <div>
+                        <h4>Добавить штраф</h4>
+                        <input
+                            type="text"
+                            placeholder="ID пользователя"
+                            value={newPenalty.userId}
+                            onChange={(e) => setNewPenalty({ ...newPenalty, userId: e.target.value })}
+                        />
+                        <input
+                            type="text"
+                            placeholder="Причина"
+                            value={newPenalty.reason}
+                            onChange={(e) => setNewPenalty({ ...newPenalty, reason: e.target.value })}
+                        />
+                        <input
+                            type="number"
+                            placeholder="Сумма"
+                            value={newPenalty.amount}
+                            onChange={(e) => setNewPenalty({ ...newPenalty, amount: e.target.value })}
+                        />
+                        <input
+                            type="datetime-local"
+                            value={newPenalty.dateIssued}
+                            onChange={(e) => setNewPenalty({ ...newPenalty, dateIssued: e.target.value })}
+                        />
+                        <button onClick={handleAddPenalty}>Добавить</button>
+                    </div>
+
+                    <table className="table">
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Category Name</th>
+                            <th>Клиент (Email)</th>
+                            <th>Причина</th>
+                            <th>Стоимость</th>
+                            <th>Дата нарушения</th>
+                            <th>Действия</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {categories.length > 0 ? (
-                            categories.map(category => (
-                                <tr key={category.id}>
-                                    <td>{category.id}</td>
-                                    <td>{category.name}</td>
-                                </tr>
-                            ))
-                        ) : (
-                            <tr>
-                                <td colSpan="2">No data available</td>
+                        {penalties.map((penalty) => (
+                            <tr key={penalty.id}>
+                                <td>{penalty.id}</td>
+                                <td>{penalty.user?.email || 'Не указан'}</td>
+                                <td>
+                                    {editingPenaltyId === penalty.id ? (
+                                        <input
+                                            type="text"
+                                            value={editedPenalty.reason}
+                                            onChange={(e) =>
+                                                setEditedPenalty({ ...editedPenalty, reason: e.target.value })
+                                            }
+                                        />
+                                    ) : (
+                                        penalty.reason
+                                    )}
+                                </td>
+                                <td>
+                                    {editingPenaltyId === penalty.id ? (
+                                        <input
+                                            type="number"
+                                            value={editedPenalty.amount}
+                                            onChange={(e) =>
+                                                setEditedPenalty({ ...editedPenalty, amount: e.target.value })
+                                            }
+                                        />
+                                    ) : (
+                                        penalty.amount
+                                    )}
+                                </td>
+                                <td>
+                                    {editingPenaltyId === penalty.id ? (
+                                        <input
+                                            type="datetime-local"
+                                            value={editedPenalty.dateIssued}
+                                            onChange={(e) =>
+                                                setEditedPenalty({ ...editedPenalty, dateIssued: e.target.value })
+                                            }
+                                        />
+                                    ) : (
+                                        new Date(penalty.dateIssued).toLocaleString()
+                                    )}
+                                </td>
+                                <td>
+                                    {editingPenaltyId === penalty.id ? (
+                                        <button onClick={handleUpdatePenalty}>Сохранить</button>
+                                    ) : (
+                                        <button onClick={() => handleEditPenalty(penalty)}>Редактировать</button>
+                                    )}
+                                    <button onClick={() => handleDeletePenalty(penalty.id)}>Удалить</button>
+                                </td>
                             </tr>
-                        )}
+                        ))}
                         </tbody>
                     </table>
                 </div>
             )}
-
-            {message && <p>{message}</p>}
         </div>
     );
 };

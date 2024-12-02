@@ -15,7 +15,7 @@ namespace IlusalongAPI.Controllers
             _context = context;
         }
 
-        // Получение всех мастеров
+
         [HttpGet]
         public IActionResult GetAllMasters()
         {
@@ -26,7 +26,7 @@ namespace IlusalongAPI.Controllers
             return Ok(masters);
         }
 
-        // Получение мастера по ID
+
         [HttpGet("{id}")]
         public IActionResult GetMasterById(int id)
         {
@@ -37,7 +37,7 @@ namespace IlusalongAPI.Controllers
             return Ok(master);
         }
 
-        // Добавление мастера
+
         [HttpPost]
         public IActionResult AddMaster([FromBody] User master)
         {
@@ -47,14 +47,14 @@ namespace IlusalongAPI.Controllers
             if (_context.Users.Any(u => u.Email == master.Email))
                 return BadRequest("Мастер с таким email уже существует.");
 
-            master.Role = "master"; // Устанавливаем роль "master"
+            master.Role = "master"; 
             _context.Users.Add(master);
             _context.SaveChanges();
 
             return Ok(new { message = "Мастер успешно добавлен.", master });
         }
 
-        // Изменение данных мастера
+        
         [HttpPut("{id}")]
         public IActionResult UpdateMaster(int id, [FromBody] User updatedMaster)
         {

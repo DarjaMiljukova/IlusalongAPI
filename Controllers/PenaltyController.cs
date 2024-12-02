@@ -15,12 +15,11 @@ namespace IlusalongAPI.Controllers
             _context = context;
         }
 
-        // Получение всех штрафов
         [HttpGet]
         public IActionResult GetAllPenalties()
         {
             var penalties = _context.Penalties
-                .Include(p => p.User) // Включаем связанные данные о пользователе
+                .Include(p => p.User) 
                 .ToList();
 
             if (!penalties.Any())
@@ -29,21 +28,21 @@ namespace IlusalongAPI.Controllers
             return Ok(penalties);
         }
 
-
-
-        // Создание нового штрафа
         [HttpPost("{userId}/addFine")]
         public IActionResult AddFine(int userId, [FromBody] Penalty penalty)
         {
-            // Проверяем существование пользователя
             var user = _context.Users.FirstOrDefault(u => u.Id == userId);
             if (user == null)
                 return NotFound("Пользователь не найден.");
 
-            // Устанавливаем ID пользователя, но не создаём нового
             penalty.UserId = userId;
-            penalty.DateIssued = DateTime.UtcNow; // Добавляем дату штрафа
-            penalty.User = null; // Убираем связь, чтобы избежать создания нового пользователя
+
+            if (penalty.DateIssued == default(DateTime))
+            {
+                return BadRequest(new { message = "Дата штрафа обязательна." });
+            }
+
+            penalty.User = null; 
 
             _context.Penalties.Add(penalty);
             _context.SaveChanges();
@@ -51,8 +50,6 @@ namespace IlusalongAPI.Controllers
             return Ok(new { message = "Штраф успешно добавлен.", penalty });
         }
 
-
-        // Изменение штрафа
         [HttpPut("{id}")]
         public IActionResult UpdatePenalty(int id, [FromBody] Penalty updatedPenalty)
         {
@@ -62,6 +59,7 @@ namespace IlusalongAPI.Controllers
 
             penalty.Reason = updatedPenalty.Reason ?? penalty.Reason;
             penalty.Amount = updatedPenalty.Amount != 0 ? updatedPenalty.Amount : penalty.Amount;
+            penalty.DateIssued = updatedPenalty.DateIssued != default(DateTime) ? updatedPenalty.DateIssued : penalty.DateIssued;
 
             _context.Penalties.Update(penalty);
             _context.SaveChanges();
@@ -69,7 +67,6 @@ namespace IlusalongAPI.Controllers
             return Ok(new { message = "Штраф успешно обновлён.", penalty });
         }
 
-        // Удаление штрафа
         [HttpDelete("{id}")]
         public IActionResult DeletePenalty(int id)
         {

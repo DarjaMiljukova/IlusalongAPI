@@ -3,12 +3,12 @@
 public class Appointment
 {
     public int Id { get; set; }
-    public DateTime AppointmentDate { get; set; } // Дата записи
-    public string Status { get; set; } // Статус записи
+    public DateTime AppointmentDate { get; set; } 
+    public string Status { get; set; } 
 
-    public int UserId { get; set; } // ID клиента
-    public User User { get; set; } // Связь с клиентом
+    public int UserId { get; set; }
+    public User User { get; set; }
 
-    public int ServiceId { get; set; } // ID услуги
-    public Service Service { get; set; } // Связь с услугой
+    public int ServiceId { get; set; } 
+    public Service Service { get; set; }
 }

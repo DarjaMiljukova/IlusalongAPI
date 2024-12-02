@@ -1,5 +1,4 @@
-﻿
-using IlusalongAPI;
+﻿using IlusalongAPI;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

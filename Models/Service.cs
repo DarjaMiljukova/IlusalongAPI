@@ -7,9 +7,8 @@ public class Service
     public string Description { get; set; }
     public decimal Price { get; set; }
 
-    public int MasterId { get; set; } // ID мастера
-    public User Master { get; set; } // Связь с мастером из Users
-
+    public int MasterId { get; set; } 
+    public User ?Master { get; set; } 
     public int CategoryId { get; set; }
-    public Category Category { get; set; } // Связь с категорией
+    public Category ?Category { get; set; } 
 }

@@ -10,7 +10,6 @@ namespace IlusalongAPI.Models
         public decimal Amount { get; set; }
         public DateTime DateIssued { get; set; }
 
-        // Связь с пользователем
         public User User { get; set; }
     }
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
-import '../styles/logres.css'; // Подключение вашего CSS файла
+import '../styles/logres.css';
 
 const LoginRegister = () => {
     const [isLogin, setIsLogin] = useState(true); // Переключение между логином и регистрацией
@@ -23,21 +23,20 @@ const LoginRegister = () => {
                     password,
                 });
 
-                const { token } = response.data; // Получаем токен из ответа
+                const { token } = response.data;
 
                 if (!token) {
                     setMessage('Не удалось получить токен. Проверьте данные логина.');
                     return;
                 }
 
-                localStorage.setItem('authToken', token); // Сохраняем токен в localStorage
+                localStorage.setItem('authToken', token);
 
-                const decodedToken = jwtDecode(token); // Декодируем токен
-                const { role, id } = decodedToken; // Извлекаем роль и ID пользователя
+                const decodedToken = jwtDecode(token);
+                const { role, id } = decodedToken;
 
-                console.log(`User ID: ${id}, Role: ${role}`); // Для отладки
+                console.log(`User ID: ${id}, Role: ${role}`);
 
-                // Перенаправляем пользователя в зависимости от его роли
                 switch (role) {
                     case 'admin':
                         navigate('/admin');
@@ -52,7 +51,7 @@ const LoginRegister = () => {
                         setMessage('Неизвестная роль. Обратитесь в поддержку.');
                 }
             } catch (error) {
-                console.error(error); // Логирование ошибки
+                console.error(error);
                 if (error.response) {
                     setMessage(error.response.data.message || 'Ошибка авторизации.');
                 } else {
@@ -73,9 +72,9 @@ const LoginRegister = () => {
                 });
 
                 setMessage(response.data.message || 'Регистрация успешна.');
-                setIsLogin(true); // Переключение на страницу логина после регистрации
+                setIsLogin(true);
             } catch (error) {
-                console.error(error); // Логирование ошибки
+                console.error(error);
                 if (error.response) {
                     const errors = error.response.data.errors;
                     if (errors) {

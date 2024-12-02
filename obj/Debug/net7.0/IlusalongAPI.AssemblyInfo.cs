@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IlusalongAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+281c06da56de4c5d6ca61415a1cc9dc6cb492ad2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9ef088b59663b826019e86da895aad72da1a4a6b")]
 [assembly: System.Reflection.AssemblyProductAttribute("IlusalongAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IlusalongAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
