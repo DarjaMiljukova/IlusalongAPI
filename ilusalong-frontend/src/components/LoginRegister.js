@@ -26,7 +26,7 @@ const LoginRegister = () => {
                 const { token } = response.data;
 
                 if (!token) {
-                    setMessage('Не удалось получить токен. Проверьте данные логина.');
+                    setMessage('Žetooni hankimine ebaõnnestus. Kontrollige oma sisselogimisandmeid.');
                     return;
                 }
 
@@ -48,19 +48,19 @@ const LoginRegister = () => {
                         navigate('/client');
                         break;
                     default:
-                        setMessage('Неизвестная роль. Обратитесь в поддержку.');
+                        setMessage('Tundmatu roll. Võtke ühendust toega.');
                 }
             } catch (error) {
                 console.error(error);
                 if (error.response) {
-                    setMessage(error.response.data.message || 'Ошибка авторизации.');
+                    setMessage(error.response.data.message || 'Volituse viga.');
                 } else {
-                    setMessage('Ошибка подключения к серверу. Попробуйте снова.');
+                    setMessage('Viga serveriga ühenduse loomisel. Proovi uuesti.');
                 }
             }
         } else {
             if (password !== confirmPassword) {
-                setMessage('Пароли не совпадают.');
+                setMessage('Paroolid ei ühti.\n');
                 return;
             }
 
@@ -71,7 +71,7 @@ const LoginRegister = () => {
                     phoneNumber,
                 });
 
-                setMessage(response.data.message || 'Регистрация успешна.');
+                setMessage(response.data.message || 'Registreerimine õnnestus.');
                 setIsLogin(true);
             } catch (error) {
                 console.error(error);
@@ -92,23 +92,23 @@ const LoginRegister = () => {
 
     return (
         <div className="wrapper">
-            <div className="title-text">{isLogin ? 'Вход' : 'Регистрация'}</div>
+            <div className="title-text">{isLogin ? 'Logi sisse' : 'Registreerimine'}</div>
             <form onSubmit={handleSubmit}>
                 <div className="field">
                     <label>Email</label>
                     <input
                         type="email"
-                        placeholder="Введите email"
+                        placeholder="Sisestage e-posti aadress"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
                 </div>
                 <div className="field">
-                    <label>Пароль</label>
+                    <label>Parool</label>
                     <input
                         type="password"
-                        placeholder="Введите пароль"
+                        placeholder="Sisestage oma parool"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
@@ -117,20 +117,20 @@ const LoginRegister = () => {
                 {!isLogin && (
                     <>
                         <div className="field">
-                            <label>Подтвердите пароль</label>
+                            <label>Kinnitage oma parool</label>
                             <input
                                 type="password"
-                                placeholder="Введите пароль повторно"
+                                placeholder="Sisestage oma parool uuesti"
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 required
                             />
                         </div>
                         <div className="field">
-                            <label>Номер телефона</label>
+                            <label>Telefoninumber</label>
                             <input
                                 type="text"
-                                placeholder="Введите номер телефона"
+                                placeholder="Sisestage oma telefoninumber"
                                 value={phoneNumber}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
                                 required
@@ -138,19 +138,19 @@ const LoginRegister = () => {
                         </div>
                     </>
                 )}
-                <button type="submit">{isLogin ? 'Войти' : 'Зарегистрироваться'}</button>
+                <button type="submit">{isLogin ? 'Logi sisse' : 'Registreerimine'}</button>
             </form>
             {message && <p>{message}</p>}
             <p>
                 {isLogin ? (
                     <>
-                        У вас нет аккаунта?{' '}
-                        <span onClick={() => setIsLogin(false)}>Зарегистрируйтесь</span>
+                        Kas teil pole kontot?{' '}
+                        <span onClick={() => setIsLogin(false)}>Registreeru</span>
                     </>
                 ) : (
                     <>
-                        Уже есть аккаунт?{' '}
-                        <span onClick={() => setIsLogin(true)}>Войдите</span>
+                        Kas teil on juba konto?{' '}
+                        <span onClick={() => setIsLogin(true)}>Logi sisse</span>
                     </>
                 )}
             </p>

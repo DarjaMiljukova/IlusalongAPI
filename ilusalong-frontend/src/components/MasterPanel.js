@@ -49,8 +49,8 @@ const MasterPanel = () => {
                     }))
                 );
             } catch (error) {
-                console.error("Ошибка при загрузке данных:", error);
-                toast.error("Ошибка при загрузке данных.");
+                console.error("Viga andmete laadimisel:", error);
+                toast.error("Viga andmete laadimisel.");
             }
         };
 
@@ -63,12 +63,12 @@ const MasterPanel = () => {
             const response = await axios.get('http://localhost:5259/api/Service');
             setServices(response.data);
         } catch (error) {
-            console.error('Ошибка при загрузке мастеров:', error);
+            console.error('Viga meistrite laadimisel:', error);
         }
     };
 
     const handleSaveEdit = async () => {
-        const isConfirmed = window.confirm("Вы уверены, что хотите сохранить изменения услуги?");
+        const isConfirmed = window.confirm("Kas olete kindel, et soovite oma teenusemuudatused salvestada?");
         if (!isConfirmed) return;
 
         try {
@@ -78,7 +78,7 @@ const MasterPanel = () => {
                 !editedService.price ||
                 !editedService.categoryId
             ) {
-                toast.error("Все поля должны быть заполнены!");
+                toast.error("Kõik tekstiväljad tuleb täita!\n");
                 return;
             }
 
@@ -105,10 +105,10 @@ const MasterPanel = () => {
             setEditingServiceId(null);
             setEditedService({});
             fetchService();
-            toast.success("Услуга успешно обновлена!");
+            toast.success("Teenus on edukalt värskendatud!\n");
         } catch (error) {
-            console.error("Ошибка при обновлении услуги:", error.response?.data || error.message);
-            toast.error("Ошибка при обновлении услуги.");
+            console.error("Viga teenuse värskendamisel:", error.response?.data || error.message);
+            toast.error("Viga teenuse värskendamisel\n.");
         }
     };
 
@@ -128,7 +128,7 @@ const MasterPanel = () => {
                 (category) => category.id === parseInt(newService.categoryId, 10)
             );
             if (!selectedCategory) {
-                toast.error("Выберите категорию.");
+                toast.error("Valige kategooria.\n");
                 return;
             }
 
@@ -145,10 +145,10 @@ const MasterPanel = () => {
 
             setServices([...services, response.data.service]);
             setNewService({ name: "", description: "", price: "", categoryId: "" });
-            toast.success("Услуга успешно добавлена!");
+            toast.success("Teenus on edukalt lisatud!");
         } catch (error) {
-            console.error("Ошибка при добавлении услуги:", error);
-            toast.error("Ошибка при добавлении услуги.");
+            console.error("Teenuse lisamisel tekkis viga:", error);
+            toast.error("Teenuse lisamisel tekkis viga.");
         }
     };
 
@@ -167,24 +167,24 @@ const MasterPanel = () => {
                         cursor: "pointer",
                     }}
                 >
-                    Выйти
+                    Logi välja
                 </button>
             </div>
 
-            <h2>Панель мастера</h2>
+            <h2>Meister panel</h2>
             <ToastContainer position="top-right" autoClose={3000} />
 
             <div className="services">
-                <h3>Ваши услуги</h3>
+                <h3>Teie teenused</h3>
                 {services.length > 0 ? (
                     <table>
                         <thead>
                         <tr>
-                            <th>Название</th>
-                            <th>Описание</th>
-                            <th>Цена (€)</th>
-                            <th>Категория</th>
-                            <th>Действия</th>
+                            <th>Pealkiri</th>
+                            <th>Kirjeldus</th>
+                            <th>Summa (€)</th>
+                            <th>Kategooria</th>
+                            <th>Tegevused</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -208,8 +208,7 @@ const MasterPanel = () => {
                                 </td>
                                 <td>
                                     {editingServiceId === service.id ? (
-                                        <input
-                                            type="text"
+                                        <textarea
                                             value={editedService.description}
                                             onChange={(e) =>
                                                 setEditedService({
@@ -217,11 +216,14 @@ const MasterPanel = () => {
                                                     description: e.target.value,
                                                 })
                                             }
+                                            rows="4"
+                                            cols="50"
                                         />
                                     ) : (
                                         service.description
                                     )}
                                 </td>
+
                                 <td>
                                     {editingServiceId === service.id ? (
                                         <input
@@ -267,7 +269,7 @@ const MasterPanel = () => {
                                         </>
                                     ) : (
                                         <button onClick={() => handleEditService(service)}>
-                                            Редактировать
+                                            Muuda
                                         </button>
                                     )}
                                 </td>
@@ -276,12 +278,12 @@ const MasterPanel = () => {
                         </tbody>
                     </table>
                 ) : (
-                    <p>Нет доступных услуг.</p>
+                    <p>Teenused puuduvad.</p>
                 )}
             </div>
 
             <div className="add-service">
-                <h3>Добавить услугу</h3>
+                <h3>Lisa teenus</h3>
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
@@ -290,14 +292,14 @@ const MasterPanel = () => {
                 >
                     <input
                         type="text"
-                        placeholder="Название услуги"
+                        placeholder="Teenuse nimi"
                         value={newService.name}
                         onChange={(e) => setNewService({ ...newService, name: e.target.value })}
                         required
                     />
                     <input
                         type="text"
-                        placeholder="Описание"
+                        placeholder="Kirjeldus"
                         value={newService.description}
                         onChange={(e) =>
                             setNewService({ ...newService, description: e.target.value })
@@ -306,7 +308,7 @@ const MasterPanel = () => {
                     />
                     <input
                         type="number"
-                        placeholder="Цена"
+                        placeholder="Hind"
                         value={newService.price}
                         onChange={(e) =>
                             setNewService({ ...newService, price: e.target.value })
@@ -320,14 +322,14 @@ const MasterPanel = () => {
                         }
                         required
                     >
-                        <option value="">Выберите категорию</option>
+                        <option value="">Valige kategooria</option>
                         {categories.map((category) => (
                             <option key={category.id} value={category.id}>
                                 {category.name}
                             </option>
                         ))}
                     </select>
-                    <button type="submit">Добавить услугу</button>
+                    <button type="submit">Lisa teenus</button>
                 </form>
             </div>
         </div>

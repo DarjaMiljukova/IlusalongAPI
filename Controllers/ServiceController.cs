@@ -97,10 +97,7 @@ namespace IlusalongAPI.Controllers
         public IActionResult GetServicesByMaster(int masterId)
         {
             var services = _context.Services.Where(s => s.MasterId == masterId).ToList();
-            if (!services.Any())
-            {
-                return NotFound("Услуги для указанного мастера не найдены.");
-            }
+
             return Ok(services);
         }
         [HttpGet("category/{categoryId}")]

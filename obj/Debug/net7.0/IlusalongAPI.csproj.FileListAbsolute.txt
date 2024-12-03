@@ -276,3 +276,4 @@ C:\Users\opilane\source\repos\miljukovaTARpv22\hajus+proga\IlusalongAPI\obj\Debu
 C:\Users\opilane\source\repos\miljukovaTARpv22\hajus+proga\IlusalongAPI\obj\Debug\net7.0\IlusalongAPI.pdb
 C:\Users\opilane\source\repos\miljukovaTARpv22\hajus+proga\IlusalongAPI\obj\Debug\net7.0\IlusalongAPI.genruntimeconfig.cache
 C:\Users\opilane\source\repos\miljukovaTARpv22\hajus+proga\IlusalongAPI\obj\Debug\net7.0\ref\IlusalongAPI.dll
+C:\Users\opilane\source\repos\ilu\Uus kaust\IlusalongAPI\bin\Debug\net7.0\package-lock.json
