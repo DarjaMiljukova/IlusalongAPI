@@ -46,8 +46,39 @@ namespace IlusalongAPI.Controllers
             return Ok(appointment);
         }
 
+        [HttpGet("master/{masterId}")]
+        public IActionResult GetAppointmentsByMaster(int masterId)
+        {
+            var appointments = _context.Appointments
+                .Where(a => a.Service.MasterId == masterId)  // Фильтрация по мастеру
+                .Include(a => a.User)
+                .Include(a => a.Service)  // Получаем услугу вместе с записью
+                .ThenInclude(s => s.Category)  // Получаем категорию услуги (если нужно)
+                .ToList();
 
-        [HttpPost]
+            if (!appointments.Any())
+                return NotFound("Записей не найдено.");
+
+            return Ok(appointments);
+        }
+        [HttpGet("user/{userId}")]
+        public IActionResult GetAppointmentsByUser(int userId)
+        {
+            var appointments = _context.Appointments
+                .Where(a => a.UserId == userId)  // Фильтрация по клиенту
+                .Include(a => a.User)
+                .Include(a => a.Service)  // Получаем услугу вместе с записью
+                .ThenInclude(s => s.Category)  // Получаем категорию услуги (если нужно)
+                .ToList();
+
+            if (!appointments.Any())
+                return NotFound("Записей не найдено.");
+
+            return Ok(appointments);
+        }
+
+
+        [HttpPost("addAppointment")]
         public IActionResult CreateAppointment([FromBody] Appointment appointment)
         {
             if (appointment.AppointmentDate < DateTime.Now)
@@ -63,8 +94,7 @@ namespace IlusalongAPI.Controllers
 
             appointment.User = user;
             appointment.Service = service;
-            appointment.Status = "scheduled"; 
-
+            appointment.Status = "scheduled";
 
             _context.Appointments.Add(appointment);
             _context.SaveChanges();
@@ -73,19 +103,34 @@ namespace IlusalongAPI.Controllers
         }
 
 
+
         [HttpDelete("{id}")]
         public IActionResult CancelAppointment(int id)
         {
-            var appointment = _context.Appointments.Find(id);
+            // Ищем запись по ID
+            var appointment = _context.Appointments
+                .Include(a => a.User)      // Подключаем данные пользователя
+                .Include(a => a.Service)   // Подключаем данные услуги
+                .FirstOrDefault(a => a.Id == id);
+
+            // Если запись не найдена
             if (appointment == null)
                 return NotFound("Запись не найдена.");
 
+            // Проверка, что запись принадлежит текущему клиенту
+            if (appointment.UserId != id) // ID клиента, полученный из токена
+                return BadRequest("Запись не принадлежит указанному клиенту.");
+
+            // Если разница меньше 24 часов, возвращаем ошибку
             if ((appointment.AppointmentDate - DateTime.Now).TotalHours < 24)
                 return BadRequest("Запись нельзя отменить менее чем за 24 часа до посещения.");
 
-            appointment.Status = "canceled";
+            // Удаляем запись
+            _context.Appointments.Remove(appointment);
             _context.SaveChanges();
-            return Ok("Запись успешно отменена.");
+
+            return Ok("Запись успешно удалена.");
         }
+
     }
 }

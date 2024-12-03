@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const MasterPanel = () => {
     const [services, setServices] = useState([]);
+    const [appointments, setAppointments] = useState([]); // Для записей клиентов
     const [categories, setCategories] = useState([]);
     const [editingServiceId, setEditingServiceId] = useState(null);
     const [editedService, setEditedService] = useState({});
@@ -17,13 +18,13 @@ const MasterPanel = () => {
     });
     const [masterId, setMasterId] = useState(null);
 
-
     const logout = () => {
         localStorage.removeItem("authToken");
         sessionStorage.removeItem("authToken");
         window.location.href = "/login";
     };
 
+    // Получаем masterId из токена
     useEffect(() => {
         const token = localStorage.getItem("authToken");
         if (token) {
@@ -32,6 +33,7 @@ const MasterPanel = () => {
         }
     }, []);
 
+    // Запрос данных для услуг и записей клиентов
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -48,6 +50,7 @@ const MasterPanel = () => {
                         ),
                     }))
                 );
+                fetchAppointments(); // Загружаем записи клиентов
             } catch (error) {
                 console.error("Viga andmete laadimisel:", error);
                 toast.error("Viga andmete laadimisel.");
@@ -58,12 +61,15 @@ const MasterPanel = () => {
             fetchData();
         }
     }, [masterId]);
-    const fetchService = async () => {
+
+    // Запрос записей клиентов
+    const fetchAppointments = async () => {
         try {
-            const response = await axios.get('http://localhost:5259/api/Service');
-            setServices(response.data);
+            const response = await axios.get(`http://localhost:5259/api/Appointment/master/${masterId}`);
+            setAppointments(response.data);
         } catch (error) {
-            console.error('Viga meistrite laadimisel:', error);
+            console.error("Viga andmete laadimisel:", error);
+            toast.error("Viga andmete laadimisel.");
         }
     };
 
@@ -104,7 +110,6 @@ const MasterPanel = () => {
 
             setEditingServiceId(null);
             setEditedService({});
-            fetchService();
             toast.success("Teenus on edukalt värskendatud!\n");
         } catch (error) {
             console.error("Viga teenuse värskendamisel:", error.response?.data || error.message);
@@ -174,6 +179,7 @@ const MasterPanel = () => {
             <h2>Meister panel</h2>
             <ToastContainer position="top-right" autoClose={3000} />
 
+            {/* Секция для услуг */}
             <div className="services">
                 <h3>Teie teenused</h3>
                 {services.length > 0 ? (
@@ -282,6 +288,34 @@ const MasterPanel = () => {
                 )}
             </div>
 
+            {/* Секция для записей клиентов */}
+            <div className="appointments">
+                <h3>Записи клиентов</h3>
+                {appointments.length > 0 ? (
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Клиент</th>
+                            <th>Услуга</th>
+                            <th>Дата</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {appointments.map((appointment) => (
+                            <tr key={appointment.id}>
+                                <td>{appointment.user.email}</td>
+                                <td>{appointment.service.name}</td>
+                                <td>{new Date(appointment.appointmentDate).toLocaleString()}</td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                ) : (
+                    <p>Нет записей.</p>
+                )}
+            </div>
+
+            {/* Форма добавления новой услуги */}
             <div className="add-service">
                 <h3>Lisa teenus</h3>
                 <form

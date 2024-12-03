@@ -27,6 +27,19 @@ namespace IlusalongAPI.Controllers
 
             return Ok(penalties);
         }
+        [HttpGet("user/{userId}")]
+        public IActionResult GetPenaltiesByUser(int userId)
+        {
+            var penalties = _context.Penalties
+                .Where(p => p.UserId == userId)  // Фильтрация по userId
+                .Include(p => p.User)  // Получаем данные пользователя
+                .ToList();
+
+            if (!penalties.Any())
+                return NotFound("Штрафов не найдено.");
+
+            return Ok(penalties);
+        }
 
         [HttpPost("{userId}/addFine")]
         public IActionResult AddFine(int userId, [FromBody] Penalty penalty)

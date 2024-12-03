@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\controllers\\appointmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:controllers\\appointmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\controllers\\mastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:controllers\\mastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\controllers\\penaltycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -23,20 +27,16 @@
       "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\controllers\\mastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:controllers\\mastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\controllers\\servicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:controllers\\servicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\data\\saloncontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:data\\saloncontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\models\\master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -62,37 +62,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "AppointmentsController.cs",
               "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\AppointmentsController.cs",
               "RelativeDocumentMoniker": "Controllers\\AppointmentsController.cs",
               "ToolTip": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\AppointmentsController.cs",
               "RelativeToolTip": "Controllers\\AppointmentsController.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAUwFMAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-02T23:03:11.751Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CategoryController.cs",
-              "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\CategoryController.cs",
-              "RelativeDocumentMoniker": "Controllers\\CategoryController.cs",
-              "ToolTip": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\CategoryController.cs",
-              "RelativeToolTip": "Controllers\\CategoryController.cs",
-              "ViewState": "AgIAADgAAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T23:03:10.186Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "MasterController.cs",
               "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\MasterController.cs",
               "RelativeDocumentMoniker": "Controllers\\MasterController.cs",
@@ -100,38 +87,37 @@
               "RelativeToolTip": "Controllers\\MasterController.cs",
               "ViewState": "AgIAAEkAAAAAAAAAAAAcwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T23:03:08.027Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-02T23:03:08.027Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "PenaltyController.cs",
               "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\PenaltyController.cs",
               "RelativeDocumentMoniker": "Controllers\\PenaltyController.cs",
               "ToolTip": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\PenaltyController.cs",
               "RelativeToolTip": "Controllers\\PenaltyController.cs",
-              "ViewState": "AgIAAEkAAAAAAAAAAAAcwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAUwBsAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-02T23:03:05.59Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
               "ToolTip": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\UserController.cs",
               "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AgIAAGIAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAkwHYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-02T23:03:03.178Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "ServiceController.cs",
               "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\ServiceController.cs",
               "RelativeDocumentMoniker": "Controllers\\ServiceController.cs",
@@ -139,12 +125,11 @@
               "RelativeToolTip": "Controllers\\ServiceController.cs",
               "ViewState": "AgIAAGYAAAAAAAAAAAAmwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T23:03:00.137Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-02T23:03:00.137Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "SalonContext.cs",
               "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Data\\SalonContext.cs",
               "RelativeDocumentMoniker": "Data\\SalonContext.cs",
@@ -152,25 +137,11 @@
               "RelativeToolTip": "Data\\SalonContext.cs",
               "ViewState": "AgIAABQAAAAAAAAAAAAAwCsAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T23:02:39.475Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-02T23:02:39.475Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Appointment.cs",
-              "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Models\\Appointment.cs",
-              "RelativeDocumentMoniker": "Models\\Appointment.cs",
-              "ToolTip": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Models\\Appointment.cs",
-              "RelativeToolTip": "Models\\Appointment.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T23:02:37.405Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 1,
               "Title": "Category.cs",
               "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Models\\Category.cs",
               "RelativeDocumentMoniker": "Models\\Category.cs",
@@ -183,6 +154,32 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Appointment.cs",
+              "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Models\\Appointment.cs",
+              "RelativeDocumentMoniker": "Models\\Appointment.cs",
+              "ToolTip": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Models\\Appointment.cs",
+              "RelativeToolTip": "Models\\Appointment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-02T23:02:37.405Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CategoryController.cs",
+              "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\CategoryController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CategoryController.cs",
+              "ToolTip": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\CategoryController.cs",
+              "RelativeToolTip": "Controllers\\CategoryController.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwBgAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-02T23:03:10.186Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 9,
               "Title": "Master.cs",
               "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Models\\Master.cs",
@@ -191,8 +188,7 @@
               "RelativeToolTip": "Models\\Master.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T23:02:36.223Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-02T23:02:36.223Z"
             },
             {
               "$type": "Document",
@@ -204,8 +200,7 @@
               "RelativeToolTip": "Models\\Service.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T23:02:34.997Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-02T23:02:34.997Z"
             },
             {
               "$type": "Document",
@@ -217,8 +212,7 @@
               "RelativeToolTip": "Models\\Penalty.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T23:02:34.35Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-02T23:02:34.35Z"
             },
             {
               "$type": "Document",
@@ -230,8 +224,7 @@
               "RelativeToolTip": "Models\\User.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T23:02:33.766Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-02T23:02:33.766Z"
             }
           ]
         }

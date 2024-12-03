@@ -11,22 +11,6 @@
   },
   {
     "ContainingType": "IlusalongAPI.Controllers.AppointmentController",
-    "Method": "CreateAppointment",
-    "RelativePath": "api/Appointment",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "appointment",
-        "Type": "Appointment",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "IlusalongAPI.Controllers.AppointmentController",
     "Method": "GetAppointmentById",
     "RelativePath": "api/Appointment/{id}",
     "HttpMethod": "GET",
@@ -51,6 +35,54 @@
     "Parameters": [
       {
         "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "IlusalongAPI.Controllers.AppointmentController",
+    "Method": "CreateAppointment",
+    "RelativePath": "api/Appointment/addAppointment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "appointment",
+        "Type": "Appointment",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "IlusalongAPI.Controllers.AppointmentController",
+    "Method": "GetAppointmentsByMaster",
+    "RelativePath": "api/Appointment/master/{masterId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "masterId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "IlusalongAPI.Controllers.AppointmentController",
+    "Method": "GetAppointmentsByUser",
+    "RelativePath": "api/Appointment/user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -230,6 +262,22 @@
       {
         "Name": "penalty",
         "Type": "IlusalongAPI.Models.Penalty",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "IlusalongAPI.Controllers.PenaltyController",
+    "Method": "GetPenaltiesByUser",
+    "RelativePath": "api/Penalty/user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
