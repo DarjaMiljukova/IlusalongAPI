@@ -117,9 +117,6 @@ namespace IlusalongAPI.Controllers
             if (appointment == null)
                 return NotFound("Запись не найдена.");
 
-            // Проверка, что запись принадлежит текущему клиенту
-            if (appointment.UserId != id) // ID клиента, полученный из токена
-                return BadRequest("Запись не принадлежит указанному клиенту.");
 
             // Если разница меньше 24 часов, возвращаем ошибку
             if ((appointment.AppointmentDate - DateTime.Now).TotalHours < 24)

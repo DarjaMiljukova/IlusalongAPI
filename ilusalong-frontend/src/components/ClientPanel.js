@@ -75,6 +75,7 @@ const ClientPanel = () => {
                 const appointmentsResponse = await axios.get(`http://localhost:5259/api/Appointment/user/${userId}`, {
                     headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
                 });
+                console.log("Записи клиента:", appointmentsResponse.data);  // Логирование записей
                 setAppointments(appointmentsResponse.data);
 
                 // Получаем данные клиента
@@ -96,6 +97,7 @@ const ClientPanel = () => {
 
         fetchData();
     }, [userId]);
+
 
     // Получаем доступные интервалы времени для выбранной даты
     const handleDateChange = (e) => {
@@ -142,7 +144,7 @@ const ClientPanel = () => {
                         `http://localhost:5259/api/Penalty`,
                         {
                             userId: appointment.userId,
-                            amount: 50, // Установите свой штраф
+                            amount: 10, // Установите свой штраф
                             reason: "Отмена записи менее чем за 24 часа",
                             dateIssued: new Date().toISOString(),
                         },
@@ -330,7 +332,7 @@ const ClientPanel = () => {
                                 {appointments.map((appointment) => (
                                     <tr key={appointment.id}>
                                         <td>{new Date(appointment.appointmentDate).toLocaleString()}</td>
-                                        <td>{appointment.service.name}</td>
+                                        <td>{appointment.service?.name || 'Неизвестная услуга'}</td>
                                         <td>
                                             <button onClick={() => cancelAppointment(appointment.id)}>
                                                 Отменить
@@ -342,7 +344,7 @@ const ClientPanel = () => {
                             </table>
                         ) : (
                             <p>Записей нет.</p>
-                        )}
+                            )}
                     </>
                 )}
 
@@ -390,12 +392,19 @@ const ClientPanel = () => {
                             {availableTimes.map((timeSlot) => (
                                 <button
                                     key={timeSlot}
-                                    onClick={() => handleBookingTime(timeSlot)}
+                                    onClick={async () => {
+                                        // Вызовем обработчик бронирования
+                                        await handleBookingTime(timeSlot);
+
+                                        // Перезагрузим страницу после успешного бронирования
+                                        window.location.reload(); // Используем window.location.reload()
+                                    }}
                                     style={{
                                         padding: "10px",
                                         backgroundColor: "#f0f0f0",
                                         border: "1px solid #ddd",
                                         cursor: "pointer",
+                                        color: "black"
                                     }}
                                 >
                                     {timeSlot}

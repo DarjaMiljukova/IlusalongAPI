@@ -1,57 +1,61 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\",
+  "WorkspaceRootPath": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\controllers\\appointmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\opilane\\source\\repos\\miljukovatarpv22\\projekt\\controllers\\appointmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:controllers\\appointmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\opilane\\source\\repos\\miljukovatarpv22\\projekt\\migrations\\20241204072304_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:migrations\\20241204072304_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\opilane\\source\\repos\\miljukovatarpv22\\projekt\\models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\opilane\\source\\repos\\miljukovatarpv22\\projekt\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\opilane\\source\\repos\\miljukovatarpv22\\projekt\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\controllers\\penaltycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\opilane\\source\\repos\\miljukovatarpv22\\projekt\\controllers\\penaltycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:controllers\\penaltycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\opilane\\source\\repos\\miljukovatarpv22\\projekt\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\controllers\\mastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\opilane\\source\\repos\\miljukovatarpv22\\projekt\\controllers\\mastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:controllers\\mastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\controllers\\servicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\opilane\\source\\repos\\miljukovatarpv22\\projekt\\controllers\\servicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:controllers\\servicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\data\\saloncontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\opilane\\source\\repos\\miljukovatarpv22\\projekt\\data\\saloncontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:data\\saloncontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\models\\master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\opilane\\source\\repos\\miljukovatarpv22\\projekt\\models\\master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:models\\master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\models\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\opilane\\source\\repos\\miljukovatarpv22\\projekt\\models\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:models\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\models\\penalty.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\opilane\\source\\repos\\miljukovatarpv22\\projekt\\models\\penalty.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:models\\penalty.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\opilane\\source\\repos\\miljukovatarpv22\\projekt\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -62,28 +66,57 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 5,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{74946827-37a0-11d2-a273-00c04f8ef4ff}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
+              "Title": "20241204072304_InitialCreate.cs",
+              "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Migrations\\20241204072304_InitialCreate.cs",
+              "RelativeDocumentMoniker": "Migrations\\20241204072304_InitialCreate.cs",
+              "ToolTip": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Migrations\\20241204072304_InitialCreate.cs",
+              "RelativeToolTip": "Migrations\\20241204072304_InitialCreate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T07:23:05.021Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "AppointmentsController.cs",
-              "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\AppointmentsController.cs",
+              "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Controllers\\AppointmentsController.cs",
               "RelativeDocumentMoniker": "Controllers\\AppointmentsController.cs",
-              "ToolTip": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\AppointmentsController.cs",
+              "ToolTip": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Controllers\\AppointmentsController.cs",
               "RelativeToolTip": "Controllers\\AppointmentsController.cs",
-              "ViewState": "AgIAAEEAAAAAAAAAAAAUwFMAAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAqwIUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-02T23:03:11.751Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "MasterController.cs",
-              "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\MasterController.cs",
+              "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Controllers\\MasterController.cs",
               "RelativeDocumentMoniker": "Controllers\\MasterController.cs",
-              "ToolTip": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\MasterController.cs",
+              "ToolTip": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Controllers\\MasterController.cs",
               "RelativeToolTip": "Controllers\\MasterController.cs",
               "ViewState": "AgIAAEkAAAAAAAAAAAAcwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -91,37 +124,35 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "PenaltyController.cs",
-              "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\PenaltyController.cs",
+              "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Controllers\\PenaltyController.cs",
               "RelativeDocumentMoniker": "Controllers\\PenaltyController.cs",
-              "ToolTip": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\PenaltyController.cs",
+              "ToolTip": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Controllers\\PenaltyController.cs",
               "RelativeToolTip": "Controllers\\PenaltyController.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAUwBsAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T23:03:05.59Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-02T23:03:05.59Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "UserController.cs",
-              "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\UserController.cs",
+              "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
-              "ToolTip": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Controllers\\UserController.cs",
               "RelativeToolTip": "Controllers\\UserController.cs",
               "ViewState": "AgIAAFUAAAAAAAAAAAAkwHYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T23:03:03.178Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-02T23:03:03.178Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "ServiceController.cs",
-              "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\ServiceController.cs",
+              "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Controllers\\ServiceController.cs",
               "RelativeDocumentMoniker": "Controllers\\ServiceController.cs",
-              "ToolTip": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\ServiceController.cs",
+              "ToolTip": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Controllers\\ServiceController.cs",
               "RelativeToolTip": "Controllers\\ServiceController.cs",
               "ViewState": "AgIAAGYAAAAAAAAAAAAmwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -129,11 +160,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "SalonContext.cs",
-              "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Data\\SalonContext.cs",
+              "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Data\\SalonContext.cs",
               "RelativeDocumentMoniker": "Data\\SalonContext.cs",
-              "ToolTip": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Data\\SalonContext.cs",
+              "ToolTip": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Data\\SalonContext.cs",
               "RelativeToolTip": "Data\\SalonContext.cs",
               "ViewState": "AgIAABQAAAAAAAAAAAAAwCsAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -141,24 +172,23 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Category.cs",
-              "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Models\\Category.cs",
+              "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Models\\Category.cs",
               "RelativeDocumentMoniker": "Models\\Category.cs",
-              "ToolTip": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Models\\Category.cs",
+              "ToolTip": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Models\\Category.cs",
               "RelativeToolTip": "Models\\Category.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T23:02:36.76Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-02T23:02:36.76Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Appointment.cs",
-              "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Models\\Appointment.cs",
+              "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Models\\Appointment.cs",
               "RelativeDocumentMoniker": "Models\\Appointment.cs",
-              "ToolTip": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Models\\Appointment.cs",
+              "ToolTip": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Models\\Appointment.cs",
               "RelativeToolTip": "Models\\Appointment.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -167,24 +197,23 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "CategoryController.cs",
-              "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\CategoryController.cs",
+              "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Controllers\\CategoryController.cs",
               "RelativeDocumentMoniker": "Controllers\\CategoryController.cs",
-              "ToolTip": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\CategoryController.cs",
+              "ToolTip": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Controllers\\CategoryController.cs",
               "RelativeToolTip": "Controllers\\CategoryController.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAxwBgAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T23:03:10.186Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-02T23:03:10.186Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "Master.cs",
-              "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Models\\Master.cs",
+              "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Models\\Master.cs",
               "RelativeDocumentMoniker": "Models\\Master.cs",
-              "ToolTip": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Models\\Master.cs",
+              "ToolTip": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Models\\Master.cs",
               "RelativeToolTip": "Models\\Master.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -192,11 +221,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "Service.cs",
-              "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Models\\Service.cs",
+              "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Models\\Service.cs",
               "RelativeDocumentMoniker": "Models\\Service.cs",
-              "ToolTip": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Models\\Service.cs",
+              "ToolTip": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Models\\Service.cs",
               "RelativeToolTip": "Models\\Service.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -204,11 +233,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "Penalty.cs",
-              "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Models\\Penalty.cs",
+              "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Models\\Penalty.cs",
               "RelativeDocumentMoniker": "Models\\Penalty.cs",
-              "ToolTip": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Models\\Penalty.cs",
+              "ToolTip": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Models\\Penalty.cs",
               "RelativeToolTip": "Models\\Penalty.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -216,11 +245,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Models\\User.cs",
+              "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Models\\User.cs",
               "RelativeDocumentMoniker": "Models\\User.cs",
-              "ToolTip": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Models\\User.cs",
               "RelativeToolTip": "Models\\User.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
