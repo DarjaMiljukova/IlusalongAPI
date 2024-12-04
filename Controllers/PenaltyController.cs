@@ -31,8 +31,8 @@ namespace IlusalongAPI.Controllers
         public IActionResult GetPenaltiesByUser(int userId)
         {
             var penalties = _context.Penalties
-                .Where(p => p.UserId == userId)  // Фильтрация по userId
-                .Include(p => p.User)  // Получаем данные пользователя
+                .Where(p => p.UserId == userId)  
+                .Include(p => p.User)  
                 .ToList();
 
             if (!penalties.Any())
@@ -44,6 +44,8 @@ namespace IlusalongAPI.Controllers
         [HttpPost("{userId}/addFine")]
         public IActionResult AddFine(int userId, [FromBody] Penalty penalty)
         {
+            Console.WriteLine($"Received penalty: {penalty}");
+
             var user = _context.Users.FirstOrDefault(u => u.Id == userId);
             if (user == null)
                 return NotFound("Пользователь не найден.");
@@ -55,13 +57,14 @@ namespace IlusalongAPI.Controllers
                 return BadRequest(new { message = "Дата штрафа обязательна." });
             }
 
-            penalty.User = null; 
+            penalty.User = null;
 
             _context.Penalties.Add(penalty);
             _context.SaveChanges();
 
             return Ok(new { message = "Штраф успешно добавлен.", penalty });
         }
+
 
         [HttpPut("{id}")]
         public IActionResult UpdatePenalty(int id, [FromBody] Penalty updatedPenalty)

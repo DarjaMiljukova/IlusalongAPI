@@ -1,6 +1,8 @@
 ﻿using IlusalongAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Mail;
+using System.Net;
 
 namespace IlusalongAPI.Controllers
 {
@@ -50,10 +52,10 @@ namespace IlusalongAPI.Controllers
         public IActionResult GetAppointmentsByMaster(int masterId)
         {
             var appointments = _context.Appointments
-                .Where(a => a.Service.MasterId == masterId)  // Фильтрация по мастеру
+                .Where(a => a.Service.MasterId == masterId)  
                 .Include(a => a.User)
-                .Include(a => a.Service)  // Получаем услугу вместе с записью
-                .ThenInclude(s => s.Category)  // Получаем категорию услуги (если нужно)
+                .Include(a => a.Service)  
+                .ThenInclude(s => s.Category)  
                 .ToList();
 
             if (!appointments.Any())
@@ -65,10 +67,10 @@ namespace IlusalongAPI.Controllers
         public IActionResult GetAppointmentsByUser(int userId)
         {
             var appointments = _context.Appointments
-                .Where(a => a.UserId == userId)  // Фильтрация по клиенту
+                .Where(a => a.UserId == userId)  
                 .Include(a => a.User)
-                .Include(a => a.Service)  // Получаем услугу вместе с записью
-                .ThenInclude(s => s.Category)  // Получаем категорию услуги (если нужно)
+                .Include(a => a.Service)  
+                .ThenInclude(s => s.Category)  
                 .ToList();
 
             if (!appointments.Any())
@@ -99,7 +101,80 @@ namespace IlusalongAPI.Controllers
             _context.Appointments.Add(appointment);
             _context.SaveChanges();
 
-            return Ok("Запись успешно создана.");
+            // Отправка письма с подтверждением
+            SendBookingConfirmationEmail(user.Email, service.Name, appointment.AppointmentDate);
+
+            return Ok("Запись успешно создана. Подтверждение отправлено на вашу почту.");
+        }
+
+        private void SendBookingConfirmationEmail(string userEmail, string serviceName, DateTime appointmentDate)
+        {
+            SendEmail(userEmail, "Broneeringud Celestial Touch'is", $"<p>Tere! <b>{userEmail}</b></p><p>Olete edukalt broneerinud teenuse: <b>{serviceName}</b> kuupäeval: <b>{appointmentDate}</b>.</p>" +
+                $"<p>Ootame teid huviga!</p><p>Ilusalon Celestial Touch</p><p>Administreerimine: +37258516751");
+
+
+        }
+
+       [HttpPost("sendEmail/{clientId}")]
+        public async Task<IActionResult> SendEmail(int clientId, [FromBody] SendEmailRequest request)
+        {
+            var client = await _context.Users.FirstOrDefaultAsync(u => u.Id == clientId);  
+            if (client == null)
+            {
+                return BadRequest("Клиент с указанным ID не найден.");
+            }
+
+            string email = client.Email;
+
+            if (string.IsNullOrEmpty(email))
+            {
+                return BadRequest("Email клиента не найден.");
+            }
+
+            bool isEmailSent = SendEmail(email, "Сообщение от Ilusalong", request.Message);
+
+            if (!isEmailSent)
+            {
+                return StatusCode(500, "Ошибка при отправке email.");
+            }
+
+            return Ok("Email успешно отправлен.");
+        }
+
+        private static bool SendEmail(string email, string subject, string body)
+        {
+            try
+            {
+                using (var smtpClient = new SmtpClient("smtp.mailersend.net"))
+                {
+                    smtpClient.Port = 587;
+                    smtpClient.Credentials = new NetworkCredential("MS_TyVFhe@trial-x2p0347d5p74zdrn.mlsender.net", "ivMXsuGSwInH3NJV");
+                    smtpClient.EnableSsl = true;
+
+                    var mailMessage = new MailMessage
+                    {
+                        From = new MailAddress("MS_TyVFhe@trial-x2p0347d5p74zdrn.mlsender.net", "Celestial Touch"),
+                        Subject = subject,
+                        Body = body,
+                        IsBodyHtml = true
+                    };
+                    mailMessage.To.Add(email);
+                    smtpClient.Send(mailMessage);
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка при отправке email: {ex.Message}");
+                return false;
+            }
+        }
+    
+
+        public class SendEmailRequest
+        {
+            public int ClientId { get; set; }
+            public string Message { get; set; }
         }
 
 
@@ -107,22 +182,14 @@ namespace IlusalongAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult CancelAppointment(int id)
         {
-            // Ищем запись по ID
             var appointment = _context.Appointments
-                .Include(a => a.User)      // Подключаем данные пользователя
-                .Include(a => a.Service)   // Подключаем данные услуги
+                .Include(a => a.User)      
+                .Include(a => a.Service)   
                 .FirstOrDefault(a => a.Id == id);
 
-            // Если запись не найдена
             if (appointment == null)
                 return NotFound("Запись не найдена.");
 
-
-            // Если разница меньше 24 часов, возвращаем ошибку
-            if ((appointment.AppointmentDate - DateTime.Now).TotalHours < 24)
-                return BadRequest("Запись нельзя отменить менее чем за 24 часа до посещения.");
-
-            // Удаляем запись
             _context.Appointments.Remove(appointment);
             _context.SaveChanges();
 

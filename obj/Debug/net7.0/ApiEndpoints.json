@@ -75,6 +75,27 @@
   },
   {
     "ContainingType": "IlusalongAPI.Controllers.AppointmentController",
+    "Method": "SendEmail",
+    "RelativePath": "api/Appointment/sendEmail/{clientId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "clientId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "IlusalongAPI.Controllers.AppointmentController\u002BSendEmailRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "IlusalongAPI.Controllers.AppointmentController",
     "Method": "GetAppointmentsByUser",
     "RelativePath": "api/Appointment/user/{userId}",
     "HttpMethod": "GET",

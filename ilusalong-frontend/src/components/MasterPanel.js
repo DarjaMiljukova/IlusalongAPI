@@ -5,11 +5,19 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const MasterPanel = () => {
+    const [userId, setUserId] = useState(null);
+    console.log("userId:", userId);
     const [services, setServices] = useState([]);
-    const [appointments, setAppointments] = useState([]); // Для записей клиентов
+    const [appointments, setAppointments] = useState([]);
     const [categories, setCategories] = useState([]);
     const [editingServiceId, setEditingServiceId] = useState(null);
     const [editedService, setEditedService] = useState({});
+    const [emailMessage, setEmailMessage] = useState("");
+    const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
+    const [selectedUserEmail, setSelectedUserEmail] = useState("");
+    const [loading, setLoading] = useState(false);
+    console.log("isEmailModalOpen:", isEmailModalOpen);
+
     const [newService, setNewService] = useState({
         name: "",
         description: "",
@@ -17,6 +25,7 @@ const MasterPanel = () => {
         categoryId: "",
     });
     const [masterId, setMasterId] = useState(null);
+
 
     const logout = () => {
         localStorage.removeItem("authToken");
@@ -156,6 +165,55 @@ const MasterPanel = () => {
             toast.error("Teenuse lisamisel tekkis viga.");
         }
     };
+    const handleOpenModal = (email, userId) => {
+        setSelectedUserEmail(email);
+        setUserId(userId);
+        setIsEmailModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setSelectedUserEmail("");
+        setEmailMessage("");
+        setIsEmailModalOpen(false);
+    };
+
+    const handleSendEmail = async () => {
+        console.log("Saadetavad andmed:", {
+            email: selectedUserEmail,
+            message: emailMessage,
+        });
+
+        setLoading(true);
+        try {
+            const response = await axios.post(
+                `http://localhost:5259/api/Appointment/sendEmail/${userId}`,
+                {
+                    email: selectedUserEmail,
+                    message: emailMessage,
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+
+            toast.success("Сообщение успешно отправлено!");
+            handleCloseModal();
+        } catch (error) {
+            console.error("Ошибка при отправке запроса:", error);
+
+            if (error.response) {
+                console.error("Vastus serverilt:", error.response);
+                toast.error(`Viga: ${error.response.data.title || "Midagi on valesti läinud!"}`);
+            } else {
+                console.error("Viga taotluse loomisel:", error.message);
+                toast.error(`Viga: ${error.message}`);
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <div className="master-panel">
@@ -270,8 +328,8 @@ const MasterPanel = () => {
                                 <td>
                                     {editingServiceId === service.id ? (
                                         <>
-                                            <button onClick={handleSaveEdit}>Сохранить</button>
-                                            <button onClick={handleCancelEdit}>Отмена</button>
+                                            <button onClick={handleSaveEdit}>Salvesta</button>
+                                            <button onClick={handleCancelEdit}>Tühistamine</button>
                                         </>
                                     ) : (
                                         <button onClick={() => handleEditService(service)}>
@@ -289,15 +347,17 @@ const MasterPanel = () => {
             </div>
 
             {/* Секция для записей клиентов */}
+
             <div className="appointments">
-                <h3>Записи клиентов</h3>
+                <h3>Klientide broneeringud</h3>
                 {appointments.length > 0 ? (
                     <table>
                         <thead>
                         <tr>
-                            <th>Клиент</th>
-                            <th>Услуга</th>
-                            <th>Дата</th>
+                            <th>Klient</th>
+                            <th>Teenus</th>
+                            <th>Kuupäev</th>
+                            <th>Tegevus</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -306,12 +366,90 @@ const MasterPanel = () => {
                                 <td>{appointment.user.email}</td>
                                 <td>{appointment.service.name}</td>
                                 <td>{new Date(appointment.appointmentDate).toLocaleString()}</td>
+                                <td>
+                                    <button onClick={() => handleOpenModal(appointment.user.email, appointment.user.id)}>
+                                        Võtke kliendiga
+                                    </button>
+                                </td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
                 ) : (
-                    <p>Нет записей.</p>
+                    <p>Mingeid andmeid ei ole.</p>
+                )}
+
+                {/* Модальное окно */}
+                {isEmailModalOpen && (
+                    <div
+                        style={{
+                            position: "fixed",
+                            top: 0,
+                            left: 0,
+                            width: "100%",
+                            height: "100%",
+                            backgroundColor: "rgba(0, 0, 0, 0.5)",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}
+                    >
+                        <div
+                            style={{
+                                backgroundColor: "#fff",
+                                padding: "20px",
+                                borderRadius: "8px",
+                                width: "400px",
+                                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                            }}
+                        >
+                            <h3>Saatke kliendile e-kiri</h3>
+                            <p><strong>Клиент:</strong> {selectedUserEmail}</p>
+                            <textarea
+                                placeholder="Sisestage sõnum"
+                                value={emailMessage}
+                                onChange={(e) => setEmailMessage(e.target.value)}
+                                rows={5}
+                                style={{
+                                    width: "100%",
+                                    marginTop: "10px",
+                                    padding: "10px",
+                                    fontSize: "14px",
+                                    borderRadius: "4px",
+                                    border: "1px solid #ddd",
+                                }}
+                            />
+                            <div style={{ marginTop: "10px", display: "flex", justifyContent: "space-between" }}>
+                                <button
+                                    onClick={handleSendEmail}
+                                    style={{
+                                        padding: "10px 15px",
+                                        backgroundColor: "#4CAF50",
+                                        color: "#fff",
+                                        border: "none",
+                                        borderRadius: "4px",
+                                        cursor: "pointer",
+                                    }}
+                                    disabled={loading}
+                                >
+                                    {loading ? "Lähetus..." : "Saada"}
+                                </button>
+                                <button
+                                    onClick={handleCloseModal}
+                                    style={{
+                                        padding: "10px 15px",
+                                        backgroundColor: "#f44336",
+                                        color: "#fff",
+                                        border: "none",
+                                        borderRadius: "4px",
+                                        cursor: "pointer",
+                                    }}
+                                >
+                                    Tühistamine
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 )}
             </div>
 

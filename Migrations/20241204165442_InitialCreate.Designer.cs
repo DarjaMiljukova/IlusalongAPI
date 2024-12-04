@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IlusalongAPI.Migrations
 {
     [DbContext(typeof(SalonContext))]
-    [Migration("20241204072304_InitialCreate")]
+    [Migration("20241204165442_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -147,11 +147,15 @@ const AdminPanel = () => {
     const handleDeletePenalty = async (penaltyId) => {
         try {
             await axios.delete(`http://localhost:5259/api/Penalty/${penaltyId}`);
-            fetchPenalties();
+
+            setPenalties(prevPenalties => prevPenalties.filter(penalty => penalty.id !== penaltyId));
+
+            console.log('Trahv on edukalt eemaldatud');
         } catch (error) {
             console.error('Viga trahvi kustutamisel:', error);
         }
     };
+
 
     const handleEditPenalty = (penalty) => {
         setEditingPenaltyId(penalty.id);
