@@ -347,3 +347,9 @@ C:\Users\opilane\source\repos\miljukovaTARpv22\projekt\obj\Debug\net7.0\refint\I
 C:\Users\opilane\source\repos\miljukovaTARpv22\projekt\obj\Debug\net7.0\IlusalongAPI.pdb
 C:\Users\opilane\source\repos\miljukovaTARpv22\projekt\obj\Debug\net7.0\IlusalongAPI.genruntimeconfig.cache
 C:\Users\opilane\source\repos\miljukovaTARpv22\projekt\obj\Debug\net7.0\ref\IlusalongAPI.dll
+C:\Users\opilane\source\repos\miljukovaTARpv22\projekt\bin\Debug\net7.0\BouncyCastle.Cryptography.dll
+C:\Users\opilane\source\repos\miljukovaTARpv22\projekt\bin\Debug\net7.0\MailKit.dll
+C:\Users\opilane\source\repos\miljukovaTARpv22\projekt\bin\Debug\net7.0\MimeKit.dll
+C:\Users\opilane\source\repos\miljukovaTARpv22\projekt\bin\Debug\net7.0\System.Formats.Asn1.dll
+C:\Users\opilane\source\repos\miljukovaTARpv22\projekt\bin\Debug\net7.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\opilane\source\repos\miljukovaTARpv22\projekt\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Security.Cryptography.Pkcs.dll

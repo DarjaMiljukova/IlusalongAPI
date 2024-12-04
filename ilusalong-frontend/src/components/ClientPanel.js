@@ -78,6 +78,7 @@ const ClientPanel = () => {
                 console.log("Записи клиента:", appointmentsResponse.data);  // Логирование записей
                 setAppointments(appointmentsResponse.data);
 
+
                 // Получаем данные клиента
                 const clientResponse = await axios.get(`http://localhost:5259/api/User/${userId}`, {
                     headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
@@ -97,7 +98,6 @@ const ClientPanel = () => {
 
         fetchData();
     }, [userId]);
-
 
     // Получаем доступные интервалы времени для выбранной даты
     const handleDateChange = (e) => {
@@ -183,7 +183,6 @@ const ClientPanel = () => {
             return;
         }
 
-        console.log(`Выбранное время: ${timeSlot}, Дата: ${selectedDate}`);
         const appointmentDate = `${selectedDate}T${timeSlot}:00`;  // Форматируем дату
 
         const confirmBooking = window.confirm(`Вы уверены, что хотите забронировать услугу на ${timeSlot}?`);
@@ -194,15 +193,19 @@ const ClientPanel = () => {
                     appointmentDate: appointmentDate, // Используем отформатированную дату
                     userId: userId,  // Используем userId из токена
                 };
-                console.log("Данные для бронирования:", appointmentData); // Логируем данные для отладки
 
                 // Отправляем запрос на сервер для добавления записи
                 const response = await axios.post("http://localhost:5259/api/Appointment/addAppointment", appointmentData, {
                     headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
                 });
 
-                // Обновление состояния после успешной записи
-                setAppointments([...appointments, response.data]);
+                // Заново запрашиваем все записи
+                const updatedAppointments = await axios.get(`http://localhost:5259/api/Appointment/user/${userId}`, {
+                    headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
+                });
+
+                // Обновляем список записей на фронте
+                setAppointments(updatedAppointments.data);
 
                 toast.success("Запись успешно забронирована.");
             } catch (error) {
@@ -211,6 +214,8 @@ const ClientPanel = () => {
             }
         }
     };
+
+
 
     // Обработка изменений данных клиента
     const handleNewAppointmentChange = (e) => {
@@ -344,7 +349,7 @@ const ClientPanel = () => {
                             </table>
                         ) : (
                             <p>Записей нет.</p>
-                            )}
+                        )}
                     </>
                 )}
 

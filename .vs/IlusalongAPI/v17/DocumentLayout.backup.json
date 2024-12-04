@@ -15,10 +15,6 @@
       "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\opilane\\source\\repos\\miljukovatarpv22\\projekt\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\opilane\\source\\repos\\miljukovatarpv22\\projekt\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -37,10 +33,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\opilane\\source\\repos\\miljukovatarpv22\\projekt\\controllers\\servicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:controllers\\servicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\opilane\\source\\repos\\miljukovatarpv22\\projekt\\data\\saloncontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:data\\saloncontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\opilane\\source\\repos\\miljukovatarpv22\\projekt\\models\\master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -94,8 +86,7 @@
               "RelativeToolTip": "Migrations\\20241204072304_InitialCreate.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-04T07:23:05.021Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-04T07:23:05.021Z"
             },
             {
               "$type": "Document",
@@ -103,16 +94,16 @@
               "Title": "AppointmentsController.cs",
               "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Controllers\\AppointmentsController.cs",
               "RelativeDocumentMoniker": "Controllers\\AppointmentsController.cs",
-              "ToolTip": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Controllers\\AppointmentsController.cs*",
-              "RelativeToolTip": "Controllers\\AppointmentsController.cs*",
-              "ViewState": "AgIAAGIAAAAAAAAAAAAiwHYAAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Controllers\\AppointmentsController.cs",
+              "RelativeToolTip": "Controllers\\AppointmentsController.cs",
+              "ViewState": "AgIAAGwAAAAAAAAAAAASwH0AAACoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-02T23:03:11.751Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "MasterController.cs",
               "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Controllers\\MasterController.cs",
               "RelativeDocumentMoniker": "Controllers\\MasterController.cs",
@@ -124,7 +115,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "PenaltyController.cs",
               "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Controllers\\PenaltyController.cs",
               "RelativeDocumentMoniker": "Controllers\\PenaltyController.cs",
@@ -136,7 +127,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
@@ -148,7 +139,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
               "Title": "ServiceController.cs",
               "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Controllers\\ServiceController.cs",
               "RelativeDocumentMoniker": "Controllers\\ServiceController.cs",
@@ -160,30 +151,6 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "SalonContext.cs",
-              "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Data\\SalonContext.cs",
-              "RelativeDocumentMoniker": "Data\\SalonContext.cs",
-              "ToolTip": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Data\\SalonContext.cs",
-              "RelativeToolTip": "Data\\SalonContext.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAAwCsAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T23:02:39.475Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Category.cs",
-              "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Models\\Category.cs",
-              "RelativeDocumentMoniker": "Models\\Category.cs",
-              "ToolTip": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Models\\Category.cs",
-              "RelativeToolTip": "Models\\Category.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T23:02:36.76Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Appointment.cs",
               "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Models\\Appointment.cs",
@@ -192,12 +159,11 @@
               "RelativeToolTip": "Models\\Appointment.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T23:02:37.405Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-02T23:02:37.405Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "CategoryController.cs",
               "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Controllers\\CategoryController.cs",
               "RelativeDocumentMoniker": "Controllers\\CategoryController.cs",
@@ -209,7 +175,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 8,
               "Title": "Master.cs",
               "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Models\\Master.cs",
               "RelativeDocumentMoniker": "Models\\Master.cs",
@@ -221,7 +187,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 9,
               "Title": "Service.cs",
               "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Models\\Service.cs",
               "RelativeDocumentMoniker": "Models\\Service.cs",
@@ -233,7 +199,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 10,
               "Title": "Penalty.cs",
               "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Models\\Penalty.cs",
               "RelativeDocumentMoniker": "Models\\Penalty.cs",
@@ -245,7 +211,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 11,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\opilane\\source\\repos\\miljukovaTARpv22\\projekt\\Models\\User.cs",
               "RelativeDocumentMoniker": "Models\\User.cs",

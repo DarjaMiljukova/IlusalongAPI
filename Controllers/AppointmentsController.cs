@@ -1,6 +1,10 @@
 ﻿using IlusalongAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MailKit.Net.Smtp;
+using MimeKit;
+using System.Net.Mail;
+using System.Net;
 
 namespace IlusalongAPI.Controllers
 {
@@ -99,30 +103,61 @@ namespace IlusalongAPI.Controllers
             _context.Appointments.Add(appointment);
             _context.SaveChanges();
 
-            return Ok("Запись успешно создана.");
+            // Отправка письма с подтверждением
+            SendBookingConfirmationEmail(user.Email, service.Name, appointment.AppointmentDate);
+
+            return Ok("Запись успешно создана. Подтверждение отправлено на вашу почту.");
         }
 
+        private void SendBookingConfirmationEmail(string userEmail, string serviceName, DateTime appointmentDate)
+        {
+            SendEmail(userEmail, "Подтверждение бронирования", $"<p>Здравствуйте!</p><p>Вы успешно забронировали услугу: <b>{serviceName}</b> на дату: <b>{appointmentDate}</b>.</p>");
 
+        }
+        private static string SendEmail(string email, string subject, string body)
+        {
+            try
+            {
+                System.Net.Mail.SmtpClient smtpClient = new("smtp.mailersend.net")
+                {
+                    Port = 587,
+                    Credentials = new NetworkCredential("MS_TyVFhe@trial-x2p0347d5p74zdrn.mlsender.net", "ivMXsuGSwInH3NJV"),
+                    EnableSsl = true
+                };
+                MailMessage mailMessage = new()
+                {
+                    From = new MailAddress("MS_TyVFhe@trial-x2p0347d5p74zdrn.mlsender.net", "Ilusalong"),
+                    Subject = subject,
+                    Body = body,
+                    IsBodyHtml = true
+                };
+                mailMessage.To.Add(email);
+                smtpClient.Send(mailMessage);
+                return "Email sent successfully!";
+            }
+            catch (Exception ex)
+            {
+                return $"Error: {ex.Message}";
+            }
+        }
 
         [HttpDelete("{id}")]
         public IActionResult CancelAppointment(int id)
         {
-            // Ищем запись по ID
+
             var appointment = _context.Appointments
-                .Include(a => a.User)      // Подключаем данные пользователя
-                .Include(a => a.Service)   // Подключаем данные услуги
+                .Include(a => a.User)      
+                .Include(a => a.Service)   
                 .FirstOrDefault(a => a.Id == id);
 
-            // Если запись не найдена
+
             if (appointment == null)
                 return NotFound("Запись не найдена.");
 
 
-            // Если разница меньше 24 часов, возвращаем ошибку
             if ((appointment.AppointmentDate - DateTime.Now).TotalHours < 24)
                 return BadRequest("Запись нельзя отменить менее чем за 24 часа до посещения.");
 
-            // Удаляем запись
             _context.Appointments.Remove(appointment);
             _context.SaveChanges();
 
