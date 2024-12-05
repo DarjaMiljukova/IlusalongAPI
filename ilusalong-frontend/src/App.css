@@ -39,16 +39,3 @@ form input, form select {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-
-button {
-  padding: 10px 20px;
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #0056b3;
-}

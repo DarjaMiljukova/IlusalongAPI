@@ -1,4 +1,4 @@
-/* Основные стили */
+/* Базовые стили */
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(to bottom right, #FFFFFF, #F9E5B2);
@@ -10,25 +10,6 @@ body {
     position: relative;
 }
 
-/* Контейнер панели администратора */
-.admin-container {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 900px;
-    box-sizing: border-box;
-}
-
-.admin-container h2 {
-    text-align: center;
-    color: #6B4F3C;
-    font-size: 28px;
-    margin-bottom: 20px;
-}
-
-/* Стили для бургер-меню */
 .burger-menu {
     display: flex;
     flex-direction: column;
@@ -86,7 +67,7 @@ body {
     border-radius: 5px;
     display: none;
     flex-direction: column;
-    width: 200px;
+    width: 250px;
 }
 
 .nav-tabs.open {
@@ -118,7 +99,6 @@ body {
     color: #fff;
 }
 
-/* Кнопка выхода */
 button {
     background-color: #D6A55D;
     color: #6B4F3C;
@@ -132,26 +112,6 @@ button:hover {
     background-color: #6B4F3C;
     color: #fff;
 }
-
-/* Стиль для панели администратора */
-.admin-panel {
-    width: 100%;
-    max-width: 1200px;
-    margin: 20px;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-}
-
-.admin-panel h2 {
-    font-size: 28px;
-    text-align: center;
-    margin-bottom: 20px;
-    color: #6B4F3C;
-}
-
-/* Стиль для таблиц */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -225,4 +185,11 @@ button[type="submit"]:hover {
     color: red;
     font-size: 14px;
     margin-top: 10px;
+}
+
+label{
+    color: #6B4F3C;
+}
+h2,h3,h4{
+    color: #6B4F3C;
 }

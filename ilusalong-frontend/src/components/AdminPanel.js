@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../styles/admin.css';
 
 const AdminPanel = () => {
     const [users, setUsers] = useState([]);
@@ -16,7 +17,7 @@ const AdminPanel = () => {
     const [newPenalty, setNewPenalty] = useState({ userId: '', reason: '', amount: '', dateIssued: '' });
     const [editingPenaltyId, setEditingPenaltyId] = useState(null);
     const [editedPenalty, setEditedPenalty] = useState({});
-
+    const [menuOpen, setMenuOpen] = useState(false);
     useEffect(() => {
         fetchUsers();
         fetchCategories();
@@ -109,7 +110,7 @@ const AdminPanel = () => {
 
     const handleTabChange = (tab) => {
         setSelectedTab(tab);
-        if (tab === 'masters') fetchMasters();
+        setMenuOpen(false); // Закрываем меню при выборе вкладки
     };
 
     const handleAddPenalty = async () => {
@@ -180,47 +181,55 @@ const AdminPanel = () => {
 
     return (
         <div className="admin-panel">
-            <div style={{ position: 'absolute', top: '10px', right: '10px' }}>
-                <button
-                    onClick={logout}
-                    style={{
-                        padding: '10px',
-                        backgroundColor: '#f44336',
-                        color: '#fff',
-                        border: 'none',
-                        borderRadius: '5px',
-                        cursor: 'pointer',
-                    }}
-                >
-                    Logi välja
-                </button>
+            {/* Кнопка выхода */}
+            <div style={{ position: "absolute", top: "10px", right: "10px" }}>
+                <button onClick={logout}>Logi välja</button>
             </div>
-            <h2>Administraatori paneel</h2>
-            <ul className="nav nav-tabs">
-                <button
-                    className={`nav-link ${selectedTab === 'users' ? 'active' : ''}`}
-                    onClick={() => handleTabChange('users')}
-                >
-                    Kasutajad
-                </button>
-                <button
-                    className={`nav-link ${selectedTab === 'categories' ? 'active' : ''}`}
-                    onClick={() => handleTabChange('categories')}
-                >
-                    Kategooriad
-                </button>
-                <button
-                    className={`nav-link ${selectedTab === 'masters' ? 'active' : ''}`}
-                    onClick={() => handleTabChange('masters')}
-                >
-                    Meistrid
-                </button>
-                <button
-                    className={`nav-link ${selectedTab === 'penalties' ? 'active' : ''}`}
-                    onClick={() => handleTabChange('penalties')}
-                >
-                    Trahvid
-                </button>
+
+            {/* Бургер-меню */}
+            <button
+                className={`burger-menu ${menuOpen ? "open" : ""}`}
+                onClick={() => setMenuOpen(!menuOpen)}
+            >
+                <span className="bar"></span>
+                <span className="bar"></span>
+                <span className="bar"></span>
+            </button>
+
+            {/* Меню */}
+            <ul className={`nav-tabs ${menuOpen ? "open" : ""}`}>
+                <li>
+                    <button
+                        className={`nav-link ${selectedTab === "users" ? "active" : ""}`}
+                        onClick={() => handleTabChange("users")}
+                    >
+                        Kasutajad
+                    </button>
+                </li>
+                <li>
+                    <button
+                        className={`nav-link ${selectedTab === "categories" ? "active" : ""}`}
+                        onClick={() => handleTabChange("categories")}
+                    >
+                        Kategooriad
+                    </button>
+                </li>
+                <li>
+                    <button
+                        className={`nav-link ${selectedTab === "masters" ? "active" : ""}`}
+                        onClick={() => handleTabChange("masters")}
+                    >
+                        Meistrid
+                    </button>
+                </li>
+                <li>
+                    <button
+                        className={`nav-link ${selectedTab === "penalties" ? "active" : ""}`}
+                        onClick={() => handleTabChange("penalties")}
+                    >
+                        Trahvid
+                    </button>
+                </li>
             </ul>
 
             {selectedTab === 'users' && (

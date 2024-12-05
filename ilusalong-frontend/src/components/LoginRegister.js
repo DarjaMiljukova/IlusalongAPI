@@ -120,7 +120,7 @@ const LoginRegister = () => {
                             <label>Kinnitage oma parool</label>
                             <input
                                 type="password"
-                                placeholder="Sisestage oma parool uuesti"
+                                placeholder="Sisestage uuesti"
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 required
@@ -130,7 +130,7 @@ const LoginRegister = () => {
                             <label>Telefoninumber</label>
                             <input
                                 type="text"
-                                placeholder="Sisestage oma telefoninumber"
+                                placeholder="Sisestage oma telefon"
                                 value={phoneNumber}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
                                 required
@@ -145,7 +145,7 @@ const LoginRegister = () => {
                 {isLogin ? (
                     <>
                         Kas teil pole kontot?{' '}
-                        <span onClick={() => setIsLogin(false)}>Registreeru</span>
+                        <span onClick={() => setIsLogin(false)}>Registreeri</span>
                     </>
                 ) : (
                     <>

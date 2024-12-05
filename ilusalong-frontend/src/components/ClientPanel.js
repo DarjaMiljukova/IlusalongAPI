@@ -3,6 +3,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import '../styles/client.css';
 
 const ClientPanel = () => {
     const [fines, setFines] = useState([]);
@@ -20,8 +21,11 @@ const ClientPanel = () => {
     const [services, setServices] = useState([]);
     const [availableTimes, setAvailableTimes] = useState([]);
     const [selectedDate, setSelectedDate] = useState("");
-    const [activeTab, setActiveTab] = useState("appointments"); // Активная вкладка
+    const [selectedTab, setSelectedTab] = useState('appointments');
+
     const [userId, setUserId] = useState(null);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
 
     // Получаем ID пользователя из токена
     useEffect(() => {
@@ -128,7 +132,10 @@ const ClientPanel = () => {
         setAvailableTimes(times);
     };
 
-    const handleTabChange = (tab) => setActiveTab(tab);
+    const handleTabChange = (tab) => {
+        setSelectedTab(tab);
+        setMenuOpen(false); // Закрываем меню при выборе вкладки
+    };
 
     const cancelAppointment = async (appointmentId) => {
         const appointment = appointments.find((app) => app.id === appointmentId);
@@ -236,7 +243,9 @@ const ClientPanel = () => {
             toast.error("Viga andmete uuendamisel.");
         }
     };
-
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
     // Выход из аккаунта
     const logout = () => {
         localStorage.removeItem("authToken");
@@ -245,71 +254,62 @@ const ClientPanel = () => {
     };
 
     return (
-        <div style={{ display: "flex" }}>
+        <div className="client-panel">
+            {/* Кнопка выхода */}
             <div style={{ position: "absolute", top: "10px", right: "10px" }}>
-                <button
-                    onClick={logout}
-                    style={{
-                        padding: "10px",
-                        backgroundColor: "#f44336",
-                        color: "#fff",
-                        border: "none",
-                        borderRadius: "5px",
-                        cursor: "pointer",
-                    }}
-                >
-                    Logi välja
-                </button>
+                <button onClick={logout}>Logi välja</button>
             </div>
 
-            <div style={{ width: "250px", padding: "20px", borderRight: "1px solid #ccc" }}>
-                <h3>Kliendipaneel</h3>
+            {/* Бургер-меню */}
+            <button
+                className={`burger-menu ${menuOpen ? "open" : ""}`}
+                onClick={() => setMenuOpen(!menuOpen)}
+            >
+                <span className="bar"></span>
+                <span className="bar"></span>
+                <span className="bar"></span>
+            </button>
+
+            {/* Панель с навигацией */}
+            <div className={`nav-tabs ${menuOpen ? "open" : ""}`}>
                 <ul style={{ listStyleType: "none", paddingLeft: 0 }}>
-                    <li
-                        style={{
-                            padding: "10px",
-                            cursor: "pointer",
-                            backgroundColor: activeTab === "appointments" ? "#f0f0f0" : "",
-                        }}
+                    <li>
+                        <button
+                        className={selectedTab === "appointments" ? "active" : ""}
                         onClick={() => handleTabChange("appointments")}
                     >
                         Minu broneeringud
+                    </button>
                     </li>
-                    <li
-                        style={{
-                            padding: "10px",
-                            cursor: "pointer",
-                            backgroundColor: activeTab === "fines" ? "#f0f0f0" : "",
-                        }}
+                    <li>
+                        <button
+                        className={selectedTab === "fines" ? "active" : ""}
                         onClick={() => handleTabChange("fines")}
                     >
                         Trahvid
+                    </button>
                     </li>
-                    <li
-                        style={{
-                            padding: "10px",
-                            cursor: "pointer",
-                            backgroundColor: activeTab === "services" ? "#f0f0f0" : "",
-                        }}
+                    <li>
+                        <button
+                        className={selectedTab === "services" ? "active" : ""}
                         onClick={() => handleTabChange("services")}
                     >
                         Broneeri teenus
+                        </button>
                     </li>
-                    <li
-                        style={{
-                            padding: "10px",
-                            cursor: "pointer",
-                            backgroundColor: activeTab === "updateData" ? "#f0f0f0" : "",
-                        }}
+                    <li>
+                        <button
+                        className={selectedTab === "updateData" ? "active" : ""}
                         onClick={() => handleTabChange("updateData")}
                     >
                         Andmete muutmine
+                    </button>
                     </li>
                 </ul>
             </div>
 
             <div style={{ flex: 1, padding: "20px" }}>
-                {activeTab === "appointments" && (
+                {selectedTab === "appointments" && (
                     <>
                         <h3>Minu broneeringud</h3>
                         {appointments.length > 0 ? (
@@ -341,7 +341,7 @@ const ClientPanel = () => {
                     </>
                 )}
 
-                {activeTab === "fines" && (
+                {selectedTab === "fines" && (
                     <>
                         <h3>Minu trahvid</h3>
                         {fines.length > 0 ? (
@@ -370,7 +370,7 @@ const ClientPanel = () => {
                 )}
 
 
-                {activeTab === "services" && (
+                {selectedTab === "services" && (
                     <>
                         <h3>Broneeri teenus</h3>
                         <select
@@ -403,7 +403,7 @@ const ClientPanel = () => {
                         <h4>Valige aeg</h4>
                         <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: "10px" }}>
                             {availableTimes.map((timeSlot) => (
-                                <button
+                                <button className={`aeg`}
                                     key={timeSlot}
                                     onClick={async () => {
                                         await handleBookingTime(timeSlot);
@@ -427,7 +427,7 @@ const ClientPanel = () => {
 
 
 
-                {activeTab === "updateData" && (
+                {selectedTab === "updateData" && (
                     <>
                         <h3>Andmete muutmine</h3>
                         <form onSubmit={handleClientDataSubmit}>
