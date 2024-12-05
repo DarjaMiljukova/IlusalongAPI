@@ -350,7 +350,7 @@ const ClientPanel = () => {
                                 <tr>
                                     <th>Põhjus</th>
                                     <th>Kuupäev</th>
-                                    <th>Summa</th>
+                                    <th>Summa (€)</th>
                                 </tr>
                                 </thead>
                                 <tbody>

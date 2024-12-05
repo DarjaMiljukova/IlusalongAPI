@@ -362,7 +362,7 @@ const AdminPanel = () => {
                                                 )
                                             }
                                         >
-                                            Сохранить
+                                            Salvesta
                                         </button>
                                     ) : (
                                         <button onClick={() => setEditingCategoryId(category.id)}>Muuda</button>
@@ -415,12 +415,13 @@ const AdminPanel = () => {
                             value={newPenalty.reason}
                             onChange={(e) => setNewPenalty({ ...newPenalty, reason: e.target.value })}
                         />
-                        <input
-                            type="number"
-                            placeholder="Summa"
-                            value={newPenalty.amount}
-                            onChange={(e) => setNewPenalty({ ...newPenalty, amount: e.target.value })}
-                        />
+                            <input
+                                type="number"
+                                placeholder="Summa"
+                                value={newPenalty.amount}
+                                onChange={(e) => setNewPenalty({ ...newPenalty, amount: e.target.value })}
+                                style={{ width: '80%' }}
+                            />
                         <input
                             type="datetime-local"
                             value={newPenalty.dateIssued}
@@ -435,7 +436,7 @@ const AdminPanel = () => {
                             <th>ID</th>
                             <th>Kliendi (Email)</th>
                             <th>Põhjus</th>
-                            <th>Summa</th>
+                            <th>Summa (€)</th>
                             <th>Rikkumise kuupäev</th>
                             <th>Tegevused</th>
                         </tr>

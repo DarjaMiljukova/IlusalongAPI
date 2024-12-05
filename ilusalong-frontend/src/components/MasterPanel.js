@@ -297,6 +297,56 @@ const MasterPanel = () => {
                 {/* Секция для услуг */}
                 {selectedTab === "services" && (
                     <div className="services">
+                        <div className="add-service">
+                            <h3>Lisa teenus</h3>
+                            <form
+                                onSubmit={(e) => {
+                                    e.preventDefault();
+                                    handleAddService();
+                                }}
+                            >
+                                <input
+                                    type="text"
+                                    placeholder="Teenuse nimi"
+                                    value={newService.name}
+                                    onChange={(e) => setNewService({ ...newService, name: e.target.value })}
+                                    required
+                                />
+                                <input
+                                    type="text"
+                                    placeholder="Kirjeldus"
+                                    value={newService.description}
+                                    onChange={(e) =>
+                                        setNewService({ ...newService, description: e.target.value })
+                                    }
+                                    required
+                                />
+                                <input
+                                    type="number"
+                                    placeholder="Hind"
+                                    value={newService.price}
+                                    onChange={(e) =>
+                                        setNewService({ ...newService, price: e.target.value })
+                                    }
+                                    required
+                                />
+                                <select
+                                    value={newService.categoryId}
+                                    onChange={(e) =>
+                                        setNewService({ ...newService, categoryId: e.target.value })
+                                    }
+                                    required
+                                >
+                                    <option value="">Valige kategooria</option>
+                                    {categories.map((category) => (
+                                        <option key={category.id} value={category.id}>
+                                            {category.name}
+                                        </option>
+                                    ))}
+                                </select>
+                                <button type="submit">Lisa teenus</button>
+                            </form>
+                        </div>
                         <h3>Teie teenused</h3>
                         {services.length > 0 ? (
                             <table>
@@ -402,56 +452,7 @@ const MasterPanel = () => {
                         ) : (
                             <p>Teenused puuduvad.</p>
                         )}
-                        <div className="add-service">
-                            <h3>Lisa teenus</h3>
-                            <form
-                                onSubmit={(e) => {
-                                    e.preventDefault();
-                                    handleAddService();
-                                }}
-                            >
-                                <input
-                                    type="text"
-                                    placeholder="Teenuse nimi"
-                                    value={newService.name}
-                                    onChange={(e) => setNewService({ ...newService, name: e.target.value })}
-                                    required
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="Kirjeldus"
-                                    value={newService.description}
-                                    onChange={(e) =>
-                                        setNewService({ ...newService, description: e.target.value })
-                                    }
-                                    required
-                                />
-                                <input
-                                    type="number"
-                                    placeholder="Hind"
-                                    value={newService.price}
-                                    onChange={(e) =>
-                                        setNewService({ ...newService, price: e.target.value })
-                                    }
-                                    required
-                                />
-                                <select
-                                    value={newService.categoryId}
-                                    onChange={(e) =>
-                                        setNewService({ ...newService, categoryId: e.target.value })
-                                    }
-                                    required
-                                >
-                                    <option value="">Valige kategooria</option>
-                                    {categories.map((category) => (
-                                        <option key={category.id} value={category.id}>
-                                            {category.name}
-                                        </option>
-                                    ))}
-                                </select>
-                                <button type="submit">Lisa teenus</button>
-                            </form>
-                        </div>
+
                     </div>
                 )}
 
@@ -513,7 +514,7 @@ const MasterPanel = () => {
                                     }}
                                 >
                                     <h3>Saatke kliendile e-kiri</h3>
-                                    <p><strong>Клиент:</strong> {selectedUserEmail}</p>
+                                    <p><strong>Klient:</strong> {selectedUserEmail}</p>
                                     <textarea
                                         placeholder="Sisestage sõnum"
                                         value={emailMessage}
