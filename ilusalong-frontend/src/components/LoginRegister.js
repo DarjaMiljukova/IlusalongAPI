@@ -92,7 +92,7 @@ const LoginRegister = () => {
 
     return (
         <div className="wrapper">
-            <div className="title-text">{isLogin ? 'Logi sisse' : 'Registreerimine'}</div>
+            <div className="title-text">Celestial Touch</div>
             <form onSubmit={handleSubmit}>
                 <div className="field">
                     <label>Email</label>
