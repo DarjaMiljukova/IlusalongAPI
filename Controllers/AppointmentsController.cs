@@ -1,8 +1,9 @@
 ﻿using IlusalongAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Net.Mail;
-using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text.Json;
 
 namespace IlusalongAPI.Controllers
 {
@@ -10,8 +11,6 @@ namespace IlusalongAPI.Controllers
     [Route("api/[controller]")]
     public class AppointmentController : ControllerBase
     {
-
-
         private readonly SalonContext _context;
 
         public AppointmentController(SalonContext context)
@@ -23,12 +22,12 @@ namespace IlusalongAPI.Controllers
         public IActionResult GetAllAppointments()
         {
             var appointments = _context.Appointments
-                .Include(a => a.Service)  
-                .Include(a => a.User)    
+                .Include(a => a.Service)
+                .Include(a => a.User)
                 .ToList();
 
             if (!appointments.Any())
-                return NotFound("Записи не найдены.");
+                return Ok(new List<Appointment>());
 
             return Ok(appointments);
         }
@@ -37,9 +36,8 @@ namespace IlusalongAPI.Controllers
         public IActionResult GetAppointmentById(int id)
         {
             var appointment = _context.Appointments
-                .Include(a => a.Service)  
-
-                .Include(a => a.User)   
+                .Include(a => a.Service)
+                .Include(a => a.User)
                 .FirstOrDefault(a => a.Id == id);
 
             if (appointment == null)
@@ -52,33 +50,27 @@ namespace IlusalongAPI.Controllers
         public IActionResult GetAppointmentsByMaster(int masterId)
         {
             var appointments = _context.Appointments
-                .Where(a => a.Service.MasterId == masterId)  
+                .Where(a => a.Service.MasterId == masterId)
                 .Include(a => a.User)
-                .Include(a => a.Service)  
-                .ThenInclude(s => s.Category)  
+                .Include(a => a.Service)
+                .ThenInclude(s => s.Category)
                 .ToList();
-
-            if (!appointments.Any())
-                return NotFound("Записей не найдено.");
 
             return Ok(appointments);
         }
+
         [HttpGet("user/{userId}")]
         public IActionResult GetAppointmentsByUser(int userId)
         {
             var appointments = _context.Appointments
-                .Where(a => a.UserId == userId)  
+                .Where(a => a.UserId == userId)
                 .Include(a => a.User)
-                .Include(a => a.Service)  
-                .ThenInclude(s => s.Category)  
+                .Include(a => a.Service)
+                .ThenInclude(s => s.Category)
                 .ToList();
-
-            if (!appointments.Any())
-                return NotFound("Записей не найдено.");
 
             return Ok(appointments);
         }
-
 
         [HttpPost("addAppointment")]
         public IActionResult CreateAppointment([FromBody] Appointment appointment)
@@ -90,9 +82,21 @@ namespace IlusalongAPI.Controllers
             if (user == null)
                 return BadRequest("Пользователь с указанным ID не найден.");
 
-            var service = _context.Services.FirstOrDefault(s => s.Id == appointment.ServiceId);
-            if (service == null)
-                return BadRequest("Услуга с указанным ID не найдена.");
+            var service = _context.Services
+                .Include(s => s.Master)
+                .FirstOrDefault(s => s.Id == appointment.ServiceId);
+            if (service == null || service.MasterId == 0)
+                return BadRequest("Услуга с мастером не найдена.");
+
+            // Проверка на занятость
+            bool isSlotTaken = _context.Appointments
+                .Include(a => a.Service)
+                .Any(a =>
+                    a.Service.MasterId == service.MasterId &&
+                    a.AppointmentDate == appointment.AppointmentDate);
+
+            if (isSlotTaken)
+                return BadRequest("Это время уже занято другим клиентом.");
 
             appointment.User = user;
             appointment.Service = service;
@@ -101,7 +105,6 @@ namespace IlusalongAPI.Controllers
             _context.Appointments.Add(appointment);
             _context.SaveChanges();
 
-            // Отправка письма с подтверждением
             SendBookingConfirmationEmail(user.Email, service.Name, appointment.AppointmentDate);
 
             return Ok("Запись успешно создана. Подтверждение отправлено на вашу почту.");
@@ -109,67 +112,50 @@ namespace IlusalongAPI.Controllers
 
         private void SendBookingConfirmationEmail(string userEmail, string serviceName, DateTime appointmentDate)
         {
-            SendEmail(userEmail, "Broneeringud Celestial Touch'is", $"<p>Tere! <b>{userEmail}</b></p><p>Olete edukalt broneerinud teenuse: <b>{serviceName}</b> kuupäeval: <b>{appointmentDate}</b>.</p>" +
-                $"<p>Ootame teid huviga!</p><p>Ilusalon Celestial Touch</p><p>Administreerimine: +37258516751");
+            string subject = "Broneering kinnitatud - Celestial Touch";
+            string body = $"<p>Tere, {userEmail}!</p>" +
+                          $"<p>Teie broneering teenusele <b>{serviceName}</b> on edukalt kinnitatud.</p>" +
+                          $"<p>Kuupäev: <b>{appointmentDate}</b></p>" +
+                          $"<p>Kohtume peagi!</p><p>Celestial Touch</p>";
 
-
+            SendEmail(userEmail, subject, body);
         }
 
-       [HttpPost("sendEmail/{clientId}")]
-        public async Task<IActionResult> SendEmail(int clientId, [FromBody] SendEmailRequest request)
+        private static bool SendEmail(string recipientEmail, string subject, string htmlContent)
         {
-            var client = await _context.Users.FirstOrDefaultAsync(u => u.Id == clientId);  
-            if (client == null)
+            string mailerSendApiToken = "mlsn.5db77166a85af16a563ff77c363c04c0ec173c89d76cf59f13b6d0fa5e5c4fa3"; // ВСТАВЬ СЮДА СВОЙ API-токен
+            string fromEmail = "test-xkjn41mm5o64z781.mlsender.net"; // ТВОЙ подтверждённый email
+
+            var emailData = new
             {
-                return BadRequest("Клиент с указанным ID не найден.");
-            }
-
-            string email = client.Email;
-
-            if (string.IsNullOrEmpty(email))
-            {
-                return BadRequest("Email клиента не найден.");
-            }
-
-            bool isEmailSent = SendEmail(email, "Сообщение от Ilusalong", request.Message);
-
-            if (!isEmailSent)
-            {
-                return StatusCode(500, "Ошибка при отправке email.");
-            }
-
-            return Ok("Email успешно отправлен.");
-        }
-
-        private static bool SendEmail(string email, string subject, string body)
-        {
-            try
-            {
-                using (var smtpClient = new SmtpClient("smtp.mailersend.net"))
+                from = new
                 {
-                    smtpClient.Port = 587;
-                    smtpClient.Credentials = new NetworkCredential("MS_TyVFhe@trial-x2p0347d5p74zdrn.mlsender.net", "ivMXsuGSwInH3NJV");
-                    smtpClient.EnableSsl = true;
+                    email = fromEmail,
+                    name = "Celestial Touch"
+                },
+                to = new[]
+                {
+                    new { email = recipientEmail }
+                },
+                subject = subject,
+                html = htmlContent
+            };
 
-                    var mailMessage = new MailMessage
-                    {
-                        From = new MailAddress("MS_TyVFhe@trial-x2p0347d5p74zdrn.mlsender.net", "Celestial Touch"),
-                        Subject = subject,
-                        Body = body,
-                        IsBodyHtml = true
-                    };
-                    mailMessage.To.Add(email);
-                    smtpClient.Send(mailMessage);
-                }
-                return true;
-            }
-            catch (Exception ex)
+            var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", mailerSendApiToken);
+
+            var content = new StringContent(JsonSerializer.Serialize(emailData), System.Text.Encoding.UTF8, "application/json");
+
+            var response = httpClient.PostAsync("https://api.mailersend.com/v1/email", content).Result;
+
+            if (!response.IsSuccessStatusCode)
             {
-                Console.WriteLine($"Ошибка при отправке email: {ex.Message}");
+                Console.WriteLine($"Ошибка при отправке email: {response.StatusCode} {response.Content.ReadAsStringAsync().Result}");
                 return false;
             }
+
+            return true;
         }
-    
 
         public class SendEmailRequest
         {
@@ -177,14 +163,31 @@ namespace IlusalongAPI.Controllers
             public string Message { get; set; }
         }
 
+        [HttpPost("sendEmail/{clientId}")]
+        public async Task<IActionResult> SendEmail(int clientId, [FromBody] SendEmailRequest request)
+        {
+            var client = await _context.Users.FirstOrDefaultAsync(u => u.Id == clientId);
+            if (client == null)
+                return BadRequest("Клиент с указанным ID не найден.");
 
+            string email = client.Email;
+            if (string.IsNullOrEmpty(email))
+                return BadRequest("Email клиента не найден.");
+
+            bool isEmailSent = SendEmail(email, "Сообщение от Ilusalong", request.Message);
+
+            if (!isEmailSent)
+                return StatusCode(500, "Ошибка при отправке email.");
+
+            return Ok("Email успешно отправлен.");
+        }
 
         [HttpDelete("{id}")]
         public IActionResult CancelAppointment(int id)
         {
             var appointment = _context.Appointments
-                .Include(a => a.User)      
-                .Include(a => a.Service)   
+                .Include(a => a.User)
+                .Include(a => a.Service)
                 .FirstOrDefault(a => a.Id == id);
 
             if (appointment == null)
@@ -195,6 +198,5 @@ namespace IlusalongAPI.Controllers
 
             return Ok("Запись успешно удалена.");
         }
-
     }
 }

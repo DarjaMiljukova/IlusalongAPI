@@ -1,0 +1,130 @@
+/* === СВЕТЛАЯ ТЕМА === */
+:root {
+    --bg-color: #ffffff;
+    --bg-gradient: linear-gradient(to bottom right, #FFFFFF, #F9E5B2);
+    --primary-color: #6B4F3C;
+    --accent-color: #D6A55D;
+    --input-bg: #f9f9f9;
+    --text-color: #000000;
+    --box-color: #ffffff;
+    --hover-bg: #f1e5d6;
+}
+
+.dark {
+    --bg-color: #213448;
+    --bg-gradient: linear-gradient(to bottom right, #213448, #547792);
+    --primary-color: #ECEFCA;
+    --accent-color: #94B4C1;
+    --input-bg: #547792;
+    --text-color: #ECEFCA;
+    --box-color: #213448;
+    --hover-bg: #547792;
+}
+
+
+/* === ПРИМЕНЕНИЕ ПЕРЕМЕННЫХ === */
+body, html {
+    background: var(--bg-gradient);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    transition: background 0.3s, color 0.3s;
+}
+
+.wrapper, .master-container, .admin-container, .form-container, .modal-content {
+    background-color: var(--box-color) !important;
+    color: var(--text-color);
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+button, .nav-link {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    transition: background-color 0.3s;
+}
+
+button:hover, .nav-link:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+input, select, textarea {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border: 1px solid #ccc;
+    transition: 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--accent-color);
+    outline: none;
+}
+
+/* === КНОПКА СМЕНЫ ТЕМЫ === */
+.theme-toggle.theme-icon-only {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    background: var(--accent-color);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: background 0.3s, color 0.3s, transform 0.2s ease;
+}
+
+.theme-toggle.theme-icon-only:hover {
+    transform: rotate(20deg);
+    background: var(--primary-color);
+    color: white;
+}
+
+.language-dropdown {
+    position: fixed;
+    top: 10px;
+    right: 80px;
+    z-index: 1000;
+}
+
+.flag-button {
+    width: 48px;
+    height: 48px;
+    background: var(--accent-color);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: background 0.3s, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.flag-button:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.05);
+}
+
+.flag-options {
+    position: absolute;
+    top: 54px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+
