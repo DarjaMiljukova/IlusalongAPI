@@ -259,7 +259,7 @@ const MasterPanel = () => {
 
             <div className="admin-panel">
                 {/* Кнопка выхода */}
-                <div style={{ position: "absolute", top: "10px", right: "10px" }}>
+                <div style={{ position: "absolute", top: "80px", right: "15px" }}>
                     <button onClick={logout}>Logi välja</button>
                 </div>
 

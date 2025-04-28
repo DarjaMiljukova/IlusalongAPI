@@ -26,9 +26,6 @@ namespace IlusalongAPI.Controllers
                 .Include(a => a.User)
                 .ToList();
 
-            if (!appointments.Any())
-                return Ok(new List<Appointment>());
-
             return Ok(appointments);
         }
 
@@ -88,12 +85,12 @@ namespace IlusalongAPI.Controllers
             if (service == null || service.MasterId == 0)
                 return BadRequest("Услуга с мастером не найдена.");
 
-            // Проверка на занятость
+            // Проверка занятости: сравниваем с точностью до минут
             bool isSlotTaken = _context.Appointments
                 .Include(a => a.Service)
                 .Any(a =>
                     a.Service.MasterId == service.MasterId &&
-                    a.AppointmentDate == appointment.AppointmentDate);
+                    EF.Functions.DateDiffMinute(a.AppointmentDate, appointment.AppointmentDate) == 0);
 
             if (isSlotTaken)
                 return BadRequest("Это время уже занято другим клиентом.");
@@ -107,7 +104,7 @@ namespace IlusalongAPI.Controllers
 
             SendBookingConfirmationEmail(user.Email, service.Name, appointment.AppointmentDate);
 
-            return Ok("Запись успешно создана. Подтверждение отправлено на вашу почту.");
+            return Ok(appointment);
         }
 
         private void SendBookingConfirmationEmail(string userEmail, string serviceName, DateTime appointmentDate)
@@ -115,7 +112,7 @@ namespace IlusalongAPI.Controllers
             string subject = "Broneering kinnitatud - Celestial Touch";
             string body = $"<p>Tere, {userEmail}!</p>" +
                           $"<p>Teie broneering teenusele <b>{serviceName}</b> on edukalt kinnitatud.</p>" +
-                          $"<p>Kuupäev: <b>{appointmentDate}</b></p>" +
+                          $"<p>Kuupäev: <b>{appointmentDate:dd.MM.yyyy HH:mm}</b></p>" +
                           $"<p>Kohtume peagi!</p><p>Celestial Touch</p>";
 
             SendEmail(userEmail, subject, body);
@@ -123,29 +120,20 @@ namespace IlusalongAPI.Controllers
 
         private static bool SendEmail(string recipientEmail, string subject, string htmlContent)
         {
-            string mailerSendApiToken = "mlsn.5db77166a85af16a563ff77c363c04c0ec173c89d76cf59f13b6d0fa5e5c4fa3"; // ВСТАВЬ СЮДА СВОЙ API-токен
-            string fromEmail = "test-xkjn41mm5o64z781.mlsender.net"; // ТВОЙ подтверждённый email
+            string mailerSendApiToken = "mlsn.5db77166a85af16a563ff77c363c04c0ec173c89d76cf59f13b6d0fa5e5c4fa3";
+            string fromEmail = "test-xkjn41mm5o64z781.mlsender.net";
 
             var emailData = new
             {
-                from = new
-                {
-                    email = fromEmail,
-                    name = "Celestial Touch"
-                },
-                to = new[]
-                {
-                    new { email = recipientEmail }
-                },
+                from = new { email = fromEmail, name = "Celestial Touch" },
+                to = new[] { new { email = recipientEmail } },
                 subject = subject,
                 html = htmlContent
             };
 
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", mailerSendApiToken);
-
             var content = new StringContent(JsonSerializer.Serialize(emailData), System.Text.Encoding.UTF8, "application/json");
-
             var response = httpClient.PostAsync("https://api.mailersend.com/v1/email", content).Result;
 
             if (!response.IsSuccessStatusCode)

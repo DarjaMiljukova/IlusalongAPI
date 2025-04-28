@@ -256,10 +256,9 @@ const ClientPanel = () => {
     return (
         <div className="client-panel">
             {/* Кнопка выхода */}
-            <div style={{ position: "absolute", top: "10px", right: "10px" }}>
+            <div style={{ position: "absolute", top: "80px", right: "15px" }}>
                 <button onClick={logout}>Logi välja</button>
             </div>
-
             {/* Бургер-меню */}
             <button
                 className={`burger-menu ${menuOpen ? "open" : ""}`}

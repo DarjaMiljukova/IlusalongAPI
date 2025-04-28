@@ -14,7 +14,7 @@ const LanguageDropdown = () => {
     const flags = {
         et: '🇪🇪',
         ru: '🇷🇺',
-        eng: '🇬🇧',
+        eng: 'EN',
     };
 
     const handleLangChange = (lang) => {

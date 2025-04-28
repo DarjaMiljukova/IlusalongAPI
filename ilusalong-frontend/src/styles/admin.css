@@ -118,16 +118,6 @@ body {
     color: #fff;
 }
 
-/* Кнопка выхода */
-button {
-    background-color: #D6A55D;
-    color: #6B4F3C;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
 button:hover {
     background-color: #6B4F3C;
     color: #fff;

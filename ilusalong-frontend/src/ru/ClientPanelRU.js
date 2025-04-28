@@ -256,8 +256,8 @@ const ClientPanel = () => {
     return (
         <div className="client-panel">
             {/* Кнопка выхода */}
-            <div style={{ position: "absolute", top: "10px", right: "10px" }}>
-                <button onClick={logout}>Logi välja</button>
+            <div style={{ position: "absolute", top: "80px", right: "15px" }}>
+                <button onClick={logout}>Выход</button>
             </div>
 
             {/* Бургер-меню */}
@@ -278,7 +278,7 @@ const ClientPanel = () => {
                         className={selectedTab === "appointments" ? "active" : ""}
                         onClick={() => handleTabChange("appointments")}
                     >
-                        Minu broneeringud
+                        Мои бронирования
                     </button>
                     </li>
                     <li>
@@ -286,7 +286,7 @@ const ClientPanel = () => {
                         className={selectedTab === "fines" ? "active" : ""}
                         onClick={() => handleTabChange("fines")}
                     >
-                        Trahvid
+                        Штрафы
                     </button>
                     </li>
                     <li>
@@ -294,7 +294,7 @@ const ClientPanel = () => {
                         className={selectedTab === "services" ? "active" : ""}
                         onClick={() => handleTabChange("services")}
                     >
-                        Broneeri teenus
+                        Бронирование услуг
                         </button>
                     </li>
                     <li>
@@ -302,7 +302,7 @@ const ClientPanel = () => {
                         className={selectedTab === "updateData" ? "active" : ""}
                         onClick={() => handleTabChange("updateData")}
                     >
-                        Andmete muutmine
+                        Изменение данных
                     </button>
                     </li>
                 </ul>
@@ -311,14 +311,14 @@ const ClientPanel = () => {
             <div style={{ flex: 1, padding: "20px" }}>
                 {selectedTab === "appointments" && (
                     <>
-                        <h3>Minu broneeringud</h3>
+                        <h3>Мои бронирования</h3>
                         {appointments.length > 0 ? (
                             <table>
                                 <thead>
                                 <tr>
-                                    <th>Kuupäev</th>
-                                    <th>Teenus</th>
-                                    <th>Tegevus</th>
+                                    <th>Дата</th>
+                                    <th>Услуга</th>
+                                    <th>Действия</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -328,7 +328,7 @@ const ClientPanel = () => {
                                         <td>{appointment.service?.name || 'Tundmatu teenus'}</td>
                                         <td>
                                             <button onClick={() => cancelAppointment(appointment.id)}>
-                                                Tühistamine
+                                                Отмена
                                             </button>
                                         </td>
                                     </tr>
@@ -336,21 +336,21 @@ const ClientPanel = () => {
                                 </tbody>
                             </table>
                         ) : (
-                            <p>Puuduvad andmed.</p>
+                            <p>Данные отсутвуют.</p>
                             )}
                     </>
                 )}
 
                 {selectedTab === "fines" && (
                     <>
-                        <h3>Minu trahvid</h3>
+                        <h3>Мои штрафы</h3>
                         {fines.length > 0 ? (
                             <table>
                                 <thead>
                                 <tr>
-                                    <th>Põhjus</th>
-                                    <th>Kuupäev</th>
-                                    <th>Summa (€)</th>
+                                    <th>Причина</th>
+                                    <th>Дата</th>
+                                    <th>Сумма (€)</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -364,7 +364,7 @@ const ClientPanel = () => {
                                 </tbody>
                             </table>
                         ) : (
-                            <p>Trahvid puuduvad.</p>
+                            <p>Штрафы отсутвуют.</p>
                         )}
                     </>
                 )}
@@ -372,17 +372,17 @@ const ClientPanel = () => {
 
                 {selectedTab === "services" && (
                     <>
-                        <h3>Broneeri teenus</h3>
+                        <h3>Бронирование услуг</h3>
                         <select
                             name="serviceId"
                             value={newAppointment.serviceId}
                             onChange={handleNewAppointmentChange}
                         >
                             {services.length === 0 ? (
-                                <option>Teenused on koormatud...</option>
+                                <option>Услуга не найдена...</option>
                             ) : (
                                 <>
-                                    <option value="">Valige teenus</option>
+                                    <option value="">Выберите услугу</option>
                                     {services.map((service) => (
                                         <option key={service.id} value={service.id}>
                                             {service.name}, {service.description}, {service.price}€
@@ -392,7 +392,7 @@ const ClientPanel = () => {
                             )}
                         </select>
 
-                        <h4>Valige kuupäev</h4>
+                        <h4>Выберите дату</h4>
                         <input
                             type="date"
                             value={selectedDate}
@@ -400,7 +400,7 @@ const ClientPanel = () => {
                             min={new Date().toISOString().split("T")[0]}
                         />
 
-                        <h4>Valige aeg</h4>
+                        <h4>Выберите время</h4>
                         <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: "10px" }}>
                             {availableTimes.map((timeSlot) => (
                                 <button className={`aeg`}
@@ -429,10 +429,10 @@ const ClientPanel = () => {
 
                 {selectedTab === "updateData" && (
                     <>
-                        <h3>Andmete muutmine</h3>
+                        <h3>Изменение данных</h3>
                         <form onSubmit={handleClientDataSubmit}>
                             <div>
-                                <label htmlFor="phoneNumber">Telefon</label>
+                                <label htmlFor="phoneNumber">Телефон</label>
                                 <input
                                     type="text"
                                     id="phoneNumber"
@@ -442,7 +442,7 @@ const ClientPanel = () => {
                                 />
                             </div>
                             <div>
-                                <label htmlFor="email">Email</label>
+                                <label htmlFor="email">Почта</label>
                                 <input
                                     type="email"
                                     id="email"
@@ -452,7 +452,7 @@ const ClientPanel = () => {
                                 />
                             </div>
                             <div>
-                                <label htmlFor="password">Salasõna</label>
+                                <label htmlFor="password">Пароль</label>
                                 <input
                                     type="password"
                                     id="password"
@@ -461,7 +461,7 @@ const ClientPanel = () => {
                                     onChange={handleClientDataChange}
                                 />
                             </div>
-                            <button type="submit">Andmete uuendamine</button>
+                            <button type="submit">Обновить данные</button>
                         </form>
                     </>
                 )}
