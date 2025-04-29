@@ -1,8 +1,6 @@
 services:
   - type: web
     name: ilusalong-api
-    runtime: dotnet
-    buildCommand: "dotnet build"
-    startCommand: "dotnet run --project IlusalongAPI.csproj"
-    region: frankfurt
+    env: docker
     plan: free
+    region: frankfurt
