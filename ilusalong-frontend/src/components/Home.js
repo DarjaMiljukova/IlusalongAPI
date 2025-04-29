@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../styles/Home.css';
+import faceImg from "../assets/images/face.jpg";
+import massageImg from "../assets/images/massage.jpg";
+import hairImg from "../assets/images/hair.jpg";
+import nailImg from "../assets/images/nail.jpg";
+import nailsImg from "../assets/images/nails.jpg";
+import makeupImg from "../assets/images/makeup.jpg";
+
 
 const Home = () => {
     const navigate = useNavigate();
@@ -11,37 +18,37 @@ const Home = () => {
             id: 1,
             title: "Näohooldus",
             description: "Täiuslik hooldus su naha värskendamiseks ja taastamiseks.",
-            image: "/images/face.jpg",
+            image: faceImg,
         },
         {
             id: 2,
             title: "Massaaž",
             description: "Sügav lõõgastus ja pingete leevendamine kogu kehale.",
-            image: "/images/massage.jpg",
+            image: massageImg,
         },
         {
             id: 3,
             title: "Juuksehooldus",
             description: "Terved ja säravad juuksed professionaalse hoolitsusega.",
-            image: "/images/hair.jpg",
+            image: hairImg,
         },
         {
             id: 4,
             title: "Maniküür",
             description: "Täiuslikud hooldatud küüned ja stiilne välimus.",
-            image: "/images/nail.jpg",
+            image: nailImg,
         },
         {
             id: 5,
             title: "Pediküür",
             description: "Hooldatud ja siidised jalad igaks hooajaks.",
-            image: "/images/nails.jpg",
+            image: nailsImg,
         },
         {
             id: 6,
             title: "Meik",
             description: "Professionaalne jumestus igaks sündmuseks.",
-            image: "/images/makeup.jpg",
+            image: makeupImg,
         },
     ];
 

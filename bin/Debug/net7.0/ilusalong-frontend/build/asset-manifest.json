@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/celestia/static/css/main.22c0c633.css",
+    "main.js": "/celestia/static/js/main.5fe595ee.js",
+    "index.html": "/celestia/index.html",
+    "main.22c0c633.css.map": "/celestia/static/css/main.22c0c633.css.map",
+    "main.5fe595ee.js.map": "/celestia/static/js/main.5fe595ee.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.22c0c633.css",
+    "static/js/main.5fe595ee.js"
+  ]
+}

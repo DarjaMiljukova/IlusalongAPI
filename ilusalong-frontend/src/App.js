@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // ЭСТОНСКИЙ
@@ -29,6 +29,14 @@ import ThemeToggle from './components/ThemeToggle';
 import LanguageDropdown from './components/LanguageDropdown';
 
 function App() {
+    // Установка языка по умолчанию
+    useEffect(() => {
+        const storedLanguage = localStorage.getItem("language");
+        if (!storedLanguage) {
+            localStorage.setItem("language", "ee"); // язык по умолчанию
+        }
+    }, []);
+
     return (
         <Router>
             <ThemeToggle />
