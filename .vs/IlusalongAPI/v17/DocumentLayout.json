@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\render.yaml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:render.yaml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|c:\\users\\msi\\source\\repos\\ilusalongapi\\controllers\\appointmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{47254FDA-4BB7-4670-AD6B-3C757716A9A8}|IlusalongAPI.csproj|solutionrelative:controllers\\appointmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -22,11 +30,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Dockerfile",
+              "RelativeDocumentMoniker": "Dockerfile",
+              "ToolTip": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Dockerfile",
+              "RelativeToolTip": "Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-29T18:08:24.968Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "render.yaml",
+              "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\render.yaml",
+              "RelativeDocumentMoniker": "render.yaml",
+              "ToolTip": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\render.yaml",
+              "RelativeToolTip": "render.yaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2025-04-29T17:56:26.564Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "MasterController.cs",
               "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\MasterController.cs",
               "RelativeDocumentMoniker": "Controllers\\MasterController.cs",
@@ -38,7 +72,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Penalty.cs",
               "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Models\\Penalty.cs",
               "RelativeDocumentMoniker": "Models\\Penalty.cs",
@@ -50,13 +84,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "AppointmentsController.cs",
               "DocumentMoniker": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\AppointmentsController.cs",
               "RelativeDocumentMoniker": "Controllers\\AppointmentsController.cs",
               "ToolTip": "C:\\Users\\MSI\\source\\repos\\IlusalongAPI\\Controllers\\AppointmentsController.cs",
               "RelativeToolTip": "Controllers\\AppointmentsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAiwBoAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-04T22:07:10.843Z",
               "EditorCaption": ""

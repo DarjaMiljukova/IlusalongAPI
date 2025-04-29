@@ -5,7 +5,7 @@ import { jwtDecode } from 'jwt-decode';
 import '../styles/logres.css';
 
 const LoginRegister = () => {
-    const [isLogin, setIsLogin] = useState(true); // Переключение между логином и регистрацией
+    const [isLogin, setIsLogin] = useState(true); // Switch between login and registration
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -26,7 +26,7 @@ const LoginRegister = () => {
                 const { token } = response.data;
 
                 if (!token) {
-                    setMessage('Žetooni hankimine ebaõnnestus. Kontrollige oma sisselogimisandmeid.');
+                    setMessage('Failed to retrieve token. Check your login credentials.');
                     return;
                 }
 
@@ -48,19 +48,19 @@ const LoginRegister = () => {
                         navigate('/client');
                         break;
                     default:
-                        setMessage('Tundmatu roll. Võtke ühendust toega.');
+                        setMessage('Unknown role. Please contact support.');
                 }
             } catch (error) {
                 console.error(error);
                 if (error.response) {
-                    setMessage(error.response.data.message || 'Volituse viga.');
+                    setMessage(error.response.data.message || 'Authorization error.');
                 } else {
-                    setMessage('Viga serveriga ühenduse loomisel. Proovi uuesti.');
+                    setMessage('Connection to server failed. Try again.');
                 }
             }
         } else {
             if (password !== confirmPassword) {
-                setMessage('Paroolid ei ühti.\n');
+                setMessage('Passwords do not match.');
                 return;
             }
 
@@ -71,7 +71,7 @@ const LoginRegister = () => {
                     phoneNumber,
                 });
 
-                setMessage(response.data.message || 'Registreerimine õnnestus.');
+                setMessage(response.data.message || 'Registration successful.');
                 setIsLogin(true);
             } catch (error) {
                 console.error(error);
@@ -81,10 +81,10 @@ const LoginRegister = () => {
                         const errorMessages = Object.values(errors).flat().join(' ');
                         setMessage(errorMessages);
                     } else {
-                        setMessage(error.response.data.message || 'Ошибка регистрации.');
+                        setMessage(error.response.data.message || 'Registration error.');
                     }
                 } else {
-                    setMessage('Ошибка подключения к серверу. Попробуйте снова.');
+                    setMessage('Connection error. Please try again.');
                 }
             }
         }
@@ -98,17 +98,17 @@ const LoginRegister = () => {
                     <label>Email</label>
                     <input
                         type="email"
-                        placeholder="Sisestage e-posti aadress"
+                        placeholder="Enter your email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
                 </div>
                 <div className="field">
-                    <label>Parool</label>
+                    <label>Password</label>
                     <input
                         type="password"
-                        placeholder="Sisestage oma parool"
+                        placeholder="Enter your password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
@@ -117,20 +117,20 @@ const LoginRegister = () => {
                 {!isLogin && (
                     <>
                         <div className="field">
-                            <label>Kinnitage oma parool</label>
+                            <label>Confirm Password</label>
                             <input
                                 type="password"
-                                placeholder="Sisestage uuesti"
+                                placeholder="Re-enter password"
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 required
                             />
                         </div>
                         <div className="field">
-                            <label>Telefoninumber</label>
+                            <label>Phone Number</label>
                             <input
                                 type="text"
-                                placeholder="Sisestage oma telefon"
+                                placeholder="Enter your phone number"
                                 value={phoneNumber}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
                                 required
@@ -138,19 +138,19 @@ const LoginRegister = () => {
                         </div>
                     </>
                 )}
-                <button type="submit">{isLogin ? 'Logi sisse' : 'Registreerimine'}</button>
+                <button type="submit">{isLogin ? 'Login' : 'Register'}</button>
             </form>
             {message && <p>{message}</p>}
             <p>
                 {isLogin ? (
                     <>
-                        Kas teil pole kontot?{' '}
-                        <span onClick={() => setIsLogin(false)}>Registreeri</span>
+                        Don't have an account?{' '}
+                        <span onClick={() => setIsLogin(false)}>Register</span>
                     </>
                 ) : (
                     <>
-                        Kas teil on juba konto?{' '}
-                        <span onClick={() => setIsLogin(true)}>Logi sisse</span>
+                        Already have an account?{' '}
+                        <span onClick={() => setIsLogin(true)}>Login</span>
                     </>
                 )}
             </p>

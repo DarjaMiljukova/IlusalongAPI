@@ -33,7 +33,7 @@ function App() {
     useEffect(() => {
         const storedLanguage = localStorage.getItem("language");
         if (!storedLanguage) {
-            localStorage.setItem("language", "ee"); // язык по умолчанию
+            localStorage.setItem("language", "ee");
         }
     }, []);
 
@@ -42,7 +42,6 @@ function App() {
             <ThemeToggle />
             <LanguageDropdown />
             <Routes>
-
                 {/* ЭСТОНСКИЙ */}
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<LoginRegister />} />
@@ -66,7 +65,6 @@ function App() {
                 <Route path="/eng/master" element={<MasterPanelENG />} />
                 <Route path="/eng/client" element={<ClientPanelENG />} />
                 <Route path="/eng/master/profile" element={<MasterProfileENG />} />
-
             </Routes>
         </Router>
     );

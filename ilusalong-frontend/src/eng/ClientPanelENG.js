@@ -27,7 +27,6 @@ const ClientPanel = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
 
-    // Получаем ID пользователя из токена
     useEffect(() => {
         const token = localStorage.getItem("authToken");
         if (token) {
@@ -37,7 +36,6 @@ const ClientPanel = () => {
             console.error("Token is missing or invalid.");
         }
     }, []);
-
 
     useEffect(() => {
         if (!userId) return;
@@ -56,24 +54,24 @@ const ClientPanel = () => {
 
                 setServices(servicesResponse.data);
 
-                toast.success("Teenused on edukalt üles laaditud!");
+                toast.success("Services have been successfully loaded!");
 
-                const appoimentResponse = await axios.get(`http://localhost:5259/api/Appointment/user/${userId}`, {
+                const appointmentResponse = await axios.get(`http://localhost:5259/api/Appointment/user/${userId}`, {
                     headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
                 });
-                toast.success("Andmed on edukalt uuendatud!");
+                toast.success("Data has been successfully updated!");
 
-                // Логируем данные клиента и услуги
-                console.log("Данные клиента:", clientResponse.data);
-                console.log("Данные об услугах:", servicesResponse.data);
+                // Log client and service data
+                console.log("Client data:", clientResponse.data);
+                console.log("Service data:", servicesResponse.data);
 
-                // Обновляем состояние
+                // Update state
                 setClientData(clientResponse.data);
                 setServices(servicesResponse.data);
-                setAppointments(appoimentResponse.data);
+                setAppointments(appointmentResponse.data);
             } catch (error) {
-                console.error("Ошибка при получении данных:", error);
-                toast.error("Ошибка при загрузке данных.");
+                console.error("Error while fetching data:", error);
+                toast.error("Error while loading data.");
             }
         };
 
@@ -144,7 +142,7 @@ const ClientPanel = () => {
         const timeDifference = (appointmentDate - currentDate) / (1000 * 60 * 60); // hours
 
         if (timeDifference < 24) {
-            const confirmCancel = window.confirm("Вы уверены, что хотите отменить запись? При отмене менее чем за 24 часа будет начислен штраф.");
+            const confirmCancel = window.confirm("Are you sure you want to cancel your appointment? Cancellations made less than 24 hours in advance will incur a cancellation fee.");
             if (confirmCancel) {
                 try {
                     await axios.post(
@@ -152,16 +150,16 @@ const ClientPanel = () => {
                         {
                             userId: appointment.userId,
                             amount: 10,
-                            reason: "Отмена записи менее чем за 24 часа",
+                            reason: "Cancellation of an appointment less than 24 hours in advance",
                             dateIssued: new Date().toISOString(),
                         },
                         { headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` } }
                     );
                     setAppointments(appointments.filter((app) => app.id !== appointmentId));
-                    toast.success("Запись успешно отменена с начислением штрафа.");
+                    toast.success("The appointment has been successfully cancelled with a penalty being charged.");
                 } catch (error) {
                     console.error("Error applying penalty:", error);
-                    toast.error("Ошибка при начислении штрафа.");
+                    toast.error("Error in calculating the fine.");
                 }
             }
         } else {
@@ -170,22 +168,22 @@ const ClientPanel = () => {
                     headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
                 });
                 setAppointments(appointments.filter((app) => app.id !== appointmentId));
-                toast.success("Salvestus on edukalt tühistatud.");
+                toast.success("Recording successfully canceled.");
             } catch (error) {
                 console.error("Error cancelling appointment:", error);
-                toast.error("Ошибка при отмене записи.");
+                toast.error("Error canceling recording.");
             }
         }
     };
 
     const handleBookingTime = async (timeSlot) => {
         if (!newAppointment.serviceId) {
-            toast.error("Palun valige teenus.");
+            toast.error("Please select a service.");
             return;
         }
 
         if (!selectedDate) {
-            toast.error("Palun valige kuupäev.");
+            toast.error("Please select a date.");
             return;
         }
 
@@ -202,7 +200,7 @@ const ClientPanel = () => {
                 { headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` } }
             );
 
-            toast.success("Andmed on edukalt loodud.");
+            toast.success("Data has been successfully created..");
             setAppointments([...appointments, response.data]);
             setNewAppointment({
                 serviceId: "",
@@ -211,7 +209,7 @@ const ClientPanel = () => {
             });
         } catch (error) {
             console.error("Error booking appointment:", error);
-            toast.error("Viga kirje loomisel.");
+            toast.error("Error creating record.");
         }
     };
 
@@ -237,10 +235,10 @@ const ClientPanel = () => {
             await axios.put(`http://localhost:5259/api/User/${clientData.id}`, clientData, {
                 headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
             });
-            toast.success("Andmed on edukalt ajakohastatud.");
+            toast.success("Data has been successfully updated.");
         } catch (error) {
             console.error("Error updating client data:", error);
-            toast.error("Viga andmete uuendamisel.");
+            toast.error("Error updating data.");
         }
     };
     const toggleMenu = () => {
@@ -277,7 +275,7 @@ const ClientPanel = () => {
                         className={selectedTab === "appointments" ? "active" : ""}
                         onClick={() => handleTabChange("appointments")}
                     >
-                        Minu broneeringud
+                            My bookings
                     </button>
                     </li>
                     <li>
@@ -285,7 +283,7 @@ const ClientPanel = () => {
                         className={selectedTab === "fines" ? "active" : ""}
                         onClick={() => handleTabChange("fines")}
                     >
-                        Trahvid
+                            Fines
                     </button>
                     </li>
                     <li>
@@ -293,7 +291,7 @@ const ClientPanel = () => {
                         className={selectedTab === "services" ? "active" : ""}
                         onClick={() => handleTabChange("services")}
                     >
-                        Broneeri teenus
+                            Book a service
                         </button>
                     </li>
                     <li>
@@ -301,7 +299,7 @@ const ClientPanel = () => {
                         className={selectedTab === "updateData" ? "active" : ""}
                         onClick={() => handleTabChange("updateData")}
                     >
-                        Andmete muutmine
+                            Changing data
                     </button>
                     </li>
                 </ul>
@@ -310,24 +308,24 @@ const ClientPanel = () => {
             <div style={{ flex: 1, padding: "20px" }}>
                 {selectedTab === "appointments" && (
                     <>
-                        <h3>Minu broneeringud</h3>
+                        <h3>My bookings</h3>
                         {appointments.length > 0 ? (
                             <table>
                                 <thead>
                                 <tr>
-                                    <th>Kuupäev</th>
-                                    <th>Teenus</th>
-                                    <th>Tegevus</th>
+                                    <th>Date</th>
+                                    <th>Service</th>
+                                    <th>Activity</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {appointments.map((appointment) => (
                                     <tr key={appointment.id}>
                                         <td>{new Date(appointment.appointmentDate).toLocaleString()}</td>
-                                        <td>{appointment.service?.name || 'Tundmatu teenus'}</td>
+                                        <td>{appointment.service?.name || 'Unknown service'}</td>
                                         <td>
                                             <button onClick={() => cancelAppointment(appointment.id)}>
-                                                Tühistamine
+                                                Cancellation
                                             </button>
                                         </td>
                                     </tr>
@@ -335,21 +333,21 @@ const ClientPanel = () => {
                                 </tbody>
                             </table>
                         ) : (
-                            <p>Puuduvad andmed.</p>
+                            <p>Missing data.</p>
                             )}
                     </>
                 )}
 
                 {selectedTab === "fines" && (
                     <>
-                        <h3>Minu trahvid</h3>
+                        <h3>My fines</h3>
                         {fines.length > 0 ? (
                             <table>
                                 <thead>
                                 <tr>
-                                    <th>Põhjus</th>
-                                    <th>Kuupäev</th>
-                                    <th>Summa (€)</th>
+                                    <th>Reason</th>
+                                    <th>Date</th>
+                                    <th>Amount (€)</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -363,7 +361,7 @@ const ClientPanel = () => {
                                 </tbody>
                             </table>
                         ) : (
-                            <p>Trahvid puuduvad.</p>
+                            <p>No fines.</p>
                         )}
                     </>
                 )}
@@ -378,10 +376,10 @@ const ClientPanel = () => {
                             onChange={handleNewAppointmentChange}
                         >
                             {services.length === 0 ? (
-                                <option>Teenused on koormatud...</option>
+                                <option>Services are overloaded...</option>
                             ) : (
                                 <>
-                                    <option value="">Valige teenus</option>
+                                    <option value="">Select a service</option>
                                     {services.map((service) => (
                                         <option key={service.id} value={service.id}>
                                             {service.name}, {service.description}, {service.price}€
@@ -391,7 +389,7 @@ const ClientPanel = () => {
                             )}
                         </select>
 
-                        <h4>Valige kuupäev</h4>
+                        <h4>Choose a day</h4>
                         <input
                             type="date"
                             value={selectedDate}
@@ -399,7 +397,7 @@ const ClientPanel = () => {
                             min={new Date().toISOString().split("T")[0]}
                         />
 
-                        <h4>Valige aeg</h4>
+                        <h4>Choose a time</h4>
                         <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: "10px" }}>
                             {availableTimes.map((timeSlot) => (
                                 <button className={`aeg`}
@@ -428,10 +426,10 @@ const ClientPanel = () => {
 
                 {selectedTab === "updateData" && (
                     <>
-                        <h3>Andmete muutmine</h3>
+                        <h3>Changing data</h3>
                         <form onSubmit={handleClientDataSubmit}>
                             <div>
-                                <label htmlFor="phoneNumber">Telefon</label>
+                                <label htmlFor="phoneNumber">Phone number</label>
                                 <input
                                     type="text"
                                     id="phoneNumber"
@@ -451,7 +449,7 @@ const ClientPanel = () => {
                                 />
                             </div>
                             <div>
-                                <label htmlFor="password">Salasõna</label>
+                                <label htmlFor="password">Password</label>
                                 <input
                                     type="password"
                                     id="password"
@@ -460,7 +458,7 @@ const ClientPanel = () => {
                                     onChange={handleClientDataChange}
                                 />
                             </div>
-                            <button type="submit">Andmete uuendamine</button>
+                            <button type="submit">Data update</button>
                         </form>
                     </>
                 )}

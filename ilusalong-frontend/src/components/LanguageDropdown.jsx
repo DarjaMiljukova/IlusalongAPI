@@ -12,14 +12,21 @@ const LanguageDropdown = () => {
         currentPath.startsWith('/eng') ? 'eng' : 'et';
 
     const flags = {
-        et: '🇪🇪',
-        ru: '🇷🇺',
-        eng: 'EN',
+        et: 'ee',
+        ru: 'ru',
+        eng: 'en',
     };
 
     const handleLangChange = (lang) => {
         setOpen(false);
-        navigate(lang === 'et' ? '/' : `/${lang}`);
+        localStorage.setItem("language", lang);
+
+        const newPath = currentPath.replace(/^\/(ru|eng)/, '');
+        const targetPath = lang === 'et' ? newPath : `/${lang}${newPath}`;
+
+        if (currentPath !== targetPath) {
+            navigate(targetPath);
+        }
     };
 
     useEffect(() => {
@@ -31,6 +38,16 @@ const LanguageDropdown = () => {
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
+
+    useEffect(() => {
+        const storedLang = localStorage.getItem("language");
+        const alreadyPrefixed = currentPath.startsWith('/ru') || currentPath.startsWith('/eng');
+
+        if (storedLang && storedLang !== 'et' && !alreadyPrefixed) {
+            const newPath = `/${storedLang}${currentPath}`;
+            navigate(newPath);
+        }
+    }, [currentPath, navigate]);
 
     return (
         <div className="language-dropdown" ref={ref}>

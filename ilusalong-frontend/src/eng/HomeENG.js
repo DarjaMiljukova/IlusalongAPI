@@ -8,7 +8,6 @@ import nailImg from "../assets/images/nail.jpg";
 import nailsImg from "../assets/images/nails.jpg";
 import makeupImg from "../assets/images/makeup.jpg";
 
-
 const Home = () => {
     const navigate = useNavigate();
     const [activeCard, setActiveCard] = useState(null);
@@ -16,38 +15,38 @@ const Home = () => {
     const services = [
         {
             id: 1,
-            title: "Näohooldus",
-            description: "Täiuslik hooldus su naha värskendamiseks ja taastamiseks.",
+            title: "Facial treatment",
+            description: "Perfect care to refresh and restore your skin.",
             image: faceImg,
         },
         {
             id: 2,
-            title: "Massaaž",
-            description: "Sügav lõõgastus ja pingete leevendamine kogu kehale.",
+            title: "Massage",
+            description: "Deep relaxation and full body tension relief.",
             image: massageImg,
         },
         {
             id: 3,
-            title: "Juuksehooldus",
-            description: "Terved ja säravad juuksed professionaalse hoolitsusega.",
+            title: "Hair care",
+            description: "Healthy and shiny hair with professional care.",
             image: hairImg,
         },
         {
             id: 4,
-            title: "Maniküür",
-            description: "Täiuslikud hooldatud küüned ja stiilne välimus.",
+            title: "Manicure",
+            description: "Perfectly groomed nails and a stylish look.",
             image: nailImg,
         },
         {
             id: 5,
-            title: "Pediküür",
-            description: "Hooldatud ja siidised jalad igaks hooajaks.",
+            title: "Pedicure",
+            description: "Soft and smooth feet for any season.",
             image: nailsImg,
         },
         {
             id: 6,
-            title: "Meik",
-            description: "Professionaalne jumestus igaks sündmuseks.",
+            title: "Makeup",
+            description: "Professional makeup for every occasion.",
             image: makeupImg,
         },
     ];
@@ -61,17 +60,17 @@ const Home = () => {
 
     const openCard = (id) => {
         setActiveCard(id);
-        document.body.style.overflow = "hidden"; // Блокируем скролл фона
+        document.body.style.overflow = "hidden"; // Disable background scroll
     };
 
     const closeCard = () => {
         setActiveCard(null);
-        document.body.style.overflow = "auto"; // Возвращаем скролл
+        document.body.style.overflow = "auto"; // Enable scroll back
     };
 
     return (
         <div className="home-container">
-            <h1 className="home-title">Tere tulemast Celestial Touch'i!</h1>
+            <h1 className="home-title">Welcome to Celestial Touch!</h1>
             <div className="services-grid">
                 {services.map((service) => (
                     <div
@@ -91,7 +90,7 @@ const Home = () => {
                     <div className="card-detail" onClick={(e) => e.stopPropagation()}>
                         <h2>{services.find((s) => s.id === activeCard).title}</h2>
                         <p>{services.find((s) => s.id === activeCard).description}</p>
-                        <button onClick={handleRegister}>Broneeri aeg</button>
+                        <button onClick={handleRegister}>Book an appointment</button>
                         <span className="close-button" onClick={closeCard}>×</span>
                     </div>
                 </div>

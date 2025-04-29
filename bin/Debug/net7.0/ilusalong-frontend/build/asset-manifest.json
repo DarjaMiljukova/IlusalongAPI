@@ -1,13 +1,19 @@
 {
   "files": {
     "main.css": "/celestia/static/css/main.22c0c633.css",
-    "main.js": "/celestia/static/js/main.5fe595ee.js",
+    "main.js": "/celestia/static/js/main.4b41dfff.js",
+    "static/media/nail.jpg": "/celestia/static/media/nail.bafbd27b42059ff0f3e2.jpg",
+    "static/media/nails.jpg": "/celestia/static/media/nails.271718813e370a6c4579.jpg",
+    "static/media/makeup.jpg": "/celestia/static/media/makeup.6386a7fe6b5780bb8522.jpg",
+    "static/media/massage.jpg": "/celestia/static/media/massage.d26a5ef54773069960f2.jpg",
+    "static/media/hair.jpg": "/celestia/static/media/hair.e74d0e4534ab6088544d.jpg",
+    "static/media/face.jpg": "/celestia/static/media/face.01b506ef4e7491b261aa.jpg",
     "index.html": "/celestia/index.html",
     "main.22c0c633.css.map": "/celestia/static/css/main.22c0c633.css.map",
-    "main.5fe595ee.js.map": "/celestia/static/js/main.5fe595ee.js.map"
+    "main.4b41dfff.js.map": "/celestia/static/js/main.4b41dfff.js.map"
   },
   "entrypoints": [
     "static/css/main.22c0c633.css",
-    "static/js/main.5fe595ee.js"
+    "static/js/main.4b41dfff.js"
   ]
 }
