@@ -26,7 +26,7 @@ const LoginRegister = () => {
                 const { token } = response.data;
 
                 if (!token) {
-                    setMessage('Žetooni hankimine ebaõnnestus. Kontrollige oma sisselogimisandmeid.');
+                    setMessage('Не удалось получить токен. Проверьте свои данные для входа.');
                     return;
                 }
 
@@ -48,19 +48,19 @@ const LoginRegister = () => {
                         navigate('/client');
                         break;
                     default:
-                        setMessage('Tundmatu roll. Võtke ühendust toega.');
+                        setMessage('Роль неизвестна. Свяжитесь со службой поддержки.');
                 }
             } catch (error) {
                 console.error(error);
                 if (error.response) {
-                    setMessage(error.response.data.message || 'Volituse viga.');
+                    setMessage(error.response.data.message || 'Ошибка авторизации.');
                 } else {
-                    setMessage('Viga serveriga ühenduse loomisel. Proovi uuesti.');
+                    setMessage('Ошибка подключения к серверу. Попробуйте еще раз.');
                 }
             }
         } else {
             if (password !== confirmPassword) {
-                setMessage('Paroolid ei ühti.\n');
+                setMessage('Пароли не совпадают..\n');
                 return;
             }
 
@@ -71,7 +71,7 @@ const LoginRegister = () => {
                     phoneNumber,
                 });
 
-                setMessage(response.data.message || 'Registreerimine õnnestus.');
+                setMessage(response.data.message || 'Регистрация прошла успешно.');
                 setIsLogin(true);
             } catch (error) {
                 console.error(error);

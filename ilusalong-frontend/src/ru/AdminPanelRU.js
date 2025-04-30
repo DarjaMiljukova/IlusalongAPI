@@ -31,7 +31,7 @@ const AdminPanel = () => {
             setUsers(response.data);
             setFilteredUsers(response.data);
         } catch (error) {
-            console.error('Viga kasutajate laadimisel:', error);
+            console.error('Ошибка загрузки пользователей:', error);
         }
     };
 
@@ -40,7 +40,7 @@ const AdminPanel = () => {
             const response = await axios.get('http://localhost:5259/api/Category');
             setCategories(response.data);
         } catch (error) {
-            console.error('Viga kategooriate laadimisel\n:', error);
+            console.error('Ошибка загрузки категорий\n:', error);
         }
     };
 
@@ -49,7 +49,7 @@ const AdminPanel = () => {
             const response = await axios.get('http://localhost:5259/api/Master');
             setMasters(response.data);
         } catch (error) {
-            console.error('Viga meistrite laadimisel:', error);
+            console.error('Ошибка загрузки мастеров:', error);
         }
     };
     const fetchPenalties = async () => {
@@ -57,11 +57,11 @@ const AdminPanel = () => {
             const response = await axios.get('http://localhost:5259/api/Penalty');
             setPenalties(response.data);
         } catch (error) {
-            console.error('Viga trahvide laadimisel:', error);
+            console.error('Ошибка загрузки штрафов:', error);
         }
     };
     const handleCategoryChange = async (categoryId, newName, newDescription) => {
-        const isConfirmed = window.confirm('Kas olete kindel, et soovite kategooriat muuta?');
+        const isConfirmed = window.confirm('Вы уверены, что хотите изменить категорию?');
         if (!isConfirmed) return;
 
         try {
@@ -69,13 +69,13 @@ const AdminPanel = () => {
             await axios.put(`http://localhost:5259/api/Category/${categoryId}`, updatedCategory);
             fetchCategories();
         } catch (error) {
-            console.error('Viga kategooria värskendamisel:', error);
+            console.error('Ошибка обновления категории:', error);
         }
         setEditingCategoryId(null);
     };
 
     const handleUserRoleChange = async (userId, newRole) => {
-        const isConfirmed = window.confirm('Kas olete kindel, et soovite kasutaja rolli muuta?');
+        const isConfirmed = window.confirm('Вы уверены, что хотите изменить роль пользователя?');
         if (!isConfirmed) return;
 
         try {
@@ -83,7 +83,7 @@ const AdminPanel = () => {
             await axios.put(`http://localhost:5259/api/User/${userId}`, updatedUser);
             fetchUsers();
         } catch (error) {
-            console.error('Viga kasutaja rolli värskendamisel\n:', error);
+            console.error('Ошибка обновления роли пользователя\n:', error);
         }
         setEditingUserId(null);
     };
@@ -104,13 +104,13 @@ const AdminPanel = () => {
             setNewCategoryName('');
             setNewCategoryDescription('');
         } catch (error) {
-            console.error('Viga kategooria lisamisel\n:', error);
+            console.error('Ошибка добавления категории\n:', error);
         }
     };
 
     const handleTabChange = (tab) => {
         setSelectedTab(tab);
-        setMenuOpen(false); // Закрываем меню при выборе вкладки
+        setMenuOpen(false);
     };
 
     const handleAddPenalty = async () => {
@@ -131,7 +131,7 @@ const AdminPanel = () => {
                 },
             };
 
-            console.log("Saadeti korralikud andmed:", penaltyData);
+            console.log("Были отправлены правильные данные.:", penaltyData);
 
             await axios.post(`http://localhost:5259/api/Penalty/${userId}/addFine`, penaltyData);
 
@@ -139,9 +139,9 @@ const AdminPanel = () => {
 
             setNewPenalty({ userId: '', reason: '', amount: '', dateIssued: '' });
 
-            console.log("Trahv on edukalt lisatud!");
+            console.log("Штраф успешно добавлен!");
         } catch (error) {
-            console.error('Viga karistuse lisamisel:', error.response?.data || error.message);
+            console.error('Ошибка добавления штрафа:', error.response?.data || error.message);
         }
     };
 
@@ -151,9 +151,9 @@ const AdminPanel = () => {
 
             setPenalties(prevPenalties => prevPenalties.filter(penalty => penalty.id !== penaltyId));
 
-            console.log('Trahv on edukalt eemaldatud');
+            console.log('Штраф успешно снят.');
         } catch (error) {
-            console.error('Viga trahvi kustutamisel:', error);
+            console.error('Ошибка при удалении штрафа:', error);
         }
     };
 
@@ -170,7 +170,7 @@ const AdminPanel = () => {
             setEditedPenalty({});
             fetchPenalties();
         } catch (error) {
-            console.error('Värskendamisel tekkis viga\n:', error);
+            console.error('Произошла ошибка при обновлении.\n:', error);
         }
     };
     const logout = () => {
@@ -183,7 +183,7 @@ const AdminPanel = () => {
         <div className="admin-panel">
             {/* Кнопка выхода */}
             <div style={{ position: "absolute", top: "80px", right: "15px" }}>
-                <button onClick={logout}>Logi välja</button>
+                <button onClick={logout}>Выход</button>
             </div>
 
             {/* Бургер-меню */}
@@ -203,7 +203,7 @@ const AdminPanel = () => {
                         className={`nav-link ${selectedTab === "users" ? "active" : ""}`}
                         onClick={() => handleTabChange("users")}
                     >
-                        Kasutajad
+                        Пользователи
                     </button>
                 </li>
                 <li>
@@ -211,7 +211,7 @@ const AdminPanel = () => {
                         className={`nav-link ${selectedTab === "categories" ? "active" : ""}`}
                         onClick={() => handleTabChange("categories")}
                     >
-                        Kategooriad
+                        Категории
                     </button>
                 </li>
                 <li>
@@ -219,7 +219,7 @@ const AdminPanel = () => {
                         className={`nav-link ${selectedTab === "masters" ? "active" : ""}`}
                         onClick={() => handleTabChange("masters")}
                     >
-                        Meistrid
+                        Мастеры
                     </button>
                 </li>
                 <li>
@@ -227,17 +227,17 @@ const AdminPanel = () => {
                         className={`nav-link ${selectedTab === "penalties" ? "active" : ""}`}
                         onClick={() => handleTabChange("penalties")}
                     >
-                        Trahvid
+                        Штрафы
                     </button>
                 </li>
             </ul>
 
             {selectedTab === 'users' && (
                 <div>
-                    <h3>Kasutajate loend</h3>
+                    <h3>Список пользователей</h3>
                     <input
                         type="text"
-                        placeholder="Otsi meili teel"
+                        placeholder="Поиск по электронной почте"
                         value={searchEmail}
                         onChange={(e) => handleSearch(e.target.value)}
                     />
@@ -245,10 +245,10 @@ const AdminPanel = () => {
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Email</th>
-                            <th>Telefon</th>
-                            <th>Rool</th>
-                            <th>Tegevused</th>
+                            <th>Почта</th>
+                            <th>Номер телефона</th>
+                            <th>Роль</th>
+                            <th>Услуги</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -263,8 +263,8 @@ const AdminPanel = () => {
                                             value={user.role}
                                             onChange={(e) => handleUserRoleChange(user.id, e.target.value)}
                                         >
-                                            <option value="client">Kasutaja</option>
-                                            <option value="master">Meister</option>
+                                            <option value="client">Пользователь</option>
+                                            <option value="master">Мастер</option>
                                         </select>
                                     ) : (
                                         user.role
@@ -272,9 +272,9 @@ const AdminPanel = () => {
                                 </td>
                                 <td>
                                     {editingUserId === user.id ? (
-                                        <button onClick={() => setEditingUserId(null)}>Salvesta</button>
+                                        <button onClick={() => setEditingUserId(null)}>Сохранить</button>
                                     ) : (
-                                        <button onClick={() => setEditingUserId(user.id)}>Muuda</button>
+                                        <button onClick={() => setEditingUserId(user.id)}>Изменить</button>
                                     )}
                                 </td>
                             </tr>
@@ -286,29 +286,29 @@ const AdminPanel = () => {
 
             {selectedTab === 'categories' && (
                 <div>
-                    <h3>Kategooriad</h3>
+                    <h3>Категории</h3>
                     <div>
                         <input
                             type="text"
-                            placeholder="Kategooria nimi"
+                            placeholder="Название категории"
                             value={newCategoryName}
                             onChange={(e) => setNewCategoryName(e.target.value)}
                         />
                         <input
                             type="text"
-                            placeholder="Kategooria kirjeldus"
+                            placeholder="Описание категории"
                             value={newCategoryDescription}
                             onChange={(e) => setNewCategoryDescription(e.target.value)}
                         />
-                        <button onClick={handleAddCategory}>Lisa kategooria</button>
+                        <button onClick={handleAddCategory}>Добавить категорию</button>
                     </div>
                     <table className="table">
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Pealkiri</th>
-                            <th>Kirjeldus</th>
-                            <th>Tegevused</th>
+                            <th>Заголовок</th>
+                            <th>Описание</th>
+                            <th>Услуги</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -362,10 +362,10 @@ const AdminPanel = () => {
                                                 )
                                             }
                                         >
-                                            Salvesta
+                                            Сохранить
                                         </button>
                                     ) : (
-                                        <button onClick={() => setEditingCategoryId(category.id)}>Muuda</button>
+                                        <button onClick={() => setEditingCategoryId(category.id)}>Изменить</button>
                                     )}
                                 </td>
                             </tr>
@@ -377,13 +377,13 @@ const AdminPanel = () => {
 
             {selectedTab === 'masters' && (
                 <div>
-                    <h3>Meistrid</h3>
+                    <h3>Мастера</h3>
                     <table className="table">
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Email</th>
-                            <th>Telefon</th>
+                            <th>Почта</th>
+                            <th>Номер телефона</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -400,24 +400,24 @@ const AdminPanel = () => {
             )}
             {selectedTab === 'penalties' && (
                 <div>
-                    <h3>Trahvid</h3>
+                    <h3>Штрафы</h3>
                     <div>
-                        <h4>Lisage trahv</h4>
+                        <h4>Добавление штрафа</h4>
                         <input
                             type="text"
-                            placeholder="Kasutaja ID"
+                            placeholder="ID Пользователя"
                             value={newPenalty.userId}
                             onChange={(e) => setNewPenalty({ ...newPenalty, userId: e.target.value })}
                         />
                         <input
                             type="text"
-                            placeholder="Põhjus"
+                            placeholder="Причина"
                             value={newPenalty.reason}
                             onChange={(e) => setNewPenalty({ ...newPenalty, reason: e.target.value })}
                         />
                             <input
                                 type="number"
-                                placeholder="Summa"
+                                placeholder="Сумма"
                                 value={newPenalty.amount}
                                 onChange={(e) => setNewPenalty({ ...newPenalty, amount: e.target.value })}
                                 style={{ width: '80%' }}
@@ -427,25 +427,25 @@ const AdminPanel = () => {
                             value={newPenalty.dateIssued}
                             onChange={(e) => setNewPenalty({ ...newPenalty, dateIssued: e.target.value })}
                         />
-                        <button onClick={handleAddPenalty}>Lisa</button>
+                        <button onClick={handleAddPenalty}>Добавить</button>
                     </div>
 
                     <table className="table">
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Kliendi (Email)</th>
-                            <th>Põhjus</th>
-                            <th>Summa (€)</th>
-                            <th>Rikkumise kuupäev</th>
-                            <th>Tegevused</th>
+                            <th>Клиент (Почта)</th>
+                            <th>Причина</th>
+                            <th>Сумма (€)</th>
+                            <th>Дата нарушения</th>
+                            <th>Услуги</th>
                         </tr>
                         </thead>
                         <tbody>
                         {penalties.map((penalty) => (
                             <tr key={penalty.id}>
                                 <td>{penalty.id}</td>
-                                <td>{penalty.user?.email || 'Määratlemata'}</td>
+                                <td>{penalty.user?.email || 'Неопределенный'}</td>
                                 <td>
                                     {editingPenaltyId === penalty.id ? (
                                         <input
@@ -487,11 +487,11 @@ const AdminPanel = () => {
                                 </td>
                                 <td>
                                     {editingPenaltyId === penalty.id ? (
-                                        <button onClick={handleUpdatePenalty}>Salvesta</button>
+                                        <button onClick={handleUpdatePenalty}>Сохранить</button>
                                     ) : (
-                                        <button onClick={() => handleEditPenalty(penalty)}>Muuda</button>
+                                        <button onClick={() => handleEditPenalty(penalty)}>Изменить</button>
                                     )}
-                                    <button onClick={() => handleDeletePenalty(penalty.id)}>Kustuta</button>
+                                    <button onClick={() => handleDeletePenalty(penalty.id)}>Удалить</button>
                                 </td>
                             </tr>
                         ))}

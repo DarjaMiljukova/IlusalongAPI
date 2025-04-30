@@ -8,7 +8,7 @@ const MasterPanel = () => {
     const [userId, setUserId] = useState(null);
     console.log("userId:", userId);
     const [services, setServices] = useState([]);
-    const [appointments, setAppointments] = useState([]); // Для записей клиентов
+    const [appointments, setAppointments] = useState([]);
     const [categories, setCategories] = useState([]);
     const [editingServiceId, setEditingServiceId] = useState(null);
     const [editedService, setEditedService] = useState({});
@@ -35,7 +35,6 @@ const MasterPanel = () => {
         window.location.href = "/login";
     };
 
-    // Получаем masterId из токена
     useEffect(() => {
         const token = localStorage.getItem("authToken");
         if (token) {
@@ -44,7 +43,6 @@ const MasterPanel = () => {
         }
     }, []);
 
-    // Запрос данных для услуг и записей клиентов
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -61,10 +59,10 @@ const MasterPanel = () => {
                         ),
                     }))
                 );
-                fetchAppointments(); // Загружаем записи клиентов
+                fetchAppointments();
             } catch (error) {
-                console.error("Viga andmete laadimisel:", error);
-                toast.error("Viga andmete laadimisel.");
+                console.error("Ошибка загрузки данных:", error);
+                toast.error("Ошибка загрузки данных.");
             }
         };
 
@@ -73,19 +71,18 @@ const MasterPanel = () => {
         }
     }, [masterId]);
 
-    // Запрос записей клиентов
     const fetchAppointments = async () => {
         try {
             const response = await axios.get(`http://localhost:5259/api/Appointment/master/${masterId}`);
             setAppointments(response.data);
         } catch (error) {
-            console.error("Viga andmete laadimisel:", error);
-            toast.error("Viga andmete laadimisel.");
+            console.error("Ошибка загрузки данных:", error);
+            toast.error("Ошибка загрузки данных.");
         }
     };
 
     const handleSaveEdit = async () => {
-        const isConfirmed = window.confirm("Kas olete kindel, et soovite oma teenusemuudatused salvestada?");
+        const isConfirmed = window.confirm("Вы уверены, что хотите сохранить изменения в сервисе?");
         if (!isConfirmed) return;
 
         try {
@@ -95,7 +92,7 @@ const MasterPanel = () => {
                 !editedService.price ||
                 !editedService.categoryId
             ) {
-                toast.error("Kõik tekstiväljad tuleb täita!\n");
+                toast.error("Все текстовые поля должны быть заполнены!\n");
                 return;
             }
 
@@ -121,10 +118,10 @@ const MasterPanel = () => {
 
             setEditingServiceId(null);
             setEditedService({});
-            toast.success("Teenus on edukalt värskendatud!\n");
+            toast.success("Сервис успешно обновлен!\n");
         } catch (error) {
-            console.error("Viga teenuse värskendamisel:", error.response?.data || error.message);
-            toast.error("Viga teenuse värskendamisel\n.");
+            console.error("Ошибка обновления сервиса:", error.response?.data || error.message);
+            toast.error("Ошибка обновления сервиса\n.");
         }
     };
 
@@ -144,7 +141,7 @@ const MasterPanel = () => {
                 (category) => category.id === parseInt(newService.categoryId, 10)
             );
             if (!selectedCategory) {
-                toast.error("Valige kategooria.\n");
+                toast.error("Выберите категорию.\n");
                 return;
             }
 
@@ -161,10 +158,10 @@ const MasterPanel = () => {
 
             setServices([...services, response.data.service]);
             setNewService({ name: "", description: "", price: "", categoryId: "" });
-            toast.success("Teenus on edukalt lisatud!");
+            toast.success("Услуга успешно добавлена!");
         } catch (error) {
-            console.error("Teenuse lisamisel tekkis viga:", error);
-            toast.error("Teenuse lisamisel tekkis viga.");
+            console.error("Произошла ошибка при добавлении услуги:", error);
+            toast.error("Произошла ошибка при добавлении услуги.");
         }
     };
     const handleOpenModal = (email, userId) => {
@@ -180,7 +177,7 @@ const MasterPanel = () => {
     };
 
     const handleSendEmail = async () => {
-        console.log("Saadetavad andmed:", {
+        console.log("Данные для отправки:", {
             email: selectedUserEmail,
             message: emailMessage,
         });
@@ -206,11 +203,11 @@ const MasterPanel = () => {
             console.error("Ошибка при отправке запроса:", error);
 
             if (error.response) {
-                console.error("Vastus serverilt:", error.response);
-                toast.error(`Viga: ${error.response.data.title || "Midagi on valesti läinud!"}`);
+                console.error("Ответ сервера:", error.response);
+                toast.error(`Ошибка: ${error.response.data.title || "Что-то пошло не так!"}`);
             } else {
-                console.error("Viga taotluse loomisel:", error.message);
-                toast.error(`Viga: ${error.message}`);
+                console.error("Ошибка создания запроса:", error.message);
+                toast.error(`Ошибка: ${error.message}`);
             }
         } finally {
             setLoading(false);
@@ -224,7 +221,7 @@ const MasterPanel = () => {
         <div className="master-panel">
             {/* Кнопка выхода */}
             <div style={{ position: "absolute", top: "10px", right: "10px" }}>
-                <button onClick={logout}>Logi välja</button>
+                <button onClick={logout}>Выход</button>
             </div>
 
             {/* Бургер-меню */}
@@ -244,7 +241,7 @@ const MasterPanel = () => {
                         className={`nav-link ${selectedTab === "appointments" ? "active" : ""}`}
                         onClick={() => handleTabChange("appointments")}
                     >
-                        Broneeringud
+                        Бронирование
                     </button>
                 </li>
                 <li>
@@ -252,7 +249,7 @@ const MasterPanel = () => {
                         className={`nav-link ${selectedTab === "services" ? "active" : ""}`}
                         onClick={() => handleTabChange("services")}
                     >
-                        Teenused
+                        Услуги
                     </button>
                 </li>
             </ul>
@@ -260,7 +257,7 @@ const MasterPanel = () => {
             <div className="admin-panel">
                 {/* Кнопка выхода */}
                 <div style={{ position: "absolute", top: "10px", right: "10px" }}>
-                    <button onClick={logout}>Logi välja</button>
+                    <button onClick={logout}>Выход</button>
                 </div>
 
                 {/* Бургер-меню */}
@@ -280,7 +277,7 @@ const MasterPanel = () => {
                             className={`nav-link ${selectedTab === "appointments" ? "active" : ""}`}
                             onClick={() => handleTabChange("appointments")}
                         >
-                            Broneeringud
+                            Бронирование
                         </button>
                     </li>
 
@@ -289,7 +286,7 @@ const MasterPanel = () => {
                             className={`nav-link ${selectedTab === "services" ? "active" : ""}`}
                             onClick={() => handleTabChange("services")}
                         >
-                            Teenused
+                            Услуги
                         </button>
                     </li>
                 </ul>
@@ -298,7 +295,7 @@ const MasterPanel = () => {
                 {selectedTab === "services" && (
                     <div className="services">
                         <div className="add-service">
-                            <h3>Lisa teenus</h3>
+                            <h3>Добавить услугу</h3>
                             <form
                                 onSubmit={(e) => {
                                     e.preventDefault();
@@ -307,14 +304,14 @@ const MasterPanel = () => {
                             >
                                 <input
                                     type="text"
-                                    placeholder="Teenuse nimi"
+                                    placeholder="Название услуги"
                                     value={newService.name}
                                     onChange={(e) => setNewService({ ...newService, name: e.target.value })}
                                     required
                                 />
                                 <input
                                     type="text"
-                                    placeholder="Kirjeldus"
+                                    placeholder="Описание"
                                     value={newService.description}
                                     onChange={(e) =>
                                         setNewService({ ...newService, description: e.target.value })
@@ -323,7 +320,7 @@ const MasterPanel = () => {
                                 />
                                 <input
                                     type="number"
-                                    placeholder="Hind"
+                                    placeholder="Цена"
                                     value={newService.price}
                                     onChange={(e) =>
                                         setNewService({ ...newService, price: e.target.value })
@@ -344,19 +341,19 @@ const MasterPanel = () => {
                                         </option>
                                     ))}
                                 </select>
-                                <button type="submit">Lisa teenus</button>
+                                <button type="submit">Добавить услугу</button>
                             </form>
                         </div>
-                        <h3>Teie teenused</h3>
+                        <h3>Ваши услуги</h3>
                         {services.length > 0 ? (
                             <table>
                                 <thead>
                                 <tr>
-                                    <th>Pealkiri</th>
-                                    <th>Kirjeldus</th>
-                                    <th>Summa (€)</th>
-                                    <th>Kategooria</th>
-                                    <th>Tegevused</th>
+                                    <th>Название</th>
+                                    <th>Описание</th>
+                                    <th>Сумма (€)</th>
+                                    <th>Категория</th>
+                                    <th>Деятельность</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -441,7 +438,7 @@ const MasterPanel = () => {
                                                 </>
                                             ) : (
                                                 <button onClick={() => handleEditService(service)}>
-                                                    Muuda
+                                                    Изменить
                                                 </button>
                                             )}
                                         </td>
@@ -450,7 +447,7 @@ const MasterPanel = () => {
                                 </tbody>
                             </table>
                         ) : (
-                            <p>Teenused puuduvad.</p>
+                            <p>Нет доступных услуг.</p>
                         )}
 
                     </div>
@@ -459,15 +456,15 @@ const MasterPanel = () => {
                 {/* Секция для записей клиентов */}
                 {selectedTab === "appointments" && (
                     <div className="appointments">
-                        <h3>Klientide broneeringud</h3>
+                        <h3>Бронирование клиентов</h3>
                         {appointments.length > 0 ? (
                             <table>
                                 <thead>
                                 <tr>
-                                    <th>Klient</th>
-                                    <th>Teenus</th>
-                                    <th>Kuupäev</th>
-                                    <th>Tegevus</th>
+                                    <th>Клиент</th>
+                                    <th>Сервис</th>
+                                    <th>Дата</th>
+                                    <th>Деятельность</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -478,7 +475,7 @@ const MasterPanel = () => {
                                         <td>{new Date(appointment.appointmentDate).toLocaleString()}</td>
                                         <td>
                                             <button onClick={() => handleOpenModal(appointment.user.email, appointment.user.id)}>
-                                                Võtke kliendiga
+                                                Связаться с клиентом
                                             </button>
                                         </td>
                                     </tr>
@@ -486,7 +483,7 @@ const MasterPanel = () => {
                                 </tbody>
                             </table>
                         ) : (
-                            <p>Mingeid andmeid ei ole.</p>
+                            <p>Данные отсутствуют.</p>
                         )}
 
                         {/* Модальное окно */}
@@ -513,10 +510,10 @@ const MasterPanel = () => {
                                         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
                                     }}
                                 >
-                                    <h3>Saatke kliendile e-kiri</h3>
-                                    <p><strong>Klient:</strong> {selectedUserEmail}</p>
+                                    <h3>Отправить электронное письмо клиенту</h3>
+                                    <p><strong>Клиент:</strong> {selectedUserEmail}</p>
                                     <textarea
-                                        placeholder="Sisestage sõnum"
+                                        placeholder="Введите сообщение"
                                         value={emailMessage}
                                         onChange={(e) => setEmailMessage(e.target.value)}
                                         rows={5}
@@ -542,7 +539,7 @@ const MasterPanel = () => {
                                             }}
                                             disabled={loading}
                                         >
-                                            {loading ? "Lähetus..." : "Saada"}
+                                            {loading ? "Отправление..." : "Отправить"}
                                         </button>
                                         <button
                                             onClick={handleCloseModal}
@@ -555,7 +552,7 @@ const MasterPanel = () => {
                                                 cursor: "pointer",
                                             }}
                                         >
-                                            Tühistamine
+                                            Отмена
                                         </button>
                                     </div>
                                 </div>

@@ -16,38 +16,38 @@ const Home = () => {
     const services = [
         {
             id: 1,
-            title: "Näohooldus",
-            description: "Täiuslik hooldus su naha värskendamiseks ja taastamiseks.",
+            title: "Уход за лицом",
+            description: "Идеальный уход для обновления и восстановления вашей кожи.",
             image: faceImg,
         },
         {
             id: 2,
-            title: "Massaaž",
-            description: "Sügav lõõgastus ja pingete leevendamine kogu kehale.",
+            title: "Массаж",
+            description: "Глубокое расслабление и снятие напряжения для всего тела.",
             image: massageImg,
         },
         {
             id: 3,
-            title: "Juuksehooldus",
-            description: "Terved ja säravad juuksed professionaalse hoolitsusega.",
+            title: "Уход за волосами",
+            description: "Здоровые и блестящие волосы с профессиональным уходом.",
             image: hairImg,
         },
         {
             id: 4,
-            title: "Maniküür",
-            description: "Täiuslikud hooldatud küüned ja stiilne välimus.",
+            title: "Маникюр",
+            description: "Идеально ухоженные ногти и стильный вид.",
             image: nailImg,
         },
         {
             id: 5,
-            title: "Pediküür",
-            description: "Hooldatud ja siidised jalad igaks hooajaks.",
+            title: "Педикюр",
+            description: "Ухоженные и шелковистые ноги в любое время года.",
             image: nailsImg,
         },
         {
             id: 6,
-            title: "Meik",
-            description: "Professionaalne jumestus igaks sündmuseks.",
+            title: "Макияж",
+            description: "Профессиональный макияж на любой случай.",
             image: makeupImg,
         },
     ];
@@ -61,17 +61,17 @@ const Home = () => {
 
     const openCard = (id) => {
         setActiveCard(id);
-        document.body.style.overflow = "hidden"; // Блокируем скролл фона
+        document.body.style.overflow = "hidden";
     };
 
     const closeCard = () => {
         setActiveCard(null);
-        document.body.style.overflow = "auto"; // Возвращаем скролл
+        document.body.style.overflow = "auto";
     };
 
     return (
         <div className="home-container">
-            <h1 className="home-title">Tere tulemast Celestial Touch'i!</h1>
+            <h1 className="home-title">Добро пожаловать в Celestial Touch!</h1>
             <div className="services-grid">
                 {services.map((service) => (
                     <div
@@ -91,7 +91,7 @@ const Home = () => {
                     <div className="card-detail" onClick={(e) => e.stopPropagation()}>
                         <h2>{services.find((s) => s.id === activeCard).title}</h2>
                         <p>{services.find((s) => s.id === activeCard).description}</p>
-                        <button onClick={handleRegister}>Broneeri aeg</button>
+                        <button onClick={handleRegister}>Записаться на прием</button>
                         <span className="close-button" onClick={closeCard}>×</span>
                     </div>
                 </div>

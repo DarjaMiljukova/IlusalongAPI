@@ -34,7 +34,7 @@ const ClientPanel = () => {
             const decoded = jwtDecode(token);
             setUserId(decoded.id);
         } else {
-            console.error("Token is missing or invalid.");
+            console.error("Токен отсутствует или недействителен.");
         }
     }, []);
 
@@ -52,22 +52,20 @@ const ClientPanel = () => {
                     headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
                 });
 
-                console.log("Services response:", servicesResponse.data);
+                console.log("Ответ службы:", servicesResponse.data);
 
                 setServices(servicesResponse.data);
 
-                toast.success("Teenused on edukalt üles laaditud!");
+                toast.success("Услуги успешно загружены!");
 
                 const appoimentResponse = await axios.get(`http://localhost:5259/api/Appointment/user/${userId}`, {
                     headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
                 });
-                toast.success("Andmed on edukalt uuendatud!");
+                toast.success("Данные успешно обновлены!");
 
-                // Логируем данные клиента и услуги
                 console.log("Данные клиента:", clientResponse.data);
                 console.log("Данные об услугах:", servicesResponse.data);
 
-                // Обновляем состояние
                 setClientData(clientResponse.data);
                 setServices(servicesResponse.data);
                 setAppointments(appoimentResponse.data);
@@ -105,7 +103,7 @@ const ClientPanel = () => {
                 });
                 setServices(servicesResponse.data);
             } catch (error) {
-                console.error("Error fetching data:", error);
+                console.error("Ошибка при получении данных:", error);
                 toast.error("Ошибка при загрузке данных.");
             }
         };
@@ -134,7 +132,7 @@ const ClientPanel = () => {
 
     const handleTabChange = (tab) => {
         setSelectedTab(tab);
-        setMenuOpen(false); // Закрываем меню при выборе вкладки
+        setMenuOpen(false);
     };
 
     const cancelAppointment = async (appointmentId) => {
@@ -170,7 +168,7 @@ const ClientPanel = () => {
                     headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
                 });
                 setAppointments(appointments.filter((app) => app.id !== appointmentId));
-                toast.success("Salvestus on edukalt tühistatud.");
+                toast.success("Запись успешно отменена.");
             } catch (error) {
                 console.error("Error cancelling appointment:", error);
                 toast.error("Ошибка при отмене записи.");
@@ -180,12 +178,12 @@ const ClientPanel = () => {
 
     const handleBookingTime = async (timeSlot) => {
         if (!newAppointment.serviceId) {
-            toast.error("Palun valige teenus.");
+            toast.error("Пожалуйста, выберите услугу.");
             return;
         }
 
         if (!selectedDate) {
-            toast.error("Palun valige kuupäev.");
+            toast.error("Пожалуйста, выберите дату.");
             return;
         }
 
@@ -202,7 +200,7 @@ const ClientPanel = () => {
                 { headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` } }
             );
 
-            toast.success("Andmed on edukalt loodud.");
+            toast.success("Данные успешно созданы.");
             setAppointments([...appointments, response.data]);
             setNewAppointment({
                 serviceId: "",
@@ -211,7 +209,7 @@ const ClientPanel = () => {
             });
         } catch (error) {
             console.error("Error booking appointment:", error);
-            toast.error("Viga kirje loomisel.");
+            toast.error("Ошибка создания записи.");
         }
     };
 
@@ -237,10 +235,10 @@ const ClientPanel = () => {
             await axios.put(`http://localhost:5259/api/User/${clientData.id}`, clientData, {
                 headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
             });
-            toast.success("Andmed on edukalt ajakohastatud.");
+            toast.success("Данные успешно обновлены.");
         } catch (error) {
             console.error("Error updating client data:", error);
-            toast.error("Viga andmete uuendamisel.");
+            toast.error("Ошибка обновления данных.");
         }
     };
     const toggleMenu = () => {

@@ -29,7 +29,7 @@ export default function MasterProfile() {
                 <div className="avatar">{master.name[0]}</div>
                 <div>
                     <h2>{master.name}</h2>
-                    <p>Email: {master.email}</p>
+                    <p>Почта: {master.email}</p>
                     <p>Средняя оценка: <strong>{getAverageRating()} ⭐️</strong></p>
                 </div>
             </div>
