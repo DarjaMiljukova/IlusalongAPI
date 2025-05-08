@@ -61,12 +61,12 @@ const Home = () => {
 
     const openCard = (id) => {
         setActiveCard(id);
-        document.body.style.overflow = "hidden"; // Блокируем скролл фона
+        document.body.style.overflow = "hidden";
     };
 
     const closeCard = () => {
         setActiveCard(null);
-        document.body.style.overflow = "auto"; // Возвращаем скролл
+        document.body.style.overflow = "auto";
     };
 
     return (
