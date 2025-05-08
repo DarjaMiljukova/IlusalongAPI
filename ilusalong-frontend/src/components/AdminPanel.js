@@ -110,7 +110,7 @@ const AdminPanel = () => {
 
     const handleTabChange = (tab) => {
         setSelectedTab(tab);
-        setMenuOpen(false); // Закрываем меню при выборе вкладки
+        setMenuOpen(false);
     };
 
     const handleAddPenalty = async () => {
@@ -181,12 +181,10 @@ const AdminPanel = () => {
 
     return (
         <div className="admin-panel">
-            {/* Кнопка выхода */}
             <div style={{ position: "absolute", top: "80px", right: "15px" }}>
                 <button onClick={logout}>Logi välja</button>
             </div>
 
-            {/* Бургер-меню */}
             <button
                 className={`burger-menu ${menuOpen ? "open" : ""}`}
                 onClick={() => setMenuOpen(!menuOpen)}

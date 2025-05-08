@@ -8,6 +8,11 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
+    transition: background 0.3s, color 0.3s;
+}
+
+.dark body {
+    background: linear-gradient(to bottom right, #213448, #547792);
 }
 
 /* Контейнер панели администратора */
@@ -21,11 +26,114 @@ body {
     box-sizing: border-box;
 }
 
+.dark .admin-container {
+    background-color: #1c2b3a;
+}
+
+/* Заголовок */
 .admin-container h2 {
     text-align: center;
     color: #6B4F3C;
     font-size: 28px;
     margin-bottom: 20px;
+}
+
+.dark .admin-container h2 {
+    color: #ECEFCA;
+}
+
+/* Поисковая строка */
+.admin-container input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #f1f1f1;
+    color: #000;
+    transition: 0.3s;
+}
+
+.dark .admin-container input[type="text"] {
+    background-color: #547792;
+    color: #fff;
+    border: 1px solid #6f8ea3;
+}
+
+/* Таблица */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s;
+}
+
+table th {
+    background-color: #F1E5D6;
+    color: #6B4F3C;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1e5d6;
+}
+
+.dark table {
+    background-color: #1c2b3a;
+    color: #fff;
+}
+
+.dark table th {
+    background-color: #2d3e50;
+    color: #ffffff;
+}
+
+.dark table td {
+    background-color: #1c2b3a;
+    color: #ffffff;
+}
+
+.dark table tr:hover td {
+    background-color: #314a64;
+}
+
+/* Кнопка Muuda */
+button {
+    background-color: #94B4C1;
+    color: #213448;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #6B4F3C;
+    color: white;
+}
+
+.dark button {
+    background-color: #547792;
+    color: #fff;
+}
+
+.dark button:hover {
+    background-color: #94B4C1;
+    color: #213448;
 }
 
 /* Стили для бургер-меню */
@@ -46,7 +154,6 @@ body {
     padding: 5px;
 }
 
-/* Бар в бургер-меню */
 .burger-menu .bar {
     width: 100%;
     height: 4px;
@@ -55,12 +162,10 @@ body {
     transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-/* Состояние при наведении */
 .burger-menu:hover .bar {
     background-color: #D6A55D !important;
 }
 
-/* Анимация бургер-меню при открытии */
 .burger-menu.open .bar:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
 }
@@ -73,7 +178,7 @@ body {
     transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Меню */
+/* Навигационные вкладки */
 .nav-tabs {
     list-style: none;
     padding: 0;
@@ -118,101 +223,19 @@ body {
     color: #fff;
 }
 
-button:hover {
-    background-color: #6B4F3C;
+.dark .nav-tabs {
+    background-color: #1c2b3a;
+}
+
+.dark .nav-tabs li {
+    background-color: #2d3e50;
+}
+
+.dark .nav-link {
     color: #fff;
 }
 
-/* Стиль для панели администратора */
-.admin-panel {
-    width: 100%;
-    max-width: 1200px;
-    margin: 20px;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-}
-
-.admin-panel h2 {
-    font-size: 28px;
-    text-align: center;
-    margin-bottom: 20px;
-    color: #6B4F3C;
-}
-
-/* Стиль для таблиц */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    box-sizing: border-box;
-}
-
-table th, table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-table th {
-    background-color: #F1E5D6;
-    color: #6B4F3C;
-    font-size: 16px;
-}
-
-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-table tr:hover {
-    background-color: #f1e5d6;
-}
-
-/* Стили для форм */
-input, select, textarea {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    background-color: #f9f9f9;
-    font-size: 16px;
-    box-sizing: border-box;
-}
-
-input:focus, select:focus, textarea:focus {
-    border-color: #D6A55D;
-    outline: none;
-}
-
-/* Кнопки отправки */
-button[type="submit"] {
-    background-color: #D6A55D;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button[type="submit"]:hover {
-    background-color: #6B4F3C;
-}
-
-/* Стиль для контейнера формы */
-.form-container {
-    padding: 30px;
-    background-color: white;
-    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    margin-top: 20px;
-}
-
-/* Сообщения об ошибке */
-.message {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
+.dark .nav-link:hover {
+    background-color: #94B4C1;
+    color: #213448;
 }

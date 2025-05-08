@@ -60,9 +60,17 @@ const LoginRegister = () => {
             }
         } else {
             if (password !== confirmPassword) {
-                setMessage('Пароли не совпадают..\n');
+                setMessage('Пароли не совпадают.');
                 return;
             }
+
+// проверим, что телефон введён полностью (например, минимум 7–9 цифр)
+            const digitsOnly = phoneNumber.replace(/\D/g, '');
+            if (digitsOnly.length < 7) {
+                setMessage('Введите действительный номер телефона (не менее 7 цифр).');
+                return;
+            }
+
 
             try {
                 const response = await axios.post('http://localhost:5259/api/User/register', {

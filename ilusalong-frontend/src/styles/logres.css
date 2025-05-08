@@ -1,5 +1,23 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
+:root {
+    --bg-gradient: linear-gradient(to bottom right, #FFFFFF, #F9E5B2);
+    --primary-color: #6B4F3C;
+    --accent-color: #ffffff;
+    --input-bg: #f9f9f9;
+    --text-color: #000000;
+    --box-color: #ffffff;
+}
+
+.dark {
+    --bg-gradient: linear-gradient(to bottom right, #213448, #547792);
+    --primary-color: #ECEFCA;
+    --accent-color: #94B4C1;
+    --input-bg: #547792;
+    --text-color: #ECEFCA;
+    --box-color: #213448;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -14,11 +32,12 @@ body, html {
     place-items: center;
     background: var(--bg-gradient);
     color: var(--text-color);
+    transition: background 0.3s, color 0.3s;
 }
 
 .wrapper {
-    max-width: 450px;
-    width: 95%;
+    width: 400px;
+    max-width: 95%;
     background: var(--box-color);
     padding: 30px 20px;
     border-radius: 15px;
@@ -108,4 +127,12 @@ p span:hover {
     text-decoration: none;
     border-radius: 10px 10px 0px 0px;
     padding: 14px;
+}
+
+/* Адаптивность */
+@media (max-width: 480px) {
+    .wrapper {
+        width: 90%;
+        padding: 20px 15px;
+    }
 }

@@ -60,9 +60,17 @@ const LoginRegister = () => {
             }
         } else {
             if (password !== confirmPassword) {
-                setMessage('Paroolid ei ühti.\n');
+                setMessage('Paroolid ei ühti.');
                 return;
             }
+
+// проверим, что телефон введён полностью (например, минимум 7–9 цифр)
+            const digitsOnly = phoneNumber.replace(/\D/g, '');
+            if (digitsOnly.length < 7) {
+                setMessage('Sisestage kehtiv telefoninumber (vähemalt 7 numbrit).');
+                return;
+            }
+
 
             try {
                 const response = await axios.post('http://localhost:5259/api/User/register', {

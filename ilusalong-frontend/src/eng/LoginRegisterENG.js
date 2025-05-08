@@ -64,6 +64,13 @@ const LoginRegister = () => {
                 return;
             }
 
+            const digitsOnly = phoneNumber.replace(/\D/g, '');
+            if (digitsOnly.length < 7) {
+                setMessage('Enter a valid phone number (at least 7 digits).');
+                return;
+            }
+
+
             try {
                 const response = await axios.post('http://localhost:5259/api/User/register', {
                     email,
@@ -91,6 +98,7 @@ const LoginRegister = () => {
     };
 
     return (
+
         <div className="wrapper">
             <div className="title-text">Celestial Touch</div>
             <form onSubmit={handleSubmit}>

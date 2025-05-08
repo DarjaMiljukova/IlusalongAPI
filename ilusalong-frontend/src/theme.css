@@ -2,9 +2,9 @@
     --bg-color: #ffffff;
     --bg-gradient: linear-gradient(to bottom right, #FFFFFF, #F9E5B2);
     --primary-color: #6B4F3C;
-    --accent-color: #D6A55D;
+    --accent-color: #ffffff;
     --input-bg: #f9f9f9;
-    --text-color: #000000;
+    --text-color: #6b4f3c;
     --box-color: #ffffff;
     --hover-bg: #f1e5d6;
 }
@@ -15,15 +15,17 @@
     --primary-color: #ECEFCA;
     --accent-color: #94B4C1;
     --input-bg: #547792;
-    --text-color: #ECEFCA;
+    --text-color: #f9f9f9;
     --box-color: #213448;
-    --hover-bg: #547792;
+    --hover-bg: #314a64;
 }
 
 body, html {
     background: var(--bg-gradient);
     color: var(--text-color);
     font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
     transition: background 0.3s, color 0.3s;
 }
 
@@ -32,42 +34,29 @@ body, html {
 .admin-container,
 .form-container,
 .modal-content {
-    background-color: var(--box-color) !important;
+    background-color: var(--box-color);
     color: var(--text-color);
     box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 960px;
+    width: 95%;
+    box-sizing: border-box;
 }
 
-body:not(.auth-page) button,
-.nav-link {
-    background-color: var(--accent-color);
-    color: var(--primary-color);
-    transition: background-color 0.3s;
-}
-
-body:not(.auth-page) button:hover,
-.nav-link:hover {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-
-.auth-page button {
-    background-color: var(--accent-color);
-    color: var(--primary-color);
-}
-
-.auth-page button:hover {
-    background-color: var(--primary-color);
-    color: white;
-}
-
+/* Inputs and selects */
 input,
 select,
 textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
     background-color: var(--input-bg);
     color: var(--text-color);
-    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
     transition: 0.3s;
 }
 
@@ -78,7 +67,31 @@ textarea:focus {
     outline: none;
 }
 
-/* Переключатель темы */
+input::placeholder {
+    color: var(--text-color);
+    opacity: 0.7;
+}
+
+/* Buttons */
+button,
+.nav-link {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button:hover,
+.nav-link:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Toggle theme button */
 .theme-toggle.theme-icon-only {
     position: fixed;
     top: 10px;
@@ -96,7 +109,7 @@ textarea:focus {
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    transition: background 0.3s, color 0.3s, transform 0.2s ease;
+    transition: background 0.3s, transform 0.2s ease;
 }
 
 .theme-toggle.theme-icon-only:hover {
@@ -105,7 +118,7 @@ textarea:focus {
     color: white;
 }
 
-/* Языковая кнопка */
+/* Language dropdown */
 .language-dropdown {
     position: fixed;
     top: 10px;
@@ -144,4 +157,269 @@ textarea:focus {
     display: flex;
     flex-direction: column;
     gap: 6px;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    transition: background-color 0.3s;
+}
+
+th {
+    background-color: var(--hover-bg);
+    color: var(--primary-color);
+}
+
+tbody tr:nth-child(even) {
+    background-color: var(--input-bg);
+}
+
+tbody tr:hover {
+    background-color: var(--hover-bg);
+}
+
+.dark table {
+    background-color: var(--box-color);
+    color: var(--text-color);
+}
+
+.dark th {
+    background-color: #2d3e50;
+    color: #fff;
+}
+
+.dark td {
+    background-color: #213448;
+    color: #fff;
+}
+
+.dark tbody tr:hover td, submit {
+    background-color: var(--hover-bg);
+}
+
+/* Headings */
+label, h4, h3, h2, h1 {
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* Burger menu bars */
+.burger-menu .bar {
+    width: 100%;
+    height: 4px;
+    background-color: var(--text-color);
+    border-radius: 2px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 768px) {
+    .wrapper,
+    .admin-container {
+        padding: 15px;
+        margin: 10px;
+    }
+
+    table th, table td {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    button,
+    .nav-link {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+
+    .flag-button,
+    .theme-toggle.theme-icon-only {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    .language-dropdown {
+        right: 70px;
+    }
+
+    input,
+    select,
+    textarea {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+/* ==== ADAPTIVE STYLES ==== */
+
+/* Для телефонов (меньше или равно 756px) */
+@media (max-width: 756px) {
+    body {
+        padding: 10px;
+    }
+
+    .admin-container,
+    .master-container,
+    .form-container,
+    .wrapper {
+        width: 100% !important;
+        padding: 15px !important;
+        box-sizing: border-box;
+        border-radius: 10px;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        font-size: 14px;
+    }
+
+    .nav-tabs {
+        position: static;
+        width: 100%;
+    }
+
+    .burger-menu {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 999;
+    }
+
+    h2, h3 {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    button, .flag-button, .theme-toggle {
+        width: 100%;
+        font-size: 16px;
+    }
+
+    input, select, textarea {
+        font-size: 16px;
+    }
+}
+
+/* Для компьютеров (больше 756px) */
+@media (min-width: 757px) {
+    .admin-container,
+    .master-container,
+    .form-container,
+    .wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    table {
+        font-size: 16px;
+    }
+
+    .burger-menu {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+    }
+}
+.dark button,
+.dark .nav-link {
+    background-color: #94B4C1; /* как у флага */
+    color: #ffffff;
+}
+
+.dark button:hover,
+.dark .nav-link:hover {
+    background-color: #ffffff;
+    color: #213448;
+}
+
+.dark .title-text {
+    color: #ffffff;
+}
+
+/* ==== STYLED BURGER MENU ==== */
+.burger-menu {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    width: 48px;
+    height: 48px;
+    background: var(--accent-color);
+    border-radius: 12px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.burger-menu:hover {
+    background: var(--primary-color);
+    transform: scale(1.05);
+}
+
+.burger-menu .bar {
+    width: 24px;
+    height: 3px;
+    background-color: var(--primary-color);
+    margin: 2px 0;
+    border-radius: 2px;
+    transition: background-color 0.3s;
+}
+
+.dark .burger-menu {
+    background: var(--accent-color);
+}
+
+.dark .burger-menu .bar {
+    background-color: #ffffff;
+} /* ← этой скобки не хватало */
+
+/* Кнопка закрытия модалки */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    background-color: var(--box-color);
+    border: none;
+    border-radius: 12px;
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease, color 0.3s;
+}
+
+.close-button:hover {
+    transform: scale(1.1);
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+}
+
+.dark .close-button {
+    background-color: #ffffff;
+    color: var(--accent-color);
+}
+
+.dark .close-button:hover {
+    background-color: var(--accent-color);
+    color: #213448;
 }

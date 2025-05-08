@@ -205,3 +205,16 @@ input, select, textarea {
     right: 20px;
     z-index: 100;
 }
+.logout-button {
+    position: fixed;
+    top: 120px;
+    right: 15px;
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}

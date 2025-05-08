@@ -181,12 +181,10 @@ const AdminPanel = () => {
 
     return (
         <div className="admin-panel">
-            {/* Кнопка выхода */}
             <div style={{ position: "absolute", top: "80px", right: "15px" }}>
-                <button onClick={logout}>Logi välja</button>
+                <button onClick={logout}>Log out</button>
             </div>
 
-            {/* Бургер-меню */}
             <button
                 className={`burger-menu ${menuOpen ? "open" : ""}`}
                 onClick={() => setMenuOpen(!menuOpen)}
@@ -487,7 +485,7 @@ const AdminPanel = () => {
                                 </td>
                                 <td>
                                     {editingPenaltyId === penalty.id ? (
-                                        <button onClick={handleUpdatePenalty}>SAve</button>
+                                        <button onClick={handleUpdatePenalty}>Save</button>
                                     ) : (
                                         <button onClick={() => handleEditPenalty(penalty)}>Change</button>
                                     )}

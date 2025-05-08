@@ -222,11 +222,11 @@ const MasterPanel = () => {
 
     return (
         <div className="master-panel">
-            {/* Кнопка выхода */}
+
             <div style={{ position: "absolute", top: "80px", right: "15px" }}>
                 <button onClick={logout}>Logi välja</button>
             </div>
-            {/* Бургер-меню */}
+
             <button
                 className={`burger-menu ${menuOpen ? "open" : ""}`}
                 onClick={() => setMenuOpen(!menuOpen)}
@@ -236,7 +236,7 @@ const MasterPanel = () => {
                 <span className="bar"></span>
             </button>
 
-            {/* Меню */}
+
             <ul className={`nav-tabs ${menuOpen ? "open" : ""}`}>
                 <li>
                     <button
@@ -257,22 +257,18 @@ const MasterPanel = () => {
             </ul>
 
             <div className="admin-panel">
-                {/* Кнопка выхода */}
-                <div style={{ position: "absolute", top: "10px", right: "10px" }}>
-                    <button onClick={logout}>Logi välja</button>
-                </div>
 
-                {/* Бургер-меню */}
                 <button
                     className={`burger-menu ${menuOpen ? "open" : ""}`}
                     onClick={() => setMenuOpen(!menuOpen)}
                 >
                     <span className="bar"></span>
                     <span className="bar"></span>
+                    <span className="bar"></span>
 
                 </button>
 
-                {/* Меню */}
+
                 <ul className={`nav-tabs ${menuOpen ? "open" : ""}`}>
                     <li>
                         <button
@@ -293,7 +289,6 @@ const MasterPanel = () => {
                     </li>
                 </ul>
 
-                {/* Секция для услуг */}
                 {selectedTab === "services" && (
                     <div className="services">
                         <div className="add-service">
@@ -455,7 +450,6 @@ const MasterPanel = () => {
                     </div>
                 )}
 
-                {/* Секция для записей клиентов */}
                 {selectedTab === "appointments" && (
                     <div className="appointments">
                         <h3>Klientide broneeringud</h3>
@@ -488,7 +482,6 @@ const MasterPanel = () => {
                             <p>Mingeid andmeid ei ole.</p>
                         )}
 
-                        {/* Модальное окно */}
                         {isEmailModalOpen && (
                             <div
                                 style={{

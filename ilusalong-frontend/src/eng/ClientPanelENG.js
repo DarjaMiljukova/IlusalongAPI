@@ -132,7 +132,7 @@ const ClientPanel = () => {
 
     const handleTabChange = (tab) => {
         setSelectedTab(tab);
-        setMenuOpen(false); // Закрываем меню при выборе вкладки
+        setMenuOpen(false);
     };
 
     const cancelAppointment = async (appointmentId) => {
@@ -253,11 +253,11 @@ const ClientPanel = () => {
 
     return (
         <div className="client-panel">
-            {/* Кнопка выхода */}
+
             <div style={{ position: "absolute", top: "80px", right: "15px" }}>
                 <button onClick={logout}>Logi välja</button>
             </div>
-            {/* Бургер-меню */}
+
             <button
                 className={`burger-menu ${menuOpen ? "open" : ""}`}
                 onClick={() => setMenuOpen(!menuOpen)}
@@ -267,7 +267,7 @@ const ClientPanel = () => {
                 <span className="bar"></span>
             </button>
 
-            {/* Панель с навигацией */}
+
             <div className={`nav-tabs ${menuOpen ? "open" : ""}`}>
                 <ul style={{ listStyleType: "none", paddingLeft: 0 }}>
                     <li>

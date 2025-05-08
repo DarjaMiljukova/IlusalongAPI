@@ -4,6 +4,7 @@ import { jwtDecode } from "jwt-decode";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 const MasterPanel = () => {
     const [userId, setUserId] = useState(null);
     console.log("userId:", userId);
@@ -219,8 +220,7 @@ const MasterPanel = () => {
 
     return (
         <div className="master-panel">
-            {/* Кнопка выхода */}
-            <div style={{ position: "absolute", top: "10px", right: "10px" }}>
+            <div style={{ position: "absolute", top: "80px", right: "15px" }}>
                 <button onClick={logout}>Выход</button>
             </div>
 
@@ -255,16 +255,14 @@ const MasterPanel = () => {
             </ul>
 
             <div className="admin-panel">
-                {/* Кнопка выхода */}
-                <div style={{ position: "absolute", top: "10px", right: "10px" }}>
-                    <button onClick={logout}>Выход</button>
-                </div>
+
 
                 {/* Бургер-меню */}
                 <button
                     className={`burger-menu ${menuOpen ? "open" : ""}`}
                     onClick={() => setMenuOpen(!menuOpen)}
                 >
+                    <span className="bar"></span>
                     <span className="bar"></span>
                     <span className="bar"></span>
 

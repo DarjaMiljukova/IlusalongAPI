@@ -60,12 +60,12 @@ const Home = () => {
 
     const openCard = (id) => {
         setActiveCard(id);
-        document.body.style.overflow = "hidden"; // Disable background scroll
+        document.body.style.overflow = "hidden";
     };
 
     const closeCard = () => {
         setActiveCard(null);
-        document.body.style.overflow = "auto"; // Enable scroll back
+        document.body.style.overflow = "auto";
     };
 
     return (
